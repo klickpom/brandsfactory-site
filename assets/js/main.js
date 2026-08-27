@@ -1,20 +1,20 @@
 /**
  * Brands Factory & Ali Mohmed - Ultra High-Performance 2026 Engine
  * Verified Real Clients (with www.hebayoussef.store & www.hycosmeticsmassa.store)
- * Instant Load, Zero Lag, 60FPS Micro-Animations
- * Version: 2026.3.0
+ * Flawless Responsive Mobile/Tablet/Desktop Architecture
+ * Version: 2026.4.0
  */
 
 // ==========================================
-// 1. Verified Real Clients Database (100% Exact URLs)
+// 1. Verified Real Clients Database (Clean Values & Exact URLs)
 // ==========================================
 const realClientsData = {
   hebayoussef: {
     name_ar: "صالون هبة يوسف للتجميل | Heba Youssef",
     name_en: "Heba Youssef Luxury Beauty Salon",
     category: "beauty_salon",
-    industry_ar: "بيوتي سنتر وصالون تجميل فاخر بالإسكندرية 💇‍♀️",
-    industry_en: "Luxury Beauty Salon & Bridal Center (Alexandria)",
+    industry_ar: "بيوتي سنتر وتجميل فاخر 💇‍♀️",
+    industry_en: "Luxury Beauty Salon & Bridal Center",
     url: "https://www.hebayoussef.store/",
     display_url: "www.hebayoussef.store",
     badge_ar: "صالون تجميل وعرائس بالإسكندرية ✨",
@@ -23,9 +23,9 @@ const realClientsData = {
     description_en: "Engineered high-converting online booking funnels for 3 flagship branches in Alexandria (Gleem & Smouha), driving consistent bookings for bridal packages and hair therapy.",
     stats: [
       { label_ar: "العائد الإعلاني (ROAS)", label_en: "Campaign ROAS", val: "5.8x" },
-      { label_ar: "الحجوزات الشهرية", label_en: "Monthly Bookings", val: "+2,400 حجز" },
-      { label_ar: "عدد الفروع بالإسكندرية", label_en: "Active Branches", val: "3 فروع راقية" },
-      { label_ar: "معدل الحضور والتأكيد", label_en: "Booking Show-up Rate", val: "94%" }
+      { label_ar: "حجز مؤكد شهرياً", label_en: "Monthly Bookings", val: "+2,400" },
+      { label_ar: "فروع بالإسكندرية", label_en: "Active Branches", val: "3 فروع" },
+      { label_ar: "معدل الحضور والتأكيد", label_en: "Show-up Rate", val: "94%" }
     ],
     strategy_ar: "تفعيل حملات فيديو UGC موجهة للفتيات والمقبلات على الزواج، مع ربط نظام الحجز ببوت تأكيد المواعيد عبر واتساب لتقليل نسبة الإلغاء.",
     strategy_en: "Launched hyper-targeted video UGC ads targeting brides-to-be and hair therapy clients, integrated with automated WhatsApp booking confirmation."
@@ -35,7 +35,7 @@ const realClientsData = {
     name_ar: "فسخاني العيلة | The Family Seafood",
     name_en: "The Family Seafood & Deli",
     category: "gourmet_food",
-    industry_ar: "فسيخ ورنجة وبطارخ ومأكولات بحرية فاخرة 🐟",
+    industry_ar: "مأكولات بحرية وبطارخ فاخرة 🐟",
     industry_en: "Gourmet Seafood & Egyptian Deli",
     url: "https://thefamilyseafood.shop/",
     display_url: "thefamilyseafood.shop",
@@ -45,9 +45,9 @@ const realClientsData = {
     description_en: "High-volume seasonal scaling across Meta & TikTok for premium seafood and deli products, maximizing direct delivery conversions with minimized CPA.",
     stats: [
       { label_ar: "العائد الإعلاني (ROAS)", label_en: "Campaign ROAS", val: "5.1x" },
-      { label_ar: "أوردرات التوصيل", label_en: "Orders Delivered", val: "+6,200 أوردر" },
+      { label_ar: "أوردر توصيل شهرياً", label_en: "Monthly Orders", val: "+6,200" },
       { label_ar: "خفض تكلفة الشراء", label_en: "CPA Reduction", val: "-52%" },
-      { label_ar: "متوسط قيمة السلة (AOV)", label_en: "Average Order Value", val: "+34%" }
+      { label_ar: "زيادة متوسط السلة", label_en: "AOV Growth", val: "+34%" }
     ],
     strategy_ar: "اختبار مصفوفة إعلانات تضم 50 زاوية مختلفة للشهية وجودة التغليف، مع حملات Retargeting للمشترين السابقين في المواسم والأعياد.",
     strategy_en: "Deployed a 50-angle creative matrix showcasing premium packaging and freshness, backed by automated seasonal customer retention flows."
@@ -57,7 +57,7 @@ const realClientsData = {
     name_ar: "دونتس تايم | Donuts Time",
     name_en: "Donuts Time",
     category: "gourmet_food",
-    industry_ar: "سلاسل دونتس ومخبوزات وحلويات F&B 🍩",
+    industry_ar: "سلاسل حلويات ومطاعم F&B 🍩",
     industry_en: "Bakery, Sweets & F&B Chain",
     url: "https://donutstime.shop/",
     display_url: "donutstime.shop",
@@ -67,19 +67,19 @@ const realClientsData = {
     description_en: "High-velocity creative ad testing driving hyper-local foot traffic and daily online delivery orders across multiple branches.",
     stats: [
       { label_ar: "العائد الإعلاني (ROAS)", label_en: "Campaign ROAS", val: "4.9x" },
-      { label_ar: "الطلبات الشهرية", label_en: "Monthly Orders", val: "+8,400 طلب" },
+      { label_ar: "طلب توصيل شهرياً", label_en: "Monthly Orders", val: "+8,400" },
       { label_ar: "نمو الإيرادات", label_en: "Revenue Growth", val: "+38%" },
-      { label_ar: "تكلفة العميل الجديد", label_en: "New Customer CAC", val: "-40%" }
+      { label_ar: "خفض تكلفة العميل", label_en: "CAC Reduction", val: "-40%" }
     ],
     strategy_ar: "استهداف فئات الشباب والجمهور المحيط بالفروع عبر فيديوهات تيك توك سريعة، وربط عروض الـ Combos بمسار طلب مباشر في ثوانٍ.",
     strategy_en: "Engineered high-tempo TikTok videos targeting local store radius, routing traffic to high-converting combo offer funnels."
   },
 
   hycosmetics: {
-    name_ar: "ماسة لمستحضرات التجميل | HY Cosmetics MASSA",
+    name_ar: "ماسة لمستحضرات التجميل | HY Cosmetics",
     name_en: "HY Cosmetics MASSA",
     category: "beauty_salon",
-    industry_ar: "منتجات معالجة وفرد شعر احترافية للصالونات B2B 🧪",
+    industry_ar: "مستحضرات فرد وعلاج شعر B2B 🧪",
     industry_en: "Pro Hair Care & Salon Supplies (B2B)",
     url: "https://www.hycosmeticsmassa.store/",
     display_url: "www.hycosmeticsmassa.store",
@@ -89,19 +89,19 @@ const realClientsData = {
     description_en: "Targeted B2B lead generation targeting professional beauty salons and stylists across Egypt for bulk wholesale distribution pipelines.",
     stats: [
       { label_ar: "العائد الإعلاني (ROAS)", label_en: "Campaign ROAS", val: "5.6x" },
-      { label_ar: "صالونات متعاقدة", label_en: "Contracted Salons", val: "+1,800 صالون" },
-      { label_ar: "طلبات متكررة شهرياً", label_en: "Monthly Re-order Rate", val: "68%" },
-      { label_ar: "تغطية المحافظات", label_en: "Governorates Covered", val: "24 محافظة" }
+      { label_ar: "صالون متعاقد", label_en: "Contracted Salons", val: "+1,800" },
+      { label_ar: "طلبات متكررة شهرياً", label_en: "Monthly Re-orders", val: "68%" },
+      { label_ar: "محافظة مغطاة", label_en: "Governorates", val: "24" }
     ],
     strategy_ar: "إعلانات فيديو تقنية تستعرض نتائج البروتين بدون فورمالين مع تأهيل الصالونات فوريّاً عبر مسار مبيعات B2B منظم.",
     strategy_en: "Technical demo ads proving zero-formaldehyde results, with instant B2B wholesale qualification pipelines."
   },
 
   turbocool: {
-    name_ar: "تربو كوول للتكييف والتبريد | Turbo Cool Egypt",
+    name_ar: "تربو كوول للتكييف والتبريد | Turbo Cool",
     name_en: "Turbo Cool Egypt",
     category: "hvac",
-    industry_ar: "تكييفات وأجهزة منزلية وتبريد ❄️",
+    industry_ar: "تكييفات وتبريد وأجهزة منزلية ❄️",
     industry_en: "HVAC & Home Cooling Systems",
     url: "https://turbocool-egypt.shop/",
     display_url: "turbocool-egypt.shop",
@@ -111,9 +111,9 @@ const realClientsData = {
     description_en: "Conversion-rate optimized sales funnels for top AC brands (Carrier, Sharp, Midea), backed by Server-Side CAPI tracking.",
     stats: [
       { label_ar: "العائد الإعلاني (ROAS)", label_en: "Campaign ROAS", val: "5.2x" },
-      { label_ar: "الأجهزة المباعة", label_en: "Units Sold", val: "+3,600 جهاز" },
+      { label_ar: "جهاز مباع", label_en: "Units Sold", val: "+3,600" },
       { label_ar: "معدل التحويل (CR)", label_en: "Conversion Rate", val: "4.8%" },
-      { label_ar: "حجم المبيعات الإجمالي", label_en: "Gross Volume", val: "+28M EGP" }
+      { label_ar: "مبيعات إجمالية", label_en: "Gross Volume", val: "+28M EGP" }
     ],
     strategy_ar: "استهداف شرائح المشترين الجدد والمجددين في مواسم الصيف مع عروض تقسيط واستبدال مدعومة بتتبع خوارزمي فائق الدقة.",
     strategy_en: "Seasonal summer acquisition campaigns promoting installment and replacement plans with precision CAPI tracking."
@@ -492,19 +492,18 @@ window.openCaseStudy = function(clientKey) {
   const liveLinkBtn2 = document.getElementById('modalCaseLiveBtn2');
   if (liveLinkBtn) {
     liveLinkBtn.href = data.url;
-    liveLinkBtn.innerText = currentLang === 'ar' ? `زيارة ${data.display_url} ↗` : `Open ${data.display_url} ↗`;
   }
   if (liveLinkBtn2) {
     liveLinkBtn2.href = data.url;
   }
 
-  // Populate Stats Grid
+  // Populate Stats Grid cleanly
   const statsContainer = document.getElementById('modalCaseStatsGrid');
   if (statsContainer && data.stats) {
     statsContainer.innerHTML = data.stats.map(stat => `
-      <div class="bg-slate-900/90 p-4 rounded-2xl border border-slate-800 text-center">
-        <div class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400 font-outfit mb-1">${stat.val}</div>
-        <div class="text-xs font-semibold text-slate-300">${currentLang === 'ar' ? stat.label_ar : stat.label_en}</div>
+      <div class="bg-slate-900/90 p-3.5 sm:p-4 rounded-2xl border border-slate-800 text-center flex flex-col justify-center items-center">
+        <div class="text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400 font-outfit mb-1">${stat.val}</div>
+        <div class="text-[11px] sm:text-xs font-semibold text-slate-300 leading-snug">${currentLang === 'ar' ? stat.label_ar : stat.label_en}</div>
       </div>
     `).join('');
   }

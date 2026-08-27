@@ -237,6 +237,14 @@ input[type="range"]::-webkit-slider-thumb:hover {
   transform: scale(1) translateY(0);
 }
 
+/* Modal Responsive Mobile Safety */
+@media (max-width: 640px) {
+  #caseStudyModal .modal-dialog-box {
+    max-height: 94vh;
+    border-radius: 20px;
+  }
+}
+
 /* Founder Glow Frame */
 .founder-image-wrapper {
   position: relative;
@@ -258,3 +266,4 @@ input[type="range"]::-webkit-slider-thumb:hover {
   opacity: 0.95;
   filter: blur(16px);
 }
+
