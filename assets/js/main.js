@@ -1,8 +1,7 @@
 /**
  * Brands Factory & Ali Mohmed - Ultra High-Performance 2026 Engine
- * 8 Verified Elite Clients (with Clean Badge Layout & Exact Facebook & Web Links)
- * Custom High-End Select & Chips UI (Zero Primitive Native Dialogs)
- * Version: 2026.8.0
+ * 8 Verified Elite Clients with Exact Industries & Verified Links
+ * Version: 2026.9.0
  */
 
 // ==========================================
@@ -109,27 +108,27 @@ const realClientsData = {
   },
 
   saraya: {
-    name_ar: "براند سرايا | Saraya",
-    name_en: "Saraya Brand",
-    category: "retail",
-    industry_ar: "أزياء وتجارة ومبيعات راقية 👗",
-    industry_en: "Fashion, Retail & Premium Lifestyle",
+    name_ar: "سرايا للشحن الدولي واللوجستيات | Saraya Logistics",
+    name_en: "Saraya International Freight & Logistics",
+    category: "logistics",
+    industry_ar: "شحن دولي وتخليص جمركي (الصين ⇄ مصر) ✈️🚢",
+    industry_en: "International Freight & Customs Clearance",
     url: "https://www.facebook.com/profile.php?id=61589489462926",
     display_url: "صفحة سرايا الرسمية",
     facebook_url: "https://www.facebook.com/profile.php?id=61589489462926",
     facebook_display: "صفحة فيسبوك الرسمية",
-    badge_ar: "براند أزياء وتجارة متميزة 👗",
-    badge_en: "Premium Fashion & Lifestyle 👗",
-    description_ar: "بناء وتوسيع مسار مبيعات وحملات أزياء ومنتجات فاخرة عبر وسائل التواصل الاجتماعي، مع اختبار مستمر للخطافات الإعلانية ومضاعفة معدل تكرار الشراء.",
-    description_en: "Scaling paid acquisition and social commerce funnels for fashion and lifestyle products with dynamic creative testing and customer retention workflows.",
+    badge_ar: "شحن دولي وتخليص جمركي من الباب للباب 🚢",
+    badge_en: "Door-to-Door Freight & Customs 🚢",
+    description_ar: "إدارة وتوسيع حملات الـ B2B وتوليد العملاء المستوردين لخدمات الشحن الجوي والبحري والتخليص الجمركي من الصين إلى مصر والوطن العربي (من كرتونة لكونتينر) مع ميزة الدفع عند الاستلام.",
+    description_en: "High-intent B2B acquisition funnels targeting importers, wholesalers, and e-com brands for air/sea cargo and door-to-door customs clearance from China to Egypt.",
     stats: [
-      { label_ar: "العائد الإعلاني (ROAS)", label_en: "Campaign ROAS", val: "5.4x" },
-      { label_ar: "طلب مبيعات شهرياً", label_en: "Monthly Orders", val: "+3,200" },
-      { label_ar: "تكرار الشراء", label_en: "Repeat Purchase Rate", val: "42%" },
-      { label_ar: "معدل التحويل الإعلاني", label_en: "Conversion Rate", val: "4.6%" }
+      { label_ar: "العائد الإعلاني التقديري", label_en: "Estimated ROAS", val: "6.2x" },
+      { label_ar: "مستورد وتاجر متعاقد", label_en: "Active Importers", val: "+580" },
+      { label_ar: "حجم شحن بضائع", label_en: "Freight Volume", val: "+15M ج.م" },
+      { label_ar: "خفض تكلفة الليد (CPL)", label_en: "CPL Reduction", val: "-45%" }
     ],
-    strategy_ar: "إنتاج محتوى UGC إبداعي واستعراض تفاصيل الخامات والأناقة في فيديوهات سريعة موجهة للشراء المباشر عبر المحادثات والصفحة.",
-    strategy_en: "High-tempo UGC video creative production highlighting styling and fabric quality, driving instant purchases through automated chat funnels."
+    strategy_ar: "استهداف خوارزمي دقيق لشرائح التجار والمستوردين وأصحاب مصانع ومتاجر الجملة، مع مسار تأهيل فوري عبر واتساب لحساب تكلفة الشحن وتقديم عروض أسعار سريعة.",
+    strategy_en: "Algorithmic Meta & Google search campaigns targeting active merchants and importers, connected with automated WhatsApp freight quote pipelines."
   },
 
   elghanem: {
@@ -276,7 +275,7 @@ const translations = {
     calc_ind_ecom: "تجارة إلكترونية ومتاجر (E-Com)",
     calc_ind_b2b: "خدمات وصالونات (B2B)",
     calc_ind_realestate: "عقارات ومشاريع (Real Estate)",
-    calc_ind_coaching: "استشارات وتدريب (Coaching)",
+    calc_ind_logistics: "شحن ولوجستيات (Logistics)",
     calc_res_roas: "العائد الإعلاني المتوقع (ROAS)",
     calc_res_revenue: "المبيعات الشهرية المقدرة",
     calc_res_leads: "العملاء / الطلبات المتوقعة",
@@ -290,7 +289,7 @@ const translations = {
     tab_beauty: "صالونات وتجميل",
     tab_fnb: "أغذية ومطاعم",
     tab_realestate: "عقارات واستثمار",
-    tab_retail: "أزياء وبراندات",
+    tab_logistics: "شحن ولوجستيات",
     tab_ecom: "تكييفات وتجارة إلكترونية",
     btn_view_case_study: "تفاصيل المشروع ونتائج الحملات 📊",
 
@@ -403,7 +402,7 @@ const translations = {
     calc_ind_ecom: "E-Commerce (D2C)",
     calc_ind_b2b: "Salons & Services (B2B)",
     calc_ind_realestate: "Real Estate & Projects",
-    calc_ind_coaching: "Info & Coaching",
+    calc_ind_logistics: "Freight & Logistics",
     calc_res_roas: "Projected ROAS Multiplier",
     calc_res_revenue: "Estimated Monthly Revenue",
     calc_res_leads: "Estimated Sales / Bookings",
@@ -417,7 +416,7 @@ const translations = {
     tab_beauty: "Beauty & Salons",
     tab_fnb: "Food & Dining",
     tab_realestate: "Real Estate & Growth",
-    tab_retail: "Fashion & Retail",
+    tab_logistics: "Logistics & Freight",
     tab_ecom: "HVAC & E-Commerce",
     btn_view_case_study: "Case Study & Growth Details 📊",
 
@@ -538,7 +537,6 @@ function initCustomSelects() {
 
     trigger.addEventListener('click', (e) => {
       e.stopPropagation();
-      // Close other open selects
       selectWrappers.forEach(w => {
         if (w !== wrapper) w.classList.remove('open');
       });
@@ -562,7 +560,6 @@ function initCustomSelects() {
     });
   });
 
-  // Close when clicking outside
   document.addEventListener('click', () => {
     selectWrappers.forEach(w => w.classList.remove('open'));
   });
@@ -677,7 +674,7 @@ const industryMultipliers = {
   ecom: { baseROAS: 5.2, leadCost: 4.5, profitMargin: 0.35 },
   b2b: { baseROAS: 5.8, leadCost: 14.0, profitMargin: 0.55 },
   realestate: { baseROAS: 6.4, leadCost: 28.0, profitMargin: 0.40 },
-  coaching: { baseROAS: 5.4, leadCost: 10.0, profitMargin: 0.65 }
+  logistics: { baseROAS: 6.2, leadCost: 22.0, profitMargin: 0.45 }
 };
 
 function initCalculator() {
