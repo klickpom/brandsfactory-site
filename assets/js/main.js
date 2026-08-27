@@ -2,7 +2,7 @@
  * Brands Factory & Ali Mohmed - Ultra High-Performance 2026 Engine
  * Verified Real Clients (with www.hebayoussef.store & www.hycosmeticsmassa.store)
  * Integrated YouTube Video Testimonial Player & Google AI Overview Proof
- * Version: 2026.5.0
+ * Version: 2026.6.0
  */
 
 // ==========================================
@@ -505,28 +505,28 @@ window.openCaseStudy = function(clientKey) {
     `).join('');
   }
 
-  // Handle Video Embed
+  // Handle Video Embed (Force explicit block display)
   const videoSection = document.getElementById('modalVideoSection');
   const videoIframe = document.getElementById('modalVideoIframe');
   if (videoSection && videoIframe) {
     if (data.video_id) {
-      videoIframe.src = `https://www.youtube-nocookie.com/embed/${data.video_id}?rel=0&modestbranding=1`;
-      videoSection.classList.remove('hidden');
+      videoIframe.src = `https://www.youtube-nocookie.com/embed/${data.video_id}?autoplay=1&rel=0&modestbranding=1`;
+      videoSection.style.display = 'block';
     } else {
       videoIframe.src = '';
-      videoSection.classList.add('hidden');
+      videoSection.style.display = 'none';
     }
   }
 
-  // Handle Google Proof Banner
+  // Handle Google Proof Banner (Force explicit flex display)
   const googleProofSection = document.getElementById('modalGoogleProofSection');
   const googleProofText = document.getElementById('modalGoogleProofText');
   if (googleProofSection && googleProofText) {
     if (data.google_seo_proof_ar) {
       googleProofText.innerText = currentLang === 'ar' ? data.google_seo_proof_ar : data.google_seo_proof_en;
-      googleProofSection.classList.remove('hidden');
+      googleProofSection.style.display = 'flex';
     } else {
-      googleProofSection.classList.add('hidden');
+      googleProofSection.style.display = 'none';
     }
   }
 

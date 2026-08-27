@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   
+  <!-- Anti-Cache Directives to force immediate browser updates -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
   <!-- SEO & Meta Tags -->
   <title>Brands Factory | AI-Driven Media Buying & Scaling Agency - Ali Mohmed</title>
   <meta name="title" content="Brands Factory | AI-Driven Media Buying & Scaling Agency - Ali Mohmed" />
@@ -68,7 +73,7 @@
   </script>
 
   <!-- High Performance Stylesheet with Cache Busting -->
-  <link rel="stylesheet" href="assets/css/style.css?v=2026.5.0" />
+  <link rel="stylesheet" href="assets/css/style.css?v=2026.6.0" />
 </head>
 
 <body class="bg-brand-dark text-slate-100 font-cairo antialiased selection:bg-brand-purple selection:text-white bg-mesh-glow relative">
@@ -565,24 +570,24 @@
       <div class="p-5 sm:p-7 overflow-y-auto space-y-6 bg-slate-950/60 flex-1">
         
         <!-- Google AI Search Dominance Banner (Dynamic) -->
-        <div id="modalGoogleProofSection" class="hidden p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-blue-950/40 via-purple-950/40 to-slate-900 border border-blue-500/40 flex items-center gap-3.5 shadow-lg">
+        <div id="modalGoogleProofSection" style="display: none;" class="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-blue-950/40 via-purple-950/40 to-slate-900 border border-blue-500/40 items-center gap-3.5 shadow-lg">
           <div class="w-10 h-10 rounded-xl bg-blue-600/30 border border-blue-400/40 flex items-center justify-center text-blue-400 shrink-0">
             <i class="fa-brands fa-google text-lg"></i>
           </div>
           <div class="min-w-0">
             <div class="text-xs sm:text-sm font-bold text-white" id="modalGoogleProofText">تصدر المركز #1 في بحث جوجل والذكاء الاصطناعي (Google AI Overview) 🏆</div>
-            <div class="text-[11px] text-slate-300 mt-0.5">بناء سلطة رقمية وتصدر عبارات البحث الأكثر طلباً لمنتجات معالجة وفرد الشعر في مصر</div>
+            <div class="text-[11px] text-slate-300 mt-0.5">بناء سلطة رقمية وتتصدر عبارات البحث الأكثر طلباً لمنتجات معالجة وفرد الشعر في مصر</div>
           </div>
         </div>
 
-        <!-- Video Player Section (Dynamic Embed) -->
-        <div id="modalVideoSection" class="hidden space-y-2.5">
+        <!-- Video Player Section (Dynamic Embed with Explicit Dimensions) -->
+        <div id="modalVideoSection" style="display: none;" class="space-y-2.5">
           <h5 class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
             <i class="fa-solid fa-circle-play text-rose-500 animate-pulse"></i>
             <span>فيديو ريفيو وتجربة العميل الحقيقية (Video Review)</span>
           </h5>
-          <div class="relative w-full rounded-2xl overflow-hidden bg-slate-900 border border-purple-500/40 aspect-video shadow-2xl">
-            <iframe id="modalVideoIframe" class="w-full h-full" src="" title="Client Review Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <div class="relative w-full rounded-2xl overflow-hidden bg-slate-900 border border-purple-500/40 shadow-2xl" style="aspect-ratio: 16/9; min-height: 220px;">
+            <iframe id="modalVideoIframe" style="position: absolute; top:0; left:0; width:100%; height:100%; border:0;" src="" title="Client Review Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
         </div>
 
@@ -1010,7 +1015,7 @@
           </p>
         </div>
 
-        <div class="glass-panel rounded-3xl p-5 sm:p-6 space-y-3 sm:space-y-4 border border-amber-500/30 relative overflow-hidden group">
+        <div class="glass-panel rounded-3xl p-5 sm:p-6 space-y-4 border border-amber-500/30 relative overflow-hidden group">
           <div class="text-4xl sm:text-5xl font-black text-amber-500/20 group-hover:text-amber-500/40 font-outfit transition-colors" data-i18n="step_4_num">04</div>
           <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-cyan-400 transition-colors" data-i18n="step_4_title">
             الأتمتة وبناء منظومة مستدامة
@@ -1197,7 +1202,7 @@
   </footer>
 
   <!-- Main JavaScript Engine with Cache-Busting -->
-  <script src="assets/js/main.js?v=2026.5.0"></script>
+  <script src="assets/js/main.js?v=2026.6.0"></script>
 
 </body>
 </html>
