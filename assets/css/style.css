@@ -1,12 +1,13 @@
 /* ==========================================================================
-   Brands Factory & Ali Mohmed - Premium 2026 AI Agency Stylesheet
-   Ultra Luxury Dark Aesthetic, Linear/Vercel Precision, Zero Clutter
+   Brands Factory & Ali Mohmed - Premium 2026 AI Growth Studio Stylesheet
+   High-End Luxury Dark UI, Apple/Linear Precision, Zero Glitches
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap');
 
 :root {
   --primary-purple: #8B5CF6;
+  --primary-purple-dark: #7C3AED;
   --primary-purple-glow: rgba(139, 92, 246, 0.35);
   --cyan-accent: #06B6D4;
   --cyan-glow: rgba(6, 182, 212, 0.3);
@@ -14,10 +15,9 @@
   --gold-accent: #F59E0B;
   --bg-dark: #070913;
   --bg-card: rgba(15, 18, 35, 0.85);
-  --bg-card-hover: rgba(22, 27, 52, 0.95);
+  --bg-card-hover: rgba(22, 27, 54, 0.95);
   --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-glow: rgba(139, 92, 246, 0.3);
-  --border-glow-hover: rgba(168, 85, 247, 0.6);
+  --border-glow: rgba(139, 92, 246, 0.35);
   --text-main: #F8FAFC;
   --text-muted: #94A3B8;
 }
@@ -42,7 +42,6 @@ body {
   letter-spacing: 0 !important;
 }
 
-/* Fix Arabic Typography Spacing */
 h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0 !important;
   word-spacing: 0 !important;
@@ -53,7 +52,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Outfit', sans-serif;
 }
 
-/* Custom Ultra-Thin Scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -62,20 +61,20 @@ h1, h2, h3, h4, h5, h6 {
   background: #070913;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2A3356;
+  background: #252D4D;
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #7C3AED;
 }
 
-/* Ambient Radial Background */
+/* Ambient Background Glow */
 .bg-mesh-glow {
   background-image: 
-    radial-gradient(circle at 10% 10%, rgba(139, 92, 246, 0.14) 0%, transparent 40%),
-    radial-gradient(circle at 90% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 40%),
-    radial-gradient(circle at 50% 60%, rgba(124, 58, 237, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 90%, rgba(16, 185, 129, 0.08) 0%, transparent 40%);
+    radial-gradient(circle at 10% 10%, rgba(139, 92, 246, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 90% 20%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 50% 60%, rgba(124, 58, 237, 0.07) 0%, transparent 50%),
+    radial-gradient(circle at 80% 90%, rgba(16, 185, 129, 0.06) 0%, transparent 40%);
   background-attachment: fixed;
 }
 
@@ -86,7 +85,7 @@ h1, h2, h3, h4, h5, h6 {
     linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
 }
 
-/* Luxury Glassmorphism Cards */
+/* Glassmorphism Panels */
 .glass-panel {
   background: var(--bg-card);
   backdrop-filter: blur(20px);
@@ -110,7 +109,7 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Gradients */
+/* Text Gradients */
 .text-gradient-purple {
   background: linear-gradient(135deg, #C084FC 0%, #A855F7 50%, #60A5FA 100%);
   -webkit-background-clip: text;
@@ -172,7 +171,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   background: #A855F7;
 }
 
-/* Tabs */
+/* Tabs Active State */
 .tab-btn.active {
   background: linear-gradient(135deg, #7C3AED, #6366F1);
   color: #FFFFFF;
@@ -181,118 +180,67 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 /* ==========================================================
-   Apple / 2026 Flagship Interactive Device Frames & Modal
+   Luxury Case Study & Showcase Modal
    ========================================================== */
-#previewModal {
+#caseStudyModal {
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-#previewModal.active {
+#caseStudyModal.active {
   opacity: 1;
   visibility: visible;
 }
 
-#previewModal .preview-modal-dialog {
+#caseStudyModal .modal-dialog-box {
   transform: scale(0.96) translateY(15px);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-#previewModal.active .preview-modal-dialog {
+#caseStudyModal.active .modal-dialog-box {
   transform: scale(1) translateY(0);
 }
 
-/* Modern Device Frames */
-.device-frame-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  padding: 10px;
+/* Modal Inner Navigation Tabs */
+.modal-nav-tab {
+  transition: all 0.2s ease;
 }
 
-/* Desktop Monitor View (Mac Studio Display) */
-.device-desktop-frame {
-  width: 100%;
-  max-width: 1000px;
-  height: 560px;
-  background: #0B0E1B;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 16px;
-  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.05);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+.modal-nav-tab.active {
+  background: rgba(139, 92, 246, 0.25);
+  color: #FFFFFF;
+  border-color: #8B5CF6;
 }
 
-/* Tablet View (iPad Pro 11-inch) */
-.device-tablet-frame {
-  width: 720px;
-  max-width: 95%;
-  height: 560px;
+/* High-Tech Device Showcase Mockup Box */
+.device-preview-screen {
   background: #0B0E1B;
-  border: 10px solid #1E2338;
-  border-radius: 28px;
-  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 0 2px rgba(255, 255, 255, 0.1);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Mobile View (iPhone 16 Pro Style with Dynamic Island) */
-.device-mobile-frame {
-  width: 380px;
-  max-width: 90%;
-  height: 580px;
-  background: #0B0E1B;
-  border: 10px solid #1E2338;
-  border-radius: 42px;
-  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 0 2px rgba(255, 255, 255, 0.1);
-  display: flex;
-  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9);
   overflow: hidden;
   position: relative;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Dynamic Island on Phone */
-.dynamic-island {
-  position: absolute;
-  top: 6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90px;
-  height: 20px;
-  background: #000000;
-  border-radius: 20px;
-  z-index: 30;
-  display: none;
-}
-
-.device-mobile-frame .dynamic-island {
-  display: block;
-}
-
-/* Iframe inside frame: Hide ugly default scrollbars */
-.preview-screen-iframe {
+.device-preview-screen iframe {
   width: 100%;
-  height: 100%;
+  height: 520px;
   border: none;
   background: #FFFFFF;
-  scrollbar-width: thin;
-  scrollbar-color: #CBD5E1 transparent;
 }
 
-/* Device Switcher Buttons */
-.device-btn.active {
-  background: #7C3AED !important;
-  color: #FFFFFF !important;
-  border-color: #A855F7 !important;
-  box-shadow: 0 0 15px rgba(124, 58, 237, 0.4);
+/* Dynamic Island */
+.dynamic-island-badge {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 22px;
+  background: #000000;
+  border-radius: 999px;
+  z-index: 20;
 }
 
 /* Founder Glowing Frame */
