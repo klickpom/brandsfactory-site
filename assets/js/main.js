@@ -1,10 +1,106 @@
 /**
  * Brands Factory & Ali Mohmed - Main Interactive Engine
- * Handles Bilingual translation (AR/EN), ROAS Calculator, Counters, Tabs, Modals & WhatsApp Integration
+ * Real Clients Showcase, Live Device Preview (Phone/Tablet/Laptop), ROAS Calculator & Multi-Language Engine
  */
 
 // ==========================================
-// 1. Multi-Language Translations (AR / EN)
+// 1. Real Clients Database
+// ==========================================
+const realClientsData = {
+  donutstime: {
+    name_ar: "دونتس تايم | Donuts Time",
+    name_en: "Donuts Time",
+    category: "fnb",
+    industry_ar: "المأكولات والحلويات (Food & Beverage)",
+    industry_en: "Food & Beverage / Bakery & Sweets",
+    url: "https://donutstime.shop/",
+    display_url: "donutstime.shop",
+    badge_ar: "قطاع الأغذية والـ F&B 🍩",
+    badge_en: "F&B & Sweets Sector 🍩",
+    description_ar: "إطلاق وإدارة حملات إعلانية متكاملة على تيك توك وميتا بهدف زيادة الطلبات اليومية وتوسيع قاعدة العملاء في الفروع والتوصيل، مع استهداف محلي عالي التحويل.",
+    description_en: "Full-funnel Meta & TikTok ad scaling to boost daily delivery orders and brand awareness with hyper-targeted local creative campaigns.",
+    stats: [
+      { label_ar: "العائد الإعلاني", label_en: "ROAS Multiplier", val: "4.9x" },
+      { label_ar: "الطلبات الشهرية", label_en: "Monthly Orders", val: "+8,400 طلب" },
+      { label_ar: "نسبة خفض CPA", label_en: "CPA Reduction", val: "-45%" }
+    ]
+  },
+  turbocool: {
+    name_ar: "توربو كول مصر | Turbo Cool Egypt",
+    name_en: "Turbo Cool Egypt",
+    category: "ecom",
+    industry_ar: "الأجهزة والتجارة الإلكترونية (Auto & Tech)",
+    industry_en: "Automotive & Cooling Hardware",
+    url: "https://turbocool-egypt.shop/",
+    display_url: "turbocool-egypt.shop",
+    badge_ar: "أجهزة وتجارة إلكترونية ❄️",
+    badge_en: "E-Commerce & Tech ❄️",
+    description_ar: "بناء مسار بيع متقدم لحملات الاستبدال والشراء المباشر، وربط البكسل وCAPI لضمان تتبع دقيق للطلبات وخفض تكلفة الشراء لأقصى حد.",
+    description_en: "Engineered high-converting sales funnels and Server-Side CAPI tracking, reducing customer acquisition costs while scaling purchase volume.",
+    stats: [
+      { label_ar: "العائد الإعلاني", label_en: "ROAS Multiplier", val: "5.2x" },
+      { label_ar: "إجمالي المبيعات", label_en: "Units Sold", val: "+3,600 جهاز" },
+      { label_ar: "معدل التحويل", label_en: "Conversion Rate", val: "4.8%" }
+    ]
+  },
+  hycosmetics: {
+    name_ar: "ماسة لمستحضرات التجميل | HY Cosmetics Massa",
+    name_en: "HY Cosmetics Massa",
+    category: "beauty",
+    industry_ar: "التجميل والعناية بالبشرة (Beauty & Skincare)",
+    industry_en: "Beauty, Skincare & Cosmetics",
+    url: "https://www.hycosmeticsmassa.store/",
+    display_url: "hycosmeticsmassa.store",
+    badge_ar: "مستحضرات تجميل فاخرة 💄",
+    badge_en: "Luxury Beauty Brand 💄",
+    description_ar: "صناعة محتوى UGC وفيديوهات إعلانية بالذكاء الاصطناعي مع اختبار أكثر من 40 زاوية إبداعية، مما أدى لمضاعفة المبيعات والاستحواذ على عملاء دائمين.",
+    description_en: "High-volume AI creative testing and UGC video ad engine resulting in a surge of repeat buyers and dramatic increase in Average Order Value (AOV).",
+    stats: [
+      { label_ar: "العائد الإعلاني", label_en: "ROAS Multiplier", val: "5.6x" },
+      { label_ar: "عميلات جديدات", label_en: "New Customers", val: "+11,200 عميلة" },
+      { label_ar: "زيادة حجم السلة AOV", label_en: "AOV Boost", val: "+38%" }
+    ]
+  },
+  hebayoussef: {
+    name_ar: "براند هبة يوسف | Heba Youssef Fashion",
+    name_en: "Heba Youssef Store",
+    category: "fashion",
+    industry_ar: "الموضة والأزياء النسائية (Fashion & Apparel)",
+    industry_en: "Women's Fashion & Modest Wear",
+    url: "https://www.hebayoussef.store/",
+    display_url: "hebayoussef.store",
+    badge_ar: "أزياء وتصميم نسائي 👗",
+    badge_en: "Fashion & Apparel 👗",
+    description_ar: "إعادة هيكلة كاملة لحسابات الإعلانات مع تصميم صفحات هبوط سريعة وتفعيل حملات Retargeting ديناميكية للمجموعات والتشكيلات الجديدة.",
+    description_en: "Complete ad account restructuring with dynamic catalog retargeting and rapid-loading landing pages for new collection launches.",
+    stats: [
+      { label_ar: "العائد الإعلاني", label_en: "ROAS Multiplier", val: "4.7x" },
+      { label_ar: "قطع مباعة", label_en: "Items Sold", val: "+7,800 قطعة" },
+      { label_ar: "عائد الحملات الموسمية", label_en: "Seasonal ROAS", val: "6.1x" }
+    ]
+  },
+  familyseafood: {
+    name_ar: "ذا فاميلي سي فود | The Family Seafood",
+    name_en: "The Family Seafood",
+    category: "fnb",
+    industry_ar: "سلسلة مطاعم ومأكولات بحرية (Seafood Dining)",
+    industry_en: "Seafood Chain & Fast Delivery",
+    url: "https://thefamilyseafood.shop/",
+    display_url: "thefamilyseafood.shop",
+    badge_ar: "مطاعم وتوصيل سريع 🦞",
+    badge_en: "Seafood & Delivery 🦞",
+    description_ar: "استهداف جغرافي دقيق (Radius Targeting) للمناطق المحيطة بالفروع مع ربط الطلبات ببوت واتساب آلي للرد الفوري وتأكيد الأوردرات دون تأخير.",
+    description_en: "Precision local geo-targeting paired with automated WhatsApp sales workflows for immediate order routing and table bookings.",
+    stats: [
+      { label_ar: "العائد الإعلاني", label_en: "ROAS Multiplier", val: "4.8x" },
+      { label_ar: "أوردرات محققة", label_en: "Orders Delivered", val: "+5,500 طلب" },
+      { label_ar: "سرعة تأكيد الأوردر", label_en: "Response Time", val: "< 30 ثانية" }
+    ]
+  }
+};
+
+// ==========================================
+// 2. Multi-Language Translations (AR / EN)
 // ==========================================
 const translations = {
   ar: {
@@ -13,7 +109,7 @@ const translations = {
     nav_about: "عن المؤسس",
     nav_services: "خدماتنا بالذكاء الاصطناعي",
     nav_calculator: "حاسبة النمو",
-    nav_portfolio: "سابقة الأعمال",
+    nav_portfolio: "عملاؤنا وسابقة الأعمال",
     nav_process: "منهجيتنا",
     nav_contact: "تواصل معنا",
     btn_book_call: "احجز استشارة نمو ⚡",
@@ -24,7 +120,7 @@ const translations = {
     hero_title_highlight: "الميديا باينج الذكي وأنظمة الـ AI",
     hero_subtitle: "في Brands Factory ندمج بين أحدث وكلاء الذكاء الاصطناعي (AI Agents) وإدارة الحملات الإعلانية فائقة الدقة لتحويل ميزانياتك الإعلانية إلى نمو هائل وعائد استثمار مضاعف (ROAS).",
     hero_cta_primary: "احجز استشارة استراتيجية مجانية 🚀",
-    hero_cta_secondary: "استكشف سابقة الأعمال والأرقام 📊",
+    hero_cta_secondary: "استكشف سابقة أعمالنا وعملاءنا 📊",
     hero_trust: "مُعتمد وموثوق من رواد الأعمال وأصحاب المتاجر والشركات",
     
     // Stats Counter
@@ -94,34 +190,30 @@ const translations = {
     calc_res_profit: "صافي الزيادة المتوقعة في الأرباح",
     calc_btn_apply: "طبق هذا النموذج الإعلاني على مشروعي 🚀",
 
-    // Portfolio / Case Studies
-    port_tag: "أرقام تتحدث عن نفسها",
-    port_title: "قصص نجاح وسابقة أعمال Brands Factory",
-    port_desc: "نتائج حقيقية حققناها لعملائنا في مختلف المجالات بالاستفادة من الميديا باينج الذكي والأتمتة.",
-    tab_all: "جميع الأعمال",
-    tab_ecom: "المتاجر الإلكترونية",
-    tab_b2b: "الشركات و B2B",
-    tab_realestate: "العقارات والخدمات",
+    // Portfolio / Real Clients
+    port_tag: "عملاؤنا ونتائج حقيقية",
+    port_title: "متاجر وعلامات تجارية نعتز بنموها معنا",
+    port_desc: "استكشف نماذج حية لمتاجر وبراندات حقيقية ندير حملاتها التسويقية ونضاعف أرقام مبيعاتها.",
+    tab_all: "جميع العملاء",
+    tab_fnb: "المأكولات والمطاعم",
+    tab_ecom: "الأجهزة والتجارة الإلكترونية",
+    tab_beauty: "التجميل والعناية",
+    tab_fashion: "الأزياء والموضة",
+    btn_preview_store: "معاينة تفاعلية حية 🔍",
+    btn_visit_store: "زيارة الموقع المباشر ↗",
 
-    case_1_title: "متجر أزياء وتجزئة فاخرة (D2C Fashion)",
-    case_1_desc: "إعادة هيكلة الحملات واختبار أكثر من 60 زاوية إعلانية بتقنيات الـ AI، مما رفع المبيعات 320% وخفض تكلفة الشراء.",
-    case_1_stat1: "5.4x ROAS",
-    case_1_stat2: "+14,500 طلب",
-
-    case_2_title: "شركة حلول B2B واستشارات برمجية",
-    case_2_desc: "بناء مسار توليد عملاء فائق التأهيل وتأكيد المواعيد آلياً عبر بوت واتساب ذكي دون فقدان أي عميل محتمل.",
-    case_2_stat1: "64% خفض تكلفة العميل",
-    case_2_stat2: "+1,200 عميل مؤهل",
-
-    case_3_title: "مشروع تطوير وتسويق عقاري",
-    case_3_desc: "استهداف فائق الدقة للمستثمرين في مصر ودول الخليج عبر حملات Meta & Google مع فلترة فورية بالذكاء الاصطناعي.",
-    case_3_stat1: "78M+ مبيعات محققة",
-    case_3_stat2: "3.2x كفاءة الاستحواذ",
+    // Preview Modal Labels
+    modal_title: "المعاينة التفاعلية المباشرة للمتجر",
+    modal_device_laptop: "شاشة كمبيوتر 💻",
+    modal_device_tablet: "تابلت 📱",
+    modal_device_mobile: "هاتف محمول 📱",
+    modal_visit_live: "فتح المتجر في نافذة جديدة",
+    modal_close: "إغلاق المعاينة",
 
     // 4-Step Process
     proc_tag: "طريقك للقمة",
     proc_title: "منهجية العمل المكونة من 4 مراحل",
-    proc_desc: "نظام علمي دقيق ومثبت يضمن لك تحقيق أقصى استفادة من كل جنيه يُنفق في الإعلانات.",
+    proc_desc: "نظام علمي دقيق ومثبت يضمن لك تحقيق أقصى استفادة من كل ميزانية تُنفق في الإعلانات.",
     step_1_num: "01",
     step_1_title: "التدقيق والتحليل الذكي (AI Audit)",
     step_1_desc: "فحص شامل لحساباتك الإعلانية ومسار البيع والمنافسين لاكتشاف نقاط التسريب وأكبر فرص النمو المتاحة.",
@@ -138,23 +230,23 @@ const translations = {
     // Testimonials
     test_tag: "ماذا يقول شركاؤنا",
     test_title: "ثقة العملاء هي سر نجاحنا",
-    test_1_quote: "العمل مع علي وفريق Brands Factory نقل متجرنا لمستوى مختلف تماماً. قفز الـ ROAS من 2.1 إلى 4.9 في أول شهرين بفضل زوايا الإعلانات المبتكرة!",
-    test_1_author: "م. أحمد الشناوي",
-    test_1_role: "مؤسس متجر E-Commerce للأجهزة",
-    test_2_quote: "أفضل ميديا باير ومستشار نمو تعاملت معه. الأتمتة التي برمجها لنا في واتساب وفرت علينا مجهود فريق مبيعات كامل وضاعفت إغلاق الصفقات.",
-    test_2_author: "أ. كريم عبد الله",
-    test_2_role: "المدير التنفيذي لشركة خدمات رقمية",
-    test_3_quote: "احترافية لا تصدق في قراءة الأرقام وفهم سلوك العميل، التقارير الأسبوعية واستراتيجيات الـ Scaling جعلتنا نتوسع بثقة.",
-    test_3_author: "د. سارة المنصوري",
-    test_3_role: "مديرة التسويق في قطاع التجميل",
+    test_1_quote: "العمل مع علي وفريق Brands Factory نقل متجرنا لمستوى مختلف تماماً. قفزت المبيعات وتضاعف الـ ROAS بفضل زوايا الإعلانات المبتكرة وتتبع الـ CAPI!",
+    test_1_author: "أحمد كمال",
+    test_1_role: "المدير التنفيذي لـ Turbo Cool Egypt",
+    test_2_quote: "أفضل ميديا باير ومستشار نمو تعاملت معه. الأتمتة التي برمجها لنا في واتساب خفضت تكلفة الطلب وضاعفت سرعة توصيل الطلبات في فروعنا.",
+    test_2_author: "إدارة دونتس تايم (Donuts Time)",
+    test_2_role: "قطاع الأغذية والحلويات",
+    test_3_quote: "احترافية لا تصدق في استهداف الجمهور النسائي واختبار المحتوى الإعلاني بالذكاء الاصطناعي، نتائج حملاتنا مستقرة ومربحة جداً.",
+    test_3_author: "فريق تسويق HY Cosmetics",
+    test_3_role: "براند مستحضرات التجميل",
 
     // Booking & Contact Form
     form_tag: "جاهز للتوسع؟",
     form_title: "احجز استشارتك المجانية لمضاعفة مبيعاتك",
     form_desc: "املأ البيانات أدناه وسيتواصل معك علي محمد مباشرة لمراجعة خطتك الإعلانية وتحديد استراتيجية النمو الأنسب لعلامتك.",
-    form_name_lbl: "الاسم بالكامل:",
+    form_name_lbl: "الاسم بالكامل: *",
     form_name_ph: "مثال: أحمد محمود",
-    form_phone_lbl: "رقم الواتساب:",
+    form_phone_lbl: "رقم الواتساب: *",
     form_phone_ph: "+20 1X XXXX XXXX",
     form_brand_lbl: "اسم البراند / رابط الموقع أو الصفحة:",
     form_brand_ph: "brandsfactory.site أو صفحتك",
@@ -202,7 +294,7 @@ const translations = {
     nav_about: "Founder",
     nav_services: "AI Services",
     nav_calculator: "Growth Calculator",
-    nav_portfolio: "Case Studies",
+    nav_portfolio: "Our Clients & Portfolio",
     nav_process: "Framework",
     nav_contact: "Contact",
     btn_book_call: "Book Strategy Call ⚡",
@@ -213,7 +305,7 @@ const translations = {
     hero_title_highlight: "AI-Driven Media Buying & Growth Systems",
     hero_subtitle: "At Brands Factory, we bridge autonomous AI agents with precision media buying architectures to convert your ad spend into predictable, high-ROAS hyper-growth.",
     hero_cta_primary: "Book a Free Strategy Call 🚀",
-    hero_cta_secondary: "Explore Case Studies & Data 📊",
+    hero_cta_secondary: "Explore Our Clients & Results 📊",
     hero_trust: "Trusted by E-Commerce founders, B2B leaders & scaling companies",
 
     // Stats Counter
@@ -283,29 +375,25 @@ const translations = {
     calc_res_profit: "Estimated Net Profit Delta",
     calc_btn_apply: "Apply This Blueprint To My Business 🚀",
 
-    // Portfolio / Case Studies
-    port_tag: "Proven Numbers",
-    port_title: "Featured Case Studies & Client Success",
-    port_desc: "Real data, verified metrics, and exponential growth generated through our proprietary AI media buying framework.",
-    tab_all: "All Projects",
-    tab_ecom: "E-Commerce",
-    tab_b2b: "B2B & Leads",
-    tab_realestate: "Real Estate",
+    // Portfolio / Real Clients
+    port_tag: "Real Clients & Proven Results",
+    port_title: "Brands We Scale & Proudly Accelerate",
+    port_desc: "Explore live stores and real clients whose paid growth pipelines and ROAS are managed by Brands Factory.",
+    tab_all: "All Clients",
+    tab_fnb: "Food & Beverage",
+    tab_ecom: "E-Commerce & Tech",
+    tab_beauty: "Beauty & Cosmetics",
+    tab_fashion: "Fashion & Apparel",
+    btn_preview_store: "Interactive Live Preview 🔍",
+    btn_visit_store: "Visit Live Store ↗",
 
-    case_1_title: "D2C Luxury Fashion & Apparel",
-    case_1_desc: "Restructured ad accounts and deployed 60+ AI-generated creative variations, achieving a 320% revenue spike and lower CPA.",
-    case_1_stat1: "5.4x ROAS",
-    case_1_stat2: "+14,500 Orders",
-
-    case_2_title: "B2B SaaS & Tech Consultancy",
-    case_2_desc: "Built a hyper-qualified lead engine with automated WhatsApp bot confirmation, eliminating lost leads completely.",
-    case_2_stat1: "64% Lower CPL",
-    case_2_stat2: "+1,200 Qualified Leads",
-
-    case_3_title: "Luxury Real Estate Development",
-    case_3_desc: "Targeted high-net-worth investors across Egypt & GCC with Meta & Google Ads and real-time AI lead qualification.",
-    case_3_stat1: "78M+ Sales Volume",
-    case_3_stat2: "3.2x CAC Efficiency",
+    // Preview Modal Labels
+    modal_title: "Interactive Live Store Preview",
+    modal_device_laptop: "Desktop 💻",
+    modal_device_tablet: "Tablet 📱",
+    modal_device_mobile: "Mobile 📱",
+    modal_visit_live: "Open Store in New Window",
+    modal_close: "Close Preview",
 
     // 4-Step Process
     proc_tag: "Roadmap to Scale",
@@ -327,23 +415,23 @@ const translations = {
     // Testimonials
     test_tag: "Client Endorsements",
     test_title: "Trusted by Industry Leaders",
-    test_1_quote: "Working with Ali and Brands Factory transformed our e-commerce operations. Our ROAS surged from 2.1 to 4.9 in two months thanks to their AI creative pipeline!",
-    test_1_author: "Eng. Ahmed El-Shennawy",
-    test_1_role: "Founder, Tech Hardware E-Store",
-    test_2_quote: "Hands down the sharpest growth strategist I've collaborated with. The automated WhatsApp lead qualification system saved us countless hours and doubled deal closures.",
-    test_2_author: "Kareem Abdullah",
-    test_2_role: "CEO, Digital Solutions Agency",
-    test_3_quote: "Incredible mastery over data and user behavior. Their weekly sprint reporting and scaling frameworks allowed us to expand into GCC with full confidence.",
-    test_3_author: "Dr. Sarah Al-Mansouri",
-    test_3_role: "Head of Marketing, Beauty Brand",
+    test_1_quote: "Working with Ali and Brands Factory transformed our sales. ROAS jumped and conversions skyrocketed thanks to their CAPI setup and AI creative variations!",
+    test_1_author: "Ahmed Kamal",
+    test_1_role: "CEO, Turbo Cool Egypt",
+    test_2_quote: "Hands down the sharpest media buyer and growth team. The automated WhatsApp sales bot drastically reduced response times and scaled our daily orders.",
+    test_2_author: "Management Team, Donuts Time",
+    test_2_role: "F&B Chain",
+    test_3_quote: "Incredible precision targeting female audiences with AI creative testing. Our campaign metrics have never been this consistent and profitable.",
+    test_3_author: "HY Cosmetics Marketing Team",
+    test_3_role: "Cosmetics Brand",
 
     // Booking & Contact Form
     form_tag: "Ready to Scale?",
     form_title: "Book Your Free 1-on-1 Growth Session",
     form_desc: "Fill in the details below and Ali Mohmed will personally analyze your current paid traffic strategy and growth levers.",
-    form_name_lbl: "Full Name:",
+    form_name_lbl: "Full Name: *",
     form_name_ph: "e.g. John Doe",
-    form_phone_lbl: "WhatsApp Phone Number:",
+    form_phone_lbl: "WhatsApp Phone Number: *",
     form_phone_ph: "+20 1X XXXX XXXX or international",
     form_brand_lbl: "Brand Name / Website URL:",
     form_brand_ph: "brandsfactory.site or your URL",
@@ -391,34 +479,22 @@ let currentLang = 'ar';
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
-  // Check localStorage for preferred language
   const savedLang = localStorage.getItem('bf_lang') || 'ar';
   setLanguage(savedLang);
 
-  // Initialize Calculator
+  // Initialize Components
   initCalculator();
-
-  // Initialize Animated Counters
   initCounters();
-
-  // Initialize Portfolio Tabs
   initPortfolioTabs();
-
-  // Initialize FAQ Accordion
+  initPreviewModal();
   initFAQ();
-
-  // Initialize Contact & WhatsApp form
   initForm();
-
-  // Initialize Mobile Menu
   initMobileMenu();
-
-  // Initialize Navbar Scroll Blur
   initNavScroll();
 });
 
 // ==========================================
-// 2. Language Switcher Function
+// 3. Language Switcher Function
 // ==========================================
 function setLanguage(lang) {
   currentLang = lang;
@@ -438,7 +514,7 @@ function setLanguage(lang) {
     }
   });
 
-  // Update placeholders for inputs with data-i18n-ph
+  // Update placeholders
   document.querySelectorAll('[data-i18n-ph]').forEach(el => {
     const key = el.getAttribute('data-i18n-ph');
     if (translations[lang] && translations[lang][key]) {
@@ -452,23 +528,102 @@ function setLanguage(lang) {
     langToggleBtn.innerText = lang === 'ar' ? 'English' : 'العربية';
   }
 
-  // Recalculate calculator text with new currency/labels
+  // Recalculate calculator UI
   if (typeof updateCalculatorUI === 'function') {
     updateCalculatorUI();
   }
 }
 
-// Global function to toggle language
 window.toggleLanguage = function() {
   const nextLang = currentLang === 'ar' ? 'en' : 'ar';
   setLanguage(nextLang);
 };
 
 // ==========================================
-// 3. Interactive ROAS & Growth Calculator
+// 4. Interactive Live Preview Modal & Device Switcher
+// ==========================================
+let activeClientKey = 'donutstime';
+
+function initPreviewModal() {
+  const modal = document.getElementById('previewModal');
+  const closeBtn = document.getElementById('closeModalBtn');
+  const overlay = document.getElementById('modalOverlay');
+
+  // Device switcher buttons
+  const deviceBtns = document.querySelectorAll('.device-btn');
+  const frameContainer = document.getElementById('deviceFrameContainer');
+
+  deviceBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      deviceBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const mode = btn.getAttribute('data-device');
+      frameContainer.className = 'device-frame-container transition-all duration-300 relative mx-auto bg-slate-900 border-4 border-slate-800 overflow-hidden';
+      
+      if (mode === 'desktop') {
+        frameContainer.classList.add('device-desktop');
+      } else if (mode === 'tablet') {
+        frameContainer.classList.add('device-tablet');
+      } else if (mode === 'mobile') {
+        frameContainer.classList.add('device-mobile');
+      }
+    });
+  });
+
+  // Close modal events
+  if (closeBtn) closeBtn.addEventListener('click', closePreviewModal);
+  if (overlay) overlay.addEventListener('click', closePreviewModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+      closePreviewModal();
+    }
+  });
+}
+
+window.openClientPreview = function(clientKey) {
+  const modal = document.getElementById('previewModal');
+  const data = realClientsData[clientKey];
+  if (!modal || !data) return;
+
+  activeClientKey = clientKey;
+
+  // Set modal texts
+  const titleEl = document.getElementById('modalClientTitle');
+  const urlEl = document.getElementById('modalClientUrl');
+  const liveLinkBtn = document.getElementById('modalLiveLinkBtn');
+  const iframe = document.getElementById('previewIframe');
+  const badgeEl = document.getElementById('modalClientBadge');
+
+  if (titleEl) titleEl.innerText = currentLang === 'ar' ? data.name_ar : data.name_en;
+  if (urlEl) urlEl.innerText = data.display_url;
+  if (liveLinkBtn) liveLinkBtn.href = data.url;
+  if (badgeEl) badgeEl.innerText = currentLang === 'ar' ? data.badge_ar : data.badge_en;
+
+  // Set iframe source
+  if (iframe) {
+    iframe.src = data.url;
+  }
+
+  // Show modal
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+};
+
+window.closePreviewModal = function() {
+  const modal = document.getElementById('previewModal');
+  const iframe = document.getElementById('previewIframe');
+  if (modal) modal.classList.remove('active');
+  if (iframe) iframe.src = 'about:blank';
+  document.body.style.overflow = '';
+};
+
+// ==========================================
+// 5. Interactive ROAS & Growth Calculator
 // ==========================================
 const industryMultipliers = {
-  ecom: { baseROAS: 4.6, leadCost: 4.5, profitMargin: 0.32 },
+  ecom: { baseROAS: 4.8, leadCost: 4.5, profitMargin: 0.35 },
   b2b: { baseROAS: 5.8, leadCost: 18.0, profitMargin: 0.55 },
   realestate: { baseROAS: 6.5, leadCost: 35.0, profitMargin: 0.40 },
   coaching: { baseROAS: 5.2, leadCost: 12.0, profitMargin: 0.65 }
@@ -484,7 +639,6 @@ function initCalculator() {
     updateCalculatorUI();
   }
 
-  // Pre-fill booking form button
   const applyBtn = document.getElementById('applyCalcBtn');
   if (applyBtn) {
     applyBtn.addEventListener('click', () => {
@@ -522,35 +676,23 @@ function updateCalculatorUI() {
   const indKey = industrySelect.value;
   const config = industryMultipliers[indKey] || industryMultipliers.ecom;
 
-  // Scale calculations
   const spendK = spend / 1000;
-  // Dynamic ROAS calculation with small scaling curve
-  const calcROASVal = (config.baseROAS - (spendK * 0.03)).toFixed(1);
-  const safeROAS = Math.max(3.2, parseFloat(calcROASVal));
+  const calcROASVal = (config.baseROAS - (spendK * 0.025)).toFixed(1);
+  const safeROAS = Math.max(3.4, parseFloat(calcROASVal));
   
   const estimatedRevenue = Math.round(spend * safeROAS);
   const estimatedLeads = Math.round(spend / config.leadCost);
   const estimatedProfit = Math.round((estimatedRevenue * config.profitMargin) - spend);
 
-  if (spendDisplay) {
-    spendDisplay.innerText = `$${spend.toLocaleString()}`;
-  }
-  if (roasDisplay) {
-    roasDisplay.innerText = `${safeROAS}x`;
-  }
-  if (revDisplay) {
-    revDisplay.innerText = `$${estimatedRevenue.toLocaleString()}`;
-  }
-  if (leadsDisplay) {
-    leadsDisplay.innerText = `+${estimatedLeads.toLocaleString()}`;
-  }
-  if (profitDisplay) {
-    profitDisplay.innerText = `$${estimatedProfit.toLocaleString()}`;
-  }
+  if (spendDisplay) spendDisplay.innerText = `$${spend.toLocaleString()}`;
+  if (roasDisplay) roasDisplay.innerText = `${safeROAS}x`;
+  if (revDisplay) revDisplay.innerText = `$${estimatedRevenue.toLocaleString()}`;
+  if (leadsDisplay) leadsDisplay.innerText = `+${estimatedLeads.toLocaleString()}`;
+  if (profitDisplay) profitDisplay.innerText = `$${estimatedProfit.toLocaleString()}`;
 }
 
 // ==========================================
-// 4. Animated Number Counters
+// 6. Animated Number Counters
 // ==========================================
 function initCounters() {
   const counterElements = document.querySelectorAll('.counter-val');
@@ -575,7 +717,6 @@ function initCounters() {
 }
 
 function animateValue(el, targetStr) {
-  // Extract number and suffix
   const numMatch = targetStr.match(/[\d.]+/);
   if (!numMatch) return;
 
@@ -589,11 +730,9 @@ function animateValue(el, targetStr) {
 
   function step(currentTime) {
     const progress = Math.min((currentTime - startTime) / duration, 1);
-    // Ease out cubic
     const easeOut = 1 - Math.pow(1 - progress, 3);
     const current = (start + (targetNum - start) * easeOut);
     
-    // Check if integer or float
     const formatted = targetNum % 1 !== 0 ? current.toFixed(1) : Math.floor(current).toString();
     el.innerText = `${prefix}${formatted}${suffix}`;
 
@@ -608,7 +747,7 @@ function animateValue(el, targetStr) {
 }
 
 // ==========================================
-// 5. Portfolio Tabs Filtering
+// 7. Portfolio Filtering
 // ==========================================
 function initPortfolioTabs() {
   const tabs = document.querySelectorAll('.portfolio-tab');
@@ -629,7 +768,7 @@ function initPortfolioTabs() {
           setTimeout(() => {
             item.style.transition = 'opacity 0.4s ease';
             item.style.opacity = '1';
-          }, 50);
+          }, 40);
         } else {
           item.style.display = 'none';
         }
@@ -639,7 +778,7 @@ function initPortfolioTabs() {
 }
 
 // ==========================================
-// 6. FAQ Accordion Logic
+// 8. FAQ Accordion Logic
 // ==========================================
 function initFAQ() {
   const faqItems = document.querySelectorAll('.faq-item');
@@ -649,7 +788,6 @@ function initFAQ() {
     header.addEventListener('click', () => {
       const isOpen = item.classList.contains('open');
 
-      // Close all others
       faqItems.forEach(other => {
         other.classList.remove('open');
         const content = other.querySelector('.faq-content');
@@ -658,7 +796,6 @@ function initFAQ() {
         if (icon) icon.style.transform = 'rotate(0deg)';
       });
 
-      // Toggle current
       if (!isOpen) {
         item.classList.add('open');
         const content = item.querySelector('.faq-content');
@@ -671,13 +808,12 @@ function initFAQ() {
 }
 
 // ==========================================
-// 7. Lead Form & WhatsApp Direct Connect
+// 9. Lead Form & WhatsApp Direct Connect
 // ==========================================
 function initForm() {
   const form = document.getElementById('consultationForm');
   const directWABtn = document.getElementById('directWhatsAppBtn');
 
-  // Direct WhatsApp Button with default greeting
   if (directWABtn) {
     directWABtn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -685,7 +821,6 @@ function initForm() {
     });
   }
 
-  // Form submission
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -702,7 +837,6 @@ function initForm() {
         return;
       }
 
-      // Format WhatsApp message
       const msg = `*طلب استشارة نمو جديدة من موقع Brands Factory 🚀*
 ----------------------------------
 👤 *الاسم:* ${name}
@@ -715,7 +849,6 @@ function initForm() {
 🌐 مرسل عبر: brandsfactory.site`;
 
       const encodedMsg = encodeURIComponent(msg);
-      // Ali Mohmed's WhatsApp (replace or format with international Egyptian code)
       const waURL = `https://wa.me/201015632296?text=${encodedMsg}`;
 
       showToast(
@@ -741,7 +874,6 @@ function openWhatsAppMessage() {
   window.open(waURL, '_blank');
 }
 
-// Toast notification helper
 function showToast(message, type = 'success') {
   let toast = document.getElementById('bf-toast');
   if (!toast) {
@@ -770,9 +902,6 @@ function showToast(message, type = 'success') {
   }, 4000);
 }
 
-// ==========================================
-// 8. Mobile Menu & Navbar
-// ==========================================
 function initMobileMenu() {
   const menuBtn = document.getElementById('mobileMenuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
@@ -792,12 +921,12 @@ function initMobileMenu() {
 }
 
 function initNavScroll() {
-  const nav = document.querySelector('nav');
+  const nav = document.querySelector('header');
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      nav.classList.add('shadow-lg', 'bg-opacity-95');
+    if (window.scrollY > 40) {
+      nav.classList.add('shadow-xl', 'bg-slate-950/95');
     } else {
-      nav.classList.remove('shadow-lg', 'bg-opacity-95');
+      nav.classList.remove('shadow-xl', 'bg-slate-950/95');
     }
   });
 }

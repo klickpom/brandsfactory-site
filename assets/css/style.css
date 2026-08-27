@@ -1,8 +1,9 @@
 /* ==========================================================================
    Brands Factory & Ali Mohmed - Premium AI Agency Stylesheet
+   Enhanced Typography, Spacing, 3-Viewport Responsive & Live Preview Frames
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap');
 
 :root {
   --primary-purple: #7C3AED;
@@ -13,10 +14,10 @@
   --emerald-accent: #10B981;
   --gold-accent: #F59E0B;
   --bg-dark: #070913;
-  --bg-card: rgba(17, 21, 39, 0.7);
-  --bg-card-hover: rgba(26, 32, 59, 0.85);
-  --border-glow: rgba(139, 92, 246, 0.2);
-  --border-glow-hover: rgba(168, 85, 247, 0.5);
+  --bg-card: rgba(17, 21, 39, 0.85);
+  --bg-card-hover: rgba(26, 32, 59, 0.95);
+  --border-glow: rgba(139, 92, 246, 0.25);
+  --border-glow-hover: rgba(168, 85, 247, 0.6);
   --text-main: #F8FAFC;
   --text-muted: #94A3B8;
 }
@@ -27,12 +28,39 @@
   box-sizing: border-box;
 }
 
+/* ==========================================
+   Typography & Arabic Letter-Spacing Reset
+   ========================================== */
 html {
   scroll-behavior: smooth;
   font-family: 'Cairo', 'Outfit', sans-serif;
   background-color: var(--bg-dark);
   color: var(--text-main);
   overflow-x: hidden;
+  letter-spacing: normal !important; /* CRITICAL: Never use tight tracking on Arabic */
+}
+
+body {
+  line-height: 1.6;
+  letter-spacing: normal !important;
+}
+
+/* Ensure no text overlap */
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+}
+
+[dir="rtl"] h1 {
+  line-height: 1.45 !important;
+}
+
+[dir="rtl"] h2 {
+  line-height: 1.4 !important;
+}
+
+[dir="rtl"] p {
+  line-height: 1.75 !important;
 }
 
 /* LTR / English font support */
@@ -58,10 +86,10 @@ html {
 /* Ambient Animated Mesh Background */
 .bg-mesh-glow {
   background-image: 
-    radial-gradient(circle at 15% 20%, rgba(124, 58, 237, 0.18) 0%, transparent 40%),
-    radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.14) 0%, transparent 40%),
-    radial-gradient(circle at 50% 75%, rgba(168, 85, 247, 0.12) 0%, transparent 50%),
-    radial-gradient(circle at 80% 85%, rgba(16, 185, 129, 0.1) 0%, transparent 40%);
+    radial-gradient(circle at 15% 15%, rgba(124, 58, 237, 0.16) 0%, transparent 45%),
+    radial-gradient(circle at 85% 25%, rgba(6, 182, 212, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 50% 65%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 85%, rgba(16, 185, 129, 0.08) 0%, transparent 45%);
   background-attachment: fixed;
 }
 
@@ -71,22 +99,22 @@ html {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-glow);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-panel:hover {
   border-color: var(--border-glow-hover);
   background: var(--bg-card-hover);
-  box-shadow: 0 15px 35px -10px rgba(124, 58, 237, 0.25);
+  box-shadow: 0 18px 40px -10px rgba(124, 58, 237, 0.3);
   transform: translateY(-3px);
 }
 
 .glass-nav {
-  background: rgba(7, 9, 19, 0.85);
+  background: rgba(7, 9, 19, 0.9);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
 }
 
 /* Glowing Neon Text & Badges */
@@ -94,12 +122,15 @@ html {
   background: linear-gradient(135deg, #C084FC 0%, #A855F7 50%, #60A5FA 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  display: inline-block;
+  padding-bottom: 4px;
 }
 
 .text-gradient-cyan {
   background: linear-gradient(135deg, #38BDF8 0%, #06B6D4 50%, #34D399 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
 .text-gradient-gold {
@@ -144,16 +175,12 @@ html {
     transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-10px) rotate(1.5deg);
+    transform: translateY(-8px) rotate(1deg);
   }
 }
 
 .animate-float {
   animation: float 5s ease-in-out infinite;
-}
-
-.animate-float-delayed {
-  animation: float 6s ease-in-out 2s infinite;
 }
 
 /* Pulsing Circle Ring */
@@ -250,17 +277,6 @@ input[type="range"]::-moz-range-thumb {
   box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
 }
 
-/* Lead Modal Animations */
-#bookingModal.show {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-#bookingModal.show .modal-content {
-  transform: scale(1);
-  opacity: 1;
-}
-
 /* Founder Frame Glow */
 .founder-image-wrapper {
   position: relative;
@@ -281,4 +297,80 @@ input[type="range"]::-moz-range-thumb {
 .founder-image-wrapper:hover::before {
   opacity: 1;
   filter: blur(18px);
+}
+
+/* ==========================================
+   Interactive Live Preview Modal Styles
+   ========================================== */
+#previewModal {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#previewModal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+#previewModal .preview-modal-dialog {
+  transform: scale(0.92) translateY(20px);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#previewModal.active .preview-modal-dialog {
+  transform: scale(1) translateY(0);
+}
+
+/* Device View Modes */
+.device-frame-container {
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), height 0.4s ease;
+  margin: 0 auto;
+}
+
+/* Desktop View (Default full width) */
+.device-desktop {
+  width: 100%;
+  max-width: 100%;
+  height: 65vh;
+  border-radius: 12px;
+}
+
+/* Tablet View (iPad size 768px) */
+.device-tablet {
+  width: 768px;
+  max-width: 95%;
+  height: 65vh;
+  border-radius: 24px;
+  box-shadow: 0 0 0 12px #1E2442, 0 20px 40px rgba(0,0,0,0.8);
+}
+
+/* Mobile View (iPhone size 390px) */
+.device-mobile {
+  width: 390px;
+  max-width: 90%;
+  height: 65vh;
+  border-radius: 36px;
+  box-shadow: 0 0 0 12px #1E2442, 0 20px 40px rgba(0,0,0,0.8);
+}
+
+.device-btn.active {
+  background: #7C3AED;
+  color: #FFFFFF;
+  border-color: #A855F7;
+  box-shadow: 0 0 15px rgba(124, 58, 237, 0.5);
+}
+
+/* Client Brand Badge Glow */
+.brand-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34D399;
 }
