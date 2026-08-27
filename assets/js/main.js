@@ -1,6 +1,7 @@
 /**
  * Brands Factory & Ali Mohmed - Premium 2026 Interactive Engine
- * Verified Real Clients, Robust Case Study & Live Device Showcase, ROAS Calculator & Multilingual Engine
+ * Verified Real Clients, Interactive Device Showcase & Case Study Suite
+ * Version: 2026.2.1
  */
 
 // ==========================================
@@ -11,8 +12,8 @@ const realClientsData = {
     name_ar: "صالون هبة يوسف للتجميل | Heba Youssef",
     name_en: "Heba Youssef Luxury Beauty Salon",
     category: "beauty_salon",
-    industry_ar: "بيوتي سنتر وصالون تجميل فاخر 💇‍♀️",
-    industry_en: "Luxury Beauty Salon & Bridal Center",
+    industry_ar: "بيوتي سنتر وصالون تجميل فاخر بالإسكندرية 💇‍♀️",
+    industry_en: "Luxury Beauty Salon & Bridal Center (Alexandria)",
     url: "https://hebayoussef.store/",
     display_url: "hebayoussef.store",
     badge_ar: "صالون تجميل وعرائس بالإسكندرية ✨",
@@ -33,7 +34,7 @@ const realClientsData = {
     name_ar: "فسخاني العيلة | The Family Seafood",
     name_en: "The Family Seafood & Deli",
     category: "gourmet_food",
-    industry_ar: "مأكولات وبطارخ وأسماك فاخرة 🐟",
+    industry_ar: "فسيخ ورنجة وبطارخ ومأكولات بحرية فاخرة 🐟",
     industry_en: "Gourmet Seafood & Egyptian Deli",
     url: "https://thefamilyseafood.shop/",
     display_url: "thefamilyseafood.shop",
@@ -55,7 +56,7 @@ const realClientsData = {
     name_ar: "دونتس تايم | Donuts Time",
     name_en: "Donuts Time",
     category: "gourmet_food",
-    industry_ar: "سلاسل حلويات ومطاعم F&B 🍩",
+    industry_ar: "سلاسل دونتس ومخبوزات وحلويات F&B 🍩",
     industry_en: "Bakery, Sweets & F&B Chain",
     url: "https://donutstime.shop/",
     display_url: "donutstime.shop",
@@ -77,7 +78,7 @@ const realClientsData = {
     name_ar: "ماسة لمستحضرات التجميل | HY Cosmetics MASSA",
     name_en: "HY Cosmetics MASSA",
     category: "beauty_salon",
-    industry_ar: "منتجات معالجة شعر احترافية للصالونات B2B 🧪",
+    industry_ar: "منتجات معالجة وفرد شعر احترافية للصالونات B2B 🧪",
     industry_en: "Pro Hair Care & Salon Supplies (B2B)",
     url: "https://www.hycosmeticsmassa.store/",
     display_url: "hycosmeticsmassa.store",
@@ -477,11 +478,17 @@ window.openCaseStudy = function(clientKey) {
   currentClientKey = clientKey;
 
   // Set Title & Badge
-  document.getElementById('modalCaseTitle').innerText = currentLang === 'ar' ? data.name_ar : data.name_en;
-  document.getElementById('modalCaseBadge').innerText = currentLang === 'ar' ? data.badge_ar : data.badge_en;
-  document.getElementById('modalCaseIndustry').innerText = currentLang === 'ar' ? data.industry_ar : data.industry_en;
-  document.getElementById('modalCaseDesc').innerText = currentLang === 'ar' ? data.description_ar : data.description_en;
-  document.getElementById('modalCaseStrategy').innerText = currentLang === 'ar' ? data.strategy_ar : data.strategy_en;
+  const titleEl = document.getElementById('modalCaseTitle');
+  const badgeEl = document.getElementById('modalCaseBadge');
+  const industryEl = document.getElementById('modalCaseIndustry');
+  const descEl = document.getElementById('modalCaseDesc');
+  const strategyEl = document.getElementById('modalCaseStrategy');
+
+  if (titleEl) titleEl.innerText = currentLang === 'ar' ? data.name_ar : data.name_en;
+  if (badgeEl) badgeEl.innerText = currentLang === 'ar' ? data.badge_ar : data.badge_en;
+  if (industryEl) industryEl.innerText = currentLang === 'ar' ? data.industry_ar : data.industry_en;
+  if (descEl) descEl.innerText = currentLang === 'ar' ? data.description_ar : data.description_en;
+  if (strategyEl) strategyEl.innerText = currentLang === 'ar' ? data.strategy_ar : data.strategy_en;
 
   // Set URL link
   const liveLinkBtn = document.getElementById('modalCaseLiveBtn');
@@ -505,21 +512,13 @@ window.openCaseStudy = function(clientKey) {
     `).join('');
   }
 
-  // Set live iframe safely
-  const iframe = document.getElementById('modalCaseIframe');
-  if (iframe) {
-    iframe.src = data.url;
-  }
-
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
 };
 
 window.closeCaseStudy = function() {
   const modal = document.getElementById('caseStudyModal');
-  const iframe = document.getElementById('modalCaseIframe');
   if (modal) modal.classList.remove('active');
-  if (iframe) iframe.src = 'about:blank';
   document.body.style.overflow = '';
 };
 
