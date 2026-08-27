@@ -68,7 +68,7 @@
   </script>
 
   <!-- High Performance Stylesheet with Cache Busting -->
-  <link rel="stylesheet" href="assets/css/style.css?v=2026.4.0" />
+  <link rel="stylesheet" href="assets/css/style.css?v=2026.5.0" />
 </head>
 
 <body class="bg-brand-dark text-slate-100 font-cairo antialiased selection:bg-brand-purple selection:text-white bg-mesh-glow relative">
@@ -416,16 +416,17 @@
           </div>
         </div>
 
-        <!-- Client 4: HY Cosmetics MASSA -->
-        <div class="portfolio-item glass-panel rounded-3xl p-5 sm:p-7 space-y-5 border border-pink-500/30 group flex flex-col justify-between" data-category="beauty_salon">
+        <!-- Client 4: HY Cosmetics MASSA (مع فيديو ريفيو وشارة Google AI) -->
+        <div class="portfolio-item glass-panel rounded-3xl p-5 sm:p-7 space-y-5 border border-pink-500/40 shadow-lg shadow-pink-950/20 group flex flex-col justify-between relative overflow-hidden" data-category="beauty_salon">
+          
           <div class="space-y-4">
             <div class="flex items-center justify-between">
               <span class="px-3 py-1 rounded-full bg-pink-900/50 border border-pink-500/40 text-pink-300 text-xs font-bold">
-                توريد جملة لصالونات التجميل B2B 🧪
+                توريد جملة للصالونات B2B 🧪
               </span>
-              <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-800/80 px-2.5 py-1 rounded-full">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                Live Client
+              <span class="inline-flex items-center gap-1.5 text-xs font-bold text-rose-400 bg-rose-950/60 border border-rose-800/80 px-2.5 py-1 rounded-full animate-pulse">
+                <i class="fa-solid fa-play text-[10px]"></i>
+                فيديو ريفيو متوفر 🎬
               </span>
             </div>
 
@@ -439,8 +440,14 @@
               </a>
             </div>
 
+            <!-- Google AI Dominance Mini Badge -->
+            <div class="p-2 rounded-xl bg-blue-950/40 border border-blue-500/30 flex items-center gap-2 text-xs text-blue-300 font-semibold">
+              <i class="fa-brands fa-google text-blue-400"></i>
+              <span>المركز #1 في بحث جوجل وتوصيات AI</span>
+            </div>
+
             <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              استهداف متخصص لأصحاب ومصففي الصالونات ومراكز التجميل في مصر، لبناء شبكة عملاء جملة وتوزيع لمنتجات البروتين والبوتكس والفيلر عبر واتساب المباشر.
+              استهداف متخصص لأصحاب ومصففي الصالونات ومراكز التجميل في مصر، لبناء شبكة عملاء جملة وتوزيع لمنتجات البروتين والبوتكس والفيلر، مع تصدر نتائج Google AI.
             </p>
 
             <div class="grid grid-cols-2 gap-2.5 pt-3 border-t border-slate-800">
@@ -456,9 +463,9 @@
           </div>
 
           <div class="flex items-center gap-2.5 pt-2">
-            <button onclick="openCaseStudy('hycosmetics')" class="flex-1 py-3 rounded-xl bg-purple-600/30 hover:bg-purple-600/50 border border-purple-500/50 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all">
-              <i class="fa-solid fa-chart-pie text-purple-300"></i>
-              <span data-i18n="btn_view_case_study">تفاصيل المشروع ونتائج الحملات 📊</span>
+            <button onclick="openCaseStudy('hycosmetics')" class="flex-1 py-3 rounded-xl bg-gradient-to-r from-purple-600/40 to-pink-600/40 hover:from-purple-600/60 hover:to-pink-600/60 border border-pink-500/50 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-md">
+              <i class="fa-solid fa-circle-play text-rose-400"></i>
+              <span>النتائج وفيديو التجربة 🎥</span>
             </button>
             <a href="https://www.hycosmeticsmassa.store/" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-400 border border-slate-700 flex items-center justify-center transition-all" title="الموقع المباشر">
               <i class="fa-solid fa-arrow-up-right-from-square"></i>
@@ -523,7 +530,7 @@
 
 
   <!-- ==========================================
-       Interactive Case Study & Live Experience Modal (100% Mobile Optimized)
+       Interactive Case Study & Live Experience Modal (with Video Player)
        ========================================== -->
   <div id="caseStudyModal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6">
     <div id="caseStudyOverlay" class="absolute inset-0 bg-slate-950/90 backdrop-blur-2xl transition-opacity"></div>
@@ -555,8 +562,30 @@
       </div>
 
       <!-- Modal Content Body -->
-      <div class="p-5 sm:p-7 overflow-y-auto space-y-6 sm:space-y-7 bg-slate-950/60 flex-1">
+      <div class="p-5 sm:p-7 overflow-y-auto space-y-6 bg-slate-950/60 flex-1">
         
+        <!-- Google AI Search Dominance Banner (Dynamic) -->
+        <div id="modalGoogleProofSection" class="hidden p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-blue-950/40 via-purple-950/40 to-slate-900 border border-blue-500/40 flex items-center gap-3.5 shadow-lg">
+          <div class="w-10 h-10 rounded-xl bg-blue-600/30 border border-blue-400/40 flex items-center justify-center text-blue-400 shrink-0">
+            <i class="fa-brands fa-google text-lg"></i>
+          </div>
+          <div class="min-w-0">
+            <div class="text-xs sm:text-sm font-bold text-white" id="modalGoogleProofText">تصدر المركز #1 في بحث جوجل والذكاء الاصطناعي (Google AI Overview) 🏆</div>
+            <div class="text-[11px] text-slate-300 mt-0.5">بناء سلطة رقمية وتصدر عبارات البحث الأكثر طلباً لمنتجات معالجة وفرد الشعر في مصر</div>
+          </div>
+        </div>
+
+        <!-- Video Player Section (Dynamic Embed) -->
+        <div id="modalVideoSection" class="hidden space-y-2.5">
+          <h5 class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-circle-play text-rose-500 animate-pulse"></i>
+            <span>فيديو ريفيو وتجربة العميل الحقيقية (Video Review)</span>
+          </h5>
+          <div class="relative w-full rounded-2xl overflow-hidden bg-slate-900 border border-purple-500/40 aspect-video shadow-2xl">
+            <iframe id="modalVideoIframe" class="w-full h-full" src="" title="Client Review Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </div>
+
         <!-- Key Metrics Grid -->
         <div class="space-y-2.5">
           <h5 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-2">
@@ -1168,7 +1197,7 @@
   </footer>
 
   <!-- Main JavaScript Engine with Cache-Busting -->
-  <script src="assets/js/main.js?v=2026.4.0"></script>
+  <script src="assets/js/main.js?v=2026.5.0"></script>
 
 </body>
 </html>

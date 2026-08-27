@@ -1,12 +1,12 @@
 /**
  * Brands Factory & Ali Mohmed - Ultra High-Performance 2026 Engine
  * Verified Real Clients (with www.hebayoussef.store & www.hycosmeticsmassa.store)
- * Flawless Responsive Mobile/Tablet/Desktop Architecture
- * Version: 2026.4.0
+ * Integrated YouTube Video Testimonial Player & Google AI Overview Proof
+ * Version: 2026.5.0
  */
 
 // ==========================================
-// 1. Verified Real Clients Database (Clean Values & Exact URLs)
+// 1. Verified Real Clients Database
 // ==========================================
 const realClientsData = {
   hebayoussef: {
@@ -85,16 +85,19 @@ const realClientsData = {
     display_url: "www.hycosmeticsmassa.store",
     badge_ar: "توريد جملة لصالونات التجميل 🧪",
     badge_en: "B2B Salon Wholesale 🧪",
-    description_ar: "استهداف متخصص لأصحاب ومصففي الصالونات ومراكز التجميل في مصر، لبناء شبكة عملاء جملة وتوزيع لمنتجات البروتين والبوتكس والفيلر عبر واتساب المباشر.",
-    description_en: "Targeted B2B lead generation targeting professional beauty salons and stylists across Egypt for bulk wholesale distribution pipelines.",
+    video_id: "oibw_kNHWh4",
+    google_seo_proof_ar: "المركز #1 في نتائج بحث جوجل والذكاء الاصطناعي (Google AI Overview) 🏆",
+    google_seo_proof_en: "#1 Google Search & AI Overview Ranking Leader 🏆",
+    description_ar: "استهداف متخصص لأصحاب ومصففي الصالونات ومراكز التجميل في مصر، لبناء شبكة عملاء جملة وتوزيع لمنتجات البروتين والبوتكس والفيلر عبر واتساب المباشر، مع تصدر نتائج البحث العضوي والذكاء الاصطناعي على جوجل.",
+    description_en: "Targeted B2B lead generation for professional beauty salons across Egypt for bulk wholesale distribution pipelines, commanding #1 Google organic & AI rankings.",
     stats: [
       { label_ar: "العائد الإعلاني (ROAS)", label_en: "Campaign ROAS", val: "5.6x" },
       { label_ar: "صالون متعاقد", label_en: "Contracted Salons", val: "+1,800" },
       { label_ar: "طلبات متكررة شهرياً", label_en: "Monthly Re-orders", val: "68%" },
       { label_ar: "محافظة مغطاة", label_en: "Governorates", val: "24" }
     ],
-    strategy_ar: "إعلانات فيديو تقنية تستعرض نتائج البروتين بدون فورمالين مع تأهيل الصالونات فوريّاً عبر مسار مبيعات B2B منظم.",
-    strategy_en: "Technical demo ads proving zero-formaldehyde results, with instant B2B wholesale qualification pipelines."
+    strategy_ar: "إعلانات فيديو تقنية تستعرض نتائج البروتين بدون فورمالين مع تأهيل الصالونات فوريّاً عبر مسار مبيعات B2B منظم، وتصدر الكلمات البحثية الأكثر طلباً.",
+    strategy_en: "Technical demo ads proving zero-formaldehyde results, with instant B2B wholesale qualification pipelines and dominant Google AI search visibility."
   },
 
   turbocool: {
@@ -477,22 +480,16 @@ window.openCaseStudy = function(clientKey) {
   // Set Title & Badge
   const titleEl = document.getElementById('modalCaseTitle');
   const badgeEl = document.getElementById('modalCaseBadge');
-  const industryEl = document.getElementById('modalCaseIndustry');
   const descEl = document.getElementById('modalCaseDesc');
   const strategyEl = document.getElementById('modalCaseStrategy');
 
   if (titleEl) titleEl.innerText = currentLang === 'ar' ? data.name_ar : data.name_en;
   if (badgeEl) badgeEl.innerText = currentLang === 'ar' ? data.badge_ar : data.badge_en;
-  if (industryEl) industryEl.innerText = currentLang === 'ar' ? data.industry_ar : data.industry_en;
   if (descEl) descEl.innerText = currentLang === 'ar' ? data.description_ar : data.description_en;
   if (strategyEl) strategyEl.innerText = currentLang === 'ar' ? data.strategy_ar : data.strategy_en;
 
   // Set URL link
-  const liveLinkBtn = document.getElementById('modalCaseLiveBtn');
   const liveLinkBtn2 = document.getElementById('modalCaseLiveBtn2');
-  if (liveLinkBtn) {
-    liveLinkBtn.href = data.url;
-  }
   if (liveLinkBtn2) {
     liveLinkBtn2.href = data.url;
   }
@@ -508,12 +505,41 @@ window.openCaseStudy = function(clientKey) {
     `).join('');
   }
 
+  // Handle Video Embed
+  const videoSection = document.getElementById('modalVideoSection');
+  const videoIframe = document.getElementById('modalVideoIframe');
+  if (videoSection && videoIframe) {
+    if (data.video_id) {
+      videoIframe.src = `https://www.youtube-nocookie.com/embed/${data.video_id}?rel=0&modestbranding=1`;
+      videoSection.classList.remove('hidden');
+    } else {
+      videoIframe.src = '';
+      videoSection.classList.add('hidden');
+    }
+  }
+
+  // Handle Google Proof Banner
+  const googleProofSection = document.getElementById('modalGoogleProofSection');
+  const googleProofText = document.getElementById('modalGoogleProofText');
+  if (googleProofSection && googleProofText) {
+    if (data.google_seo_proof_ar) {
+      googleProofText.innerText = currentLang === 'ar' ? data.google_seo_proof_ar : data.google_seo_proof_en;
+      googleProofSection.classList.remove('hidden');
+    } else {
+      googleProofSection.classList.add('hidden');
+    }
+  }
+
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
 };
 
 window.closeCaseStudy = function() {
   const modal = document.getElementById('caseStudyModal');
+  const videoIframe = document.getElementById('modalVideoIframe');
+  if (videoIframe) {
+    videoIframe.src = ''; // Stop video playback when modal closes
+  }
   if (modal) modal.classList.remove('active');
   document.body.style.overflow = '';
 };
