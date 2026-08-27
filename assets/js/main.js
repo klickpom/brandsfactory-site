@@ -1,11 +1,12 @@
 /**
  * Brands Factory & Ali Mohmed - Ultra High-Performance 2026 Engine
- * Verified Real Clients (7 Elite Clients with Websites & Official Facebook Pages)
- * Version: 2026.7.0
+ * 8 Verified Elite Clients (with Clean Badge Layout & Exact Facebook & Web Links)
+ * Custom High-End Select & Chips UI (Zero Primitive Native Dialogs)
+ * Version: 2026.8.0
  */
 
 // ==========================================
-// 1. Verified Real Clients Database (7 Selected Client Partners)
+// 1. Verified Real Clients Database (8 Selected Client Partners)
 // ==========================================
 const realClientsData = {
   hebayoussef: {
@@ -17,7 +18,7 @@ const realClientsData = {
     url: "https://www.hebayoussef.store/",
     display_url: "www.hebayoussef.store",
     facebook_url: "https://www.facebook.com/HebaYoussefSalon",
-    facebook_display: "fb/HebaYoussefSalon",
+    facebook_display: "صفحة فيسبوك الرسمية",
     badge_ar: "صالون تجميل وعرائس بالإسكندرية ✨",
     badge_en: "Alexandria Luxury Salon & Spa ✨",
     description_ar: "إدارة وتوسيع حملات الحجز الأونلاين لـ 3 فروع راقية في جليم وسموحة بالإسكندرية، مع استهداف دقيق لخدمات فرد الشعر بالبروتين، الهايدرافيشل، وباقات العرائس الملكية.",
@@ -68,7 +69,7 @@ const realClientsData = {
     url: "https://thefamilyseafood.shop/",
     display_url: "thefamilyseafood.shop",
     facebook_url: "https://www.facebook.com/TheFamilySeaFood",
-    facebook_display: "fb/TheFamilySeaFood",
+    facebook_display: "صفحة فيسبوك الرسمية",
     badge_ar: "مأكولات بحرية وتوصيل سريع 🦞",
     badge_en: "Premium Seafood Delivery 🦞",
     description_ar: "إطلاق وإدارة حملات المبيعات الموسمية والفورية على تيك توك وفيسبوك لمنتجات الفسيخ والرنجة والبطارخ الفاخرة، مع ربط البكسل وخفض تكلفة الاستحواذ (CPA).",
@@ -107,6 +108,30 @@ const realClientsData = {
     strategy_en: "Engineered high-tempo TikTok videos targeting local store radius, routing traffic to high-converting combo offer funnels."
   },
 
+  saraya: {
+    name_ar: "براند سرايا | Saraya",
+    name_en: "Saraya Brand",
+    category: "retail",
+    industry_ar: "أزياء وتجارة ومبيعات راقية 👗",
+    industry_en: "Fashion, Retail & Premium Lifestyle",
+    url: "https://www.facebook.com/profile.php?id=61589489462926",
+    display_url: "صفحة سرايا الرسمية",
+    facebook_url: "https://www.facebook.com/profile.php?id=61589489462926",
+    facebook_display: "صفحة فيسبوك الرسمية",
+    badge_ar: "براند أزياء وتجارة متميزة 👗",
+    badge_en: "Premium Fashion & Lifestyle 👗",
+    description_ar: "بناء وتوسيع مسار مبيعات وحملات أزياء ومنتجات فاخرة عبر وسائل التواصل الاجتماعي، مع اختبار مستمر للخطافات الإعلانية ومضاعفة معدل تكرار الشراء.",
+    description_en: "Scaling paid acquisition and social commerce funnels for fashion and lifestyle products with dynamic creative testing and customer retention workflows.",
+    stats: [
+      { label_ar: "العائد الإعلاني (ROAS)", label_en: "Campaign ROAS", val: "5.4x" },
+      { label_ar: "طلب مبيعات شهرياً", label_en: "Monthly Orders", val: "+3,200" },
+      { label_ar: "تكرار الشراء", label_en: "Repeat Purchase Rate", val: "42%" },
+      { label_ar: "معدل التحويل الإعلاني", label_en: "Conversion Rate", val: "4.6%" }
+    ],
+    strategy_ar: "إنتاج محتوى UGC إبداعي واستعراض تفاصيل الخامات والأناقة في فيديوهات سريعة موجهة للشراء المباشر عبر المحادثات والصفحة.",
+    strategy_en: "High-tempo UGC video creative production highlighting styling and fabric quality, driving instant purchases through automated chat funnels."
+  },
+
   elghanem: {
     name_ar: "الغانم إمباير للتطوير العقاري | El Ghanem Empire",
     name_en: "El Ghanem Empire Real Estate Development",
@@ -116,7 +141,7 @@ const realClientsData = {
     url: "https://www.facebook.com/profile.php?id=61582942118571",
     display_url: "صفحة الغانم العقارية",
     facebook_url: "https://www.facebook.com/profile.php?id=61582942118571",
-    facebook_display: "El Ghanem Empire FB",
+    facebook_display: "صفحة فيسبوك الرسمية",
     badge_ar: "تطوير عقاري واستثماري رائد 🏢",
     badge_en: "Premier Real Estate Development 🏢",
     description_ar: "هندسة وإدارة حملات توليد العملاء المحتملين (Lead Generation) للمشاريع العقارية السكنية والتجارية في مدينة بدر والشروق، مع استهداف دقيق للمستثمرين والمقبلين على الشراء.",
@@ -140,10 +165,10 @@ const realClientsData = {
     url: "https://www.facebook.com/profile.php?id=61561520316184",
     display_url: "صفحة ملكي العقارية",
     facebook_url: "https://www.facebook.com/profile.php?id=61561520316184",
-    facebook_display: "Mlki Real Estate FB",
+    facebook_display: "صفحة فيسبوك الرسمية",
     badge_ar: "تسويق واستثمار عقاري متميز 💎",
     badge_en: "Elite Real Estate Marketing 💎",
-    description_ar: "إطلاق حملات تسويق عقاري موجهة لشرائح الـ High-Ticket في القاهرة الجديدة والمناطق الواعدة، لاقتناص أفضل الفرص الاستثمارية السكنية والتجارية ذات العائد المرتفع.",
+    description_ar: "إطلاق حملات تسويق عقاري موجهة لشرائح الـ High-Ticket في القاهرة لاقتناص أفضل الفرص الاستثمارية السكنية والتجارية ذات العائد المرتفع.",
     description_en: "High-ticket property acquisition campaigns targeting affluent buyers and investors for premium residential and commercial opportunities across Cairo.",
     stats: [
       { label_ar: "العائد الإعلاني التقديري", label_en: "Estimated ROAS", val: "5.9x" },
@@ -163,7 +188,7 @@ const realClientsData = {
     industry_en: "HVAC & Home Cooling Systems",
     url: "https://turbocool-egypt.shop/",
     display_url: "turbocool-egypt.shop",
-    facebook_url: "https://www.facebook.com/profile.php?id=61589489462926",
+    facebook_url: "https://www.facebook.com/share/18zCHeSU23/",
     facebook_display: "صفحة فيسبوك الرسمية",
     badge_ar: "موزع معتمد لأكبر ماركات التكييف ❄️",
     badge_en: "Certified HVAC & Air Conditioning ❄️",
@@ -248,10 +273,10 @@ const translations = {
     calc_desc: "حرك المؤشر لاختيار ميزانيتك الإعلانية الشهرية وشاهد كيف ترفع منظومة Brands Factory أرباحك وعائد الـ ROAS.",
     calc_spend_label: "ميزانيتك الإعلانية الشهرية المتوقعة:",
     calc_industry_label: "نوع نشاطك التجاري:",
-    calc_ind_ecom: "تجارة إلكترونية ومتاجر (E-Commerce)",
-    calc_ind_b2b: "خدمات وشركات وصالونات (Services & B2B)",
-    calc_ind_realestate: "عقارات ومشاريع كبرى (Real Estate & High-Ticket)",
-    calc_ind_coaching: "استشارات ودورات تدريبية (Info & Coaching)",
+    calc_ind_ecom: "تجارة إلكترونية ومتاجر (E-Com)",
+    calc_ind_b2b: "خدمات وصالونات (B2B)",
+    calc_ind_realestate: "عقارات ومشاريع (Real Estate)",
+    calc_ind_coaching: "استشارات وتدريب (Coaching)",
     calc_res_roas: "العائد الإعلاني المتوقع (ROAS)",
     calc_res_revenue: "المبيعات الشهرية المقدرة",
     calc_res_leads: "العملاء / الطلبات المتوقعة",
@@ -261,14 +286,13 @@ const translations = {
     port_tag: "سجل نجاحات موثق ⚡ Verified Client Roster",
     port_title: "نماذج من عملائنا والعلامات التجارية التي نقود نموها",
     port_desc: "هذه نماذج لبعض الشركات والمتاجر والبراندات الحقيقية التي ندير ونضاعف حملاتها التسويقية ونقود مسارات نموها في مصر والشرق الأوسط.",
-    tab_all: "جميع العملاء (7 نماذج)",
+    tab_all: "جميع العملاء (8 نماذج)",
     tab_beauty: "صالونات وتجميل",
     tab_fnb: "أغذية ومطاعم",
     tab_realestate: "عقارات واستثمار",
+    tab_retail: "أزياء وبراندات",
     tab_ecom: "تكييفات وتجارة إلكترونية",
     btn_view_case_study: "تفاصيل المشروع ونتائج الحملات 📊",
-    btn_visit_store: "زيارة المتجر الرسمي ↗",
-    btn_visit_fb: "صفحة فيسبوك الرسمية ↗",
 
     proc_tag: "طريقك للقمة",
     proc_title: "منهجية العمل المكونة من 4 مراحل",
@@ -296,15 +320,7 @@ const translations = {
     form_brand_lbl: "اسم البراند / رابط الموقع أو الصفحة:",
     form_brand_ph: "brandsfactory.site أو صفحتك",
     form_budget_lbl: "الميزانية الإعلانية الشهرية المتوقعة:",
-    form_budget_opt1: "أقل من $1,000 (تأسيس واختبار)",
-    form_budget_opt2: "$1,000 - $3,000 (نمو واختبار زوايا)",
-    form_budget_opt3: "$3,000 - $10,000 (توسع ومضاعفة مبيعات)",
-    form_budget_opt4: "أكثر من $10,000 (تحجيم قوي ومؤسسي)",
     form_goal_lbl: "الخدمة أو الهدف الأساسي المطلوب:",
-    form_goal_opt1: "إدارة إعلانات ممولة وميديا باينج متكامل",
-    form_goal_opt2: "بناء مسار بيع وتحسين معدل التحويل (Funnel & CRO)",
-    form_goal_opt3: "صناعة محتوى إعلاني وأتمتة الـ AI",
-    form_goal_opt4: "استشارة نمو وتدقيق شامل لخطتي الحالية",
     form_notes_lbl: "ملاحظات أو تفاصيل إضافية:",
     form_notes_ph: "أخبرنا عن التحدي الأكبر الذي يواجه مشروعك حالياً...",
     form_btn_submit: "إرسال وحجز الاستشارة فوراً ⚡",
@@ -384,10 +400,10 @@ const translations = {
     calc_desc: "Drag the slider to choose your monthly ad spend and discover how Brands Factory's AI systems can scale your bottom line.",
     calc_spend_label: "Monthly Ad Budget:",
     calc_industry_label: "Industry / Business Model:",
-    calc_ind_ecom: "E-Commerce / Direct-to-Consumer (D2C)",
-    calc_ind_b2b: "Beauty Salons, Clinics & B2B Services",
-    calc_ind_realestate: "Real Estate & High-Ticket Developments",
-    calc_ind_coaching: "Info Products & Coaching Consultancies",
+    calc_ind_ecom: "E-Commerce (D2C)",
+    calc_ind_b2b: "Salons & Services (B2B)",
+    calc_ind_realestate: "Real Estate & Projects",
+    calc_ind_coaching: "Info & Coaching",
     calc_res_roas: "Projected ROAS Multiplier",
     calc_res_revenue: "Estimated Monthly Revenue",
     calc_res_leads: "Estimated Sales / Bookings",
@@ -397,14 +413,13 @@ const translations = {
     port_tag: "Verified Success Roster",
     port_title: "Selected Client Brands We Proudly Scale",
     port_desc: "A showcase of real brands and client enterprises whose paid growth engines, funnels, and ROAS are powered by Brands Factory.",
-    tab_all: "All Clients (7 Selected)",
+    tab_all: "All Clients (8 Selected)",
     tab_beauty: "Beauty & Salons",
     tab_fnb: "Food & Dining",
     tab_realestate: "Real Estate & Growth",
+    tab_retail: "Fashion & Retail",
     tab_ecom: "HVAC & E-Commerce",
     btn_view_case_study: "Case Study & Growth Details 📊",
-    btn_visit_store: "Visit Official Website ↗",
-    btn_visit_fb: "Official Facebook Page ↗",
 
     proc_tag: "Roadmap to Scale",
     proc_title: "Our Proven 4-Step Scaling Architecture",
@@ -432,15 +447,7 @@ const translations = {
     form_brand_lbl: "Brand Name / Website URL:",
     form_brand_ph: "brandsfactory.site or your URL",
     form_budget_lbl: "Monthly Ad Budget:",
-    form_budget_opt1: "Under $1,000 (Testing & Setup)",
-    form_budget_opt2: "$1,000 - $3,000 (Growth Phase)",
-    form_budget_opt3: "$3,000 - $10,000 (Aggressive Scale)",
-    form_budget_opt4: "$10,000+ (Enterprise & Dominance)",
     form_goal_lbl: "Primary Goal / Required Service:",
-    form_goal_opt1: "Full-Funnel AI Media Buying & Scaling",
-    form_goal_opt2: "Funnel Engineering & CRO Optimization",
-    form_goal_opt3: "AI Creative Studio & Content Automation",
-    form_goal_opt4: "1-on-1 Strategy & Account Audit",
     form_notes_lbl: "Additional Details & Current Bottlenecks:",
     form_notes_ph: "Tell us about your biggest growth hurdle right now...",
     form_btn_submit: "Submit & Confirm Consultation ⚡",
@@ -458,12 +465,14 @@ const translations = {
 };
 
 let currentLang = 'ar';
+let selectedCalcIndustry = 'ecom';
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
   const savedLang = localStorage.getItem('bf_lang') || 'ar';
   setLanguage(savedLang);
 
+  initCustomSelects();
   initCalculator();
   initCounters();
   initPortfolioTabs();
@@ -516,7 +525,51 @@ window.toggleLanguage = function() {
 };
 
 // ==========================================
-// 4. Case Study & Showcase Modal
+// 4. Custom UI Select & Dropdown Interactivity
+// ==========================================
+function initCustomSelects() {
+  const selectWrappers = document.querySelectorAll('.custom-select-wrapper');
+
+  selectWrappers.forEach(wrapper => {
+    const trigger = wrapper.querySelector('.custom-select-trigger');
+    const options = wrapper.querySelectorAll('.custom-option');
+    const hiddenInput = wrapper.querySelector('input[type="hidden"]');
+    const labelSpan = trigger.querySelector('.selected-val-label');
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      // Close other open selects
+      selectWrappers.forEach(w => {
+        if (w !== wrapper) w.classList.remove('open');
+      });
+      wrapper.classList.toggle('open');
+    });
+
+    options.forEach(opt => {
+      opt.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const val = opt.getAttribute('data-value');
+        const text = opt.querySelector('.option-text').innerText;
+
+        options.forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+
+        if (labelSpan) labelSpan.innerText = text;
+        if (hiddenInput) hiddenInput.value = val;
+
+        wrapper.classList.remove('open');
+      });
+    });
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', () => {
+    selectWrappers.forEach(w => w.classList.remove('open'));
+  });
+}
+
+// ==========================================
+// 5. Case Study & Showcase Modal
 // ==========================================
 function initCaseStudyModal() {
   const modal = document.getElementById('caseStudyModal');
@@ -618,7 +671,7 @@ window.closeCaseStudy = function() {
 };
 
 // ==========================================
-// 5. Interactive ROAS Calculator
+// 6. Interactive ROAS Calculator (With Custom Industry Chips)
 // ==========================================
 const industryMultipliers = {
   ecom: { baseROAS: 5.2, leadCost: 4.5, profitMargin: 0.35 },
@@ -629,26 +682,24 @@ const industryMultipliers = {
 
 function initCalculator() {
   const spendSlider = document.getElementById('spendSlider');
-  const industrySelect = document.getElementById('industrySelect');
+  const industryChips = document.querySelectorAll('.calc-chip');
 
-  if (spendSlider && industrySelect) {
+  if (spendSlider) {
     spendSlider.addEventListener('input', updateCalculatorUI);
-    industrySelect.addEventListener('change', updateCalculatorUI);
-    updateCalculatorUI();
   }
+
+  industryChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      industryChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      selectedCalcIndustry = chip.getAttribute('data-ind');
+      updateCalculatorUI();
+    });
+  });
 
   const applyBtn = document.getElementById('applyCalcBtn');
   if (applyBtn) {
     applyBtn.addEventListener('click', () => {
-      const budgetVal = document.getElementById('spendSlider').value;
-      const budgetSelect = document.getElementById('formBudget');
-      if (budgetSelect) {
-        if (budgetVal < 1000) budgetSelect.selectedIndex = 0;
-        else if (budgetVal <= 3000) budgetSelect.selectedIndex = 1;
-        else if (budgetVal <= 10000) budgetSelect.selectedIndex = 2;
-        else budgetSelect.selectedIndex = 3;
-      }
-      
       const formSection = document.getElementById('contact');
       if (formSection) {
         formSection.scrollIntoView({ behavior: 'smooth' });
@@ -657,22 +708,22 @@ function initCalculator() {
       }
     });
   }
+
+  updateCalculatorUI();
 }
 
 function updateCalculatorUI() {
   const spendSlider = document.getElementById('spendSlider');
-  const industrySelect = document.getElementById('industrySelect');
   const spendDisplay = document.getElementById('spendDisplay');
   const roasDisplay = document.getElementById('calcROAS');
   const revDisplay = document.getElementById('calcRevenue');
   const leadsDisplay = document.getElementById('calcLeads');
   const profitDisplay = document.getElementById('calcProfit');
 
-  if (!spendSlider || !industrySelect) return;
+  if (!spendSlider) return;
 
   const spend = parseFloat(spendSlider.value);
-  const indKey = industrySelect.value;
-  const config = industryMultipliers[indKey] || industryMultipliers.ecom;
+  const config = industryMultipliers[selectedCalcIndustry] || industryMultipliers.ecom;
 
   const spendK = spend / 1000;
   const calcROASVal = (config.baseROAS - (spendK * 0.02)).toFixed(1);
@@ -690,7 +741,7 @@ function updateCalculatorUI() {
 }
 
 // ==========================================
-// 6. Number Counters
+// 7. Number Counters
 // ==========================================
 function initCounters() {
   const counterElements = document.querySelectorAll('.counter-val');
@@ -745,7 +796,7 @@ function animateValue(el, targetStr) {
 }
 
 // ==========================================
-// 7. Portfolio Tabs
+// 8. Portfolio Tabs
 // ==========================================
 function initPortfolioTabs() {
   const tabs = document.querySelectorAll('.portfolio-tab');
@@ -776,7 +827,7 @@ function initPortfolioTabs() {
 }
 
 // ==========================================
-// 8. Lead Form & WhatsApp Direct
+// 9. Lead Form & WhatsApp Direct
 // ==========================================
 function initForm() {
   const form = document.getElementById('consultationForm');
@@ -796,8 +847,8 @@ function initForm() {
       const name = document.getElementById('formName').value.trim();
       const phone = document.getElementById('formPhone').value.trim();
       const brand = document.getElementById('formBrand').value.trim();
-      const budget = document.getElementById('formBudget').value;
-      const goal = document.getElementById('formGoal').value;
+      const budget = document.getElementById('formBudgetValue').value;
+      const goal = document.getElementById('formGoalValue').value;
       const notes = document.getElementById('formNotes').value.trim();
 
       if (!name || !phone) {
