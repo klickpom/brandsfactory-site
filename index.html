@@ -73,7 +73,7 @@
   </script>
 
   <!-- High Performance Stylesheet with Cache Busting -->
-  <link rel="stylesheet" href="assets/css/style.css?v=2026.9.0" />
+  <link rel="stylesheet" href="assets/css/style.css?v=2026.10.0" />
 </head>
 
 <body class="bg-brand-dark text-slate-100 font-cairo antialiased selection:bg-brand-purple selection:text-white bg-mesh-glow relative">
@@ -115,8 +115,9 @@
             <span id="langToggleText">English</span>
           </button>
 
-          <a href="#contact" class="glow-btn-purple px-5 py-2.5 rounded-xl text-sm font-bold text-white flex items-center gap-2 shadow-lg shadow-purple-600/30" data-i18n="btn_book_call">
-            احجز استشارة نمو ⚡
+          <a href="#contact" class="glow-btn-purple px-5 py-2.5 rounded-xl text-sm font-bold text-white flex items-center gap-2 shadow-lg shadow-purple-600/30">
+            <span data-i18n="btn_book_call">احجز استشارة نمو</span>
+            <i class="fa-solid fa-bolt text-amber-400 text-xs"></i>
           </a>
         </div>
 
@@ -140,7 +141,10 @@
       <a href="#calculator" class="mobile-nav-link block text-base font-semibold text-slate-200 hover:text-cyan-400" data-i18n="nav_calculator">حاسبة العائد</a>
       <a href="#portfolio" class="mobile-nav-link block text-base font-semibold text-slate-200 hover:text-cyan-400" data-i18n="nav_portfolio">عملاؤنا وسابقة الأعمال</a>
       <a href="#process" class="mobile-nav-link block text-base font-semibold text-slate-200 hover:text-cyan-400" data-i18n="nav_process">منهجية العمل</a>
-      <a href="#contact" class="mobile-nav-link block w-full text-center glow-btn-purple py-3 rounded-xl font-bold text-white shadow-lg" data-i18n="btn_book_call">احجز استشارة نمو ⚡</a>
+      <a href="#contact" class="mobile-nav-link block w-full text-center glow-btn-purple py-3 rounded-xl font-bold text-white shadow-lg flex items-center justify-center gap-2">
+        <span data-i18n="btn_book_call">احجز استشارة نمو</span>
+        <i class="fa-solid fa-bolt text-amber-400 text-xs"></i>
+      </a>
     </div>
   </header>
 
@@ -158,8 +162,8 @@
         
         <!-- Badge -->
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glow-badge text-purple-300 text-xs sm:text-sm font-semibold tracking-wide">
-          <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
-          <span data-i18n="hero_badge">منظومة نمو معتمدة بالذكاء الاصطناعي ⚡ AI-Driven Growth Engine</span>
+          <i class="fa-solid fa-bolt text-amber-400 text-xs"></i>
+          <span data-i18n="hero_badge">منظومة نمو معتمدة بالذكاء الاصطناعي - AI-Driven Growth Engine</span>
         </div>
 
         <!-- Headline -->
@@ -173,16 +177,16 @@
           في Brands Factory ندمج بين وكلاء الذكاء الاصطناعي (AI Agents) وإدارة الحملات الإعلانية فائقة الدقة لتحويل ميزانياتك الإعلانية إلى نمو هائل وعائد استثمار مضاعف (ROAS).
         </p>
 
-        <!-- Hero CTAs -->
+        <!-- Hero CTAs (Cleaned of all native emojis) -->
         <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2 sm:pt-4">
-          <a href="#contact" class="w-full sm:w-auto glow-btn-purple px-7 py-3.5 sm:px-8 sm:py-4 rounded-2xl text-sm sm:text-base font-extrabold text-white flex items-center justify-center gap-3 shadow-xl shadow-purple-600/40" data-i18n="hero_cta_primary">
-            <span>احجز استشارة استراتيجية مجانية</span>
+          <a href="#contact" class="w-full sm:w-auto glow-btn-purple px-7 py-3.5 sm:px-8 sm:py-4 rounded-2xl text-sm sm:text-base font-extrabold text-white flex items-center justify-center gap-3 shadow-xl shadow-purple-600/40">
+            <span data-i18n="hero_cta_primary">احجز استشارة استراتيجية مجانية</span>
             <i class="fa-solid fa-arrow-left-long rtl:rotate-0 ltr:rotate-180 text-cyan-300"></i>
           </a>
 
-          <a href="#portfolio" class="w-full sm:w-auto px-7 py-3.5 sm:px-8 sm:py-4 rounded-2xl text-sm sm:text-base font-bold text-slate-200 glass-panel hover:text-white flex items-center justify-center gap-3 border border-slate-700 hover:border-cyan-500" data-i18n="hero_cta_secondary">
+          <a href="#portfolio" class="w-full sm:w-auto px-7 py-3.5 sm:px-8 sm:py-4 rounded-2xl text-sm sm:text-base font-bold text-slate-200 glass-panel hover:text-white flex items-center justify-center gap-2.5 border border-slate-700 hover:border-cyan-500">
             <i class="fa-solid fa-chart-line text-cyan-400"></i>
-            <span data-i18n="hero_cta_secondary">استكشف نماذج من عملائنا 📊</span>
+            <span data-i18n="hero_cta_secondary">استكشف نماذج من عملائنا</span>
           </a>
         </div>
 
@@ -249,8 +253,9 @@
       
       <!-- Section Header -->
       <div class="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4 mb-12 sm:mb-14">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glow-badge text-purple-300 text-xs font-bold" data-i18n="port_tag">
-          سجل نجاحات موثق ⚡ Verified Client Roster
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glow-badge text-purple-300 text-xs font-bold">
+          <i class="fa-solid fa-bolt text-amber-400 text-xs"></i>
+          <span data-i18n="port_tag">سجل نجاحات موثق - Verified Client Roster</span>
         </div>
         <h2 class="text-2xl sm:text-4xl lg:text-5xl font-black text-white leading-[1.35]" data-i18n="port_title">
           نماذج من عملائنا والعلامات التجارية التي نقود نموها
@@ -270,15 +275,16 @@
         <button class="portfolio-tab tab-btn px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold border border-slate-700 bg-slate-900/80 text-slate-300 transition-all" data-filter="hvac" data-i18n="tab_ecom">تكييفات وتجارة إلكترونية</button>
       </div>
 
-      <!-- Real Clients Grid (Responsive 8 Clients) -->
+      <!-- Real Clients Grid (8 Clients with Pure Vector Badges) -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
         
         <!-- Client 1: Heba Youssef Salon -->
         <div class="portfolio-item glass-panel rounded-3xl p-5 sm:p-7 space-y-5 border border-purple-500/30 group flex flex-col justify-between" data-category="beauty_salon">
           <div class="space-y-4">
             <div class="flex items-center justify-between">
-              <span class="px-3 py-1 rounded-full bg-purple-900/50 border border-purple-500/40 text-purple-300 text-xs font-bold">
-                صالون تجميل وعرائس 💇‍♀️
+              <span class="px-3 py-1 rounded-full bg-purple-900/50 border border-purple-500/40 text-purple-300 text-xs font-bold flex items-center gap-1.5">
+                <i class="fa-solid fa-spa text-[11px] text-purple-400"></i>
+                <span>صالون تجميل وعرائس</span>
               </span>
               <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-800/80 px-2.5 py-1 rounded-full">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
@@ -322,7 +328,7 @@
           <div class="flex items-center gap-2.5 pt-2">
             <button onclick="openCaseStudy('hebayoussef')" class="flex-1 py-3 rounded-xl bg-purple-600/30 hover:bg-purple-600/50 border border-purple-500/50 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all">
               <i class="fa-solid fa-chart-pie text-purple-300"></i>
-              <span data-i18n="btn_view_case_study">تفاصيل المشروع ونتائج الحملات 📊</span>
+              <span data-i18n="btn_view_case_study">تفاصيل المشروع ونتائج الحملات</span>
             </button>
             <a href="https://www.hebayoussef.store/" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-400 border border-slate-700 flex items-center justify-center transition-all" title="الموقع المباشر">
               <i class="fa-solid fa-arrow-up-right-from-square"></i>
@@ -334,12 +340,13 @@
         <div class="portfolio-item glass-panel rounded-3xl p-5 sm:p-7 space-y-5 border border-pink-500/40 shadow-lg shadow-pink-950/20 group flex flex-col justify-between relative overflow-hidden" data-category="beauty_salon">
           <div class="space-y-4">
             <div class="flex items-center justify-between">
-              <span class="px-3 py-1 rounded-full bg-pink-900/50 border border-pink-500/40 text-pink-300 text-xs font-bold">
-                توريد جملة للصالونات B2B 🧪
+              <span class="px-3 py-1 rounded-full bg-pink-900/50 border border-pink-500/40 text-pink-300 text-xs font-bold flex items-center gap-1.5">
+                <i class="fa-solid fa-flask text-[11px] text-pink-400"></i>
+                <span>توريد جملة للصالونات B2B</span>
               </span>
               <span class="inline-flex items-center gap-1.5 text-xs font-bold text-rose-400 bg-rose-950/60 border border-rose-800/80 px-2.5 py-1 rounded-full animate-pulse">
                 <i class="fa-solid fa-play text-[10px]"></i>
-                فيديو ريفيو متوفر 🎬
+                فيديو ريفيو متوفر
               </span>
             </div>
 
@@ -385,7 +392,7 @@
           <div class="flex items-center gap-2.5 pt-2">
             <button onclick="openCaseStudy('hycosmetics')" class="flex-1 py-3 rounded-xl bg-gradient-to-r from-purple-600/40 to-pink-600/40 hover:from-purple-600/60 hover:to-pink-600/60 border border-pink-500/50 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-md">
               <i class="fa-solid fa-circle-play text-rose-400"></i>
-              <span>النتائج وفيديو التجربة 🎥</span>
+              <span>النتائج وفيديو التجربة</span>
             </button>
             <a href="https://www.hycosmeticsmassa.store/" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-400 border border-slate-700 flex items-center justify-center transition-all" title="الموقع المباشر">
               <i class="fa-solid fa-arrow-up-right-from-square"></i>
@@ -397,8 +404,9 @@
         <div class="portfolio-item glass-panel rounded-3xl p-5 sm:p-7 space-y-5 border border-cyan-500/30 group flex flex-col justify-between" data-category="gourmet_food">
           <div class="space-y-4">
             <div class="flex items-center justify-between">
-              <span class="px-3 py-1 rounded-full bg-cyan-900/50 border border-cyan-500/40 text-cyan-300 text-xs font-bold">
-                فسخاني العيلة ومأكولات بحرية 🐟
+              <span class="px-3 py-1 rounded-full bg-cyan-900/50 border border-cyan-500/40 text-cyan-300 text-xs font-bold flex items-center gap-1.5">
+                <i class="fa-solid fa-utensils text-[11px] text-cyan-400"></i>
+                <span>فسخاني العيلة ومأكولات بحرية</span>
               </span>
               <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-800/80 px-2.5 py-1 rounded-full">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
@@ -442,7 +450,7 @@
           <div class="flex items-center gap-2.5 pt-2">
             <button onclick="openCaseStudy('familyseafood')" class="flex-1 py-3 rounded-xl bg-purple-600/30 hover:bg-purple-600/50 border border-purple-500/50 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all">
               <i class="fa-solid fa-chart-pie text-purple-300"></i>
-              <span data-i18n="btn_view_case_study">تفاصيل المشروع ونتائج الحملات 📊</span>
+              <span data-i18n="btn_view_case_study">تفاصيل المشروع ونتائج الحملات</span>
             </button>
             <a href="https://thefamilyseafood.shop/" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-400 border border-slate-700 flex items-center justify-center transition-all" title="الموقع المباشر">
               <i class="fa-solid fa-arrow-up-right-from-square"></i>
@@ -454,8 +462,9 @@
         <div class="portfolio-item glass-panel rounded-3xl p-5 sm:p-7 space-y-5 border border-amber-500/30 group flex flex-col justify-between" data-category="gourmet_food">
           <div class="space-y-4">
             <div class="flex items-center justify-between">
-              <span class="px-3 py-1 rounded-full bg-amber-900/50 border border-amber-500/40 text-amber-300 text-xs font-bold">
-                سلاسل حلويات ومطاعم 🍩
+              <span class="px-3 py-1 rounded-full bg-amber-900/50 border border-amber-500/40 text-amber-300 text-xs font-bold flex items-center gap-1.5">
+                <i class="fa-solid fa-cookie-bite text-[11px] text-amber-400"></i>
+                <span>سلاسل حلويات ومطاعم</span>
               </span>
               <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-800/80 px-2.5 py-1 rounded-full">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
@@ -499,7 +508,7 @@
           <div class="flex items-center gap-2.5 pt-2">
             <button onclick="openCaseStudy('donutstime')" class="flex-1 py-3 rounded-xl bg-purple-600/30 hover:bg-purple-600/50 border border-purple-500/50 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all">
               <i class="fa-solid fa-chart-pie text-purple-300"></i>
-              <span data-i18n="btn_view_case_study">تفاصيل المشروع ونتائج الحملات 📊</span>
+              <span data-i18n="btn_view_case_study">تفاصيل المشروع ونتائج الحملات</span>
             </button>
             <a href="https://donutstime.shop/" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-400 border border-slate-700 flex items-center justify-center transition-all" title="الموقع المباشر">
               <i class="fa-solid fa-arrow-up-right-from-square"></i>
@@ -512,8 +521,8 @@
           <div class="space-y-4">
             <div class="flex items-center justify-between">
               <span class="px-3 py-1 rounded-full bg-amber-950/60 border border-amber-500/50 text-amber-300 text-xs font-bold flex items-center gap-1.5">
-                <i class="fa-solid fa-ship text-[11px]"></i>
-                شحن دولي وتخليص جمركي ✈️
+                <i class="fa-solid fa-ship text-[11px] text-amber-400"></i>
+                <span>شحن دولي وتخليص جمركي</span>
               </span>
               <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-800/80 px-2.5 py-1 rounded-full">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
@@ -552,7 +561,7 @@
           <div class="flex items-center gap-2.5 pt-2">
             <button onclick="openCaseStudy('saraya')" class="flex-1 py-3 rounded-xl bg-purple-600/30 hover:bg-purple-600/50 border border-purple-500/50 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all">
               <i class="fa-solid fa-chart-pie text-purple-300"></i>
-              <span data-i18n="btn_view_case_study">تفاصيل المشروع ونتائج الحملات 📊</span>
+              <span data-i18n="btn_view_case_study">تفاصيل المشروع ونتائج الحملات</span>
             </button>
             <a href="https://www.facebook.com/profile.php?id=61589489462926" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-blue-400 border border-slate-700 flex items-center justify-center transition-all" title="صفحة الفيسبوك">
               <i class="fa-brands fa-facebook"></i>
@@ -564,8 +573,9 @@
         <div class="portfolio-item glass-panel rounded-3xl p-5 sm:p-7 space-y-5 border border-indigo-500/40 group flex flex-col justify-between" data-category="realestate">
           <div class="space-y-4">
             <div class="flex items-center justify-between">
-              <span class="px-3 py-1 rounded-full bg-indigo-900/50 border border-indigo-500/40 text-indigo-300 text-xs font-bold">
-                تطوير واستثمار عقاري 🏢
+              <span class="px-3 py-1 rounded-full bg-indigo-900/50 border border-indigo-500/40 text-indigo-300 text-xs font-bold flex items-center gap-1.5">
+                <i class="fa-solid fa-city text-[11px] text-indigo-400"></i>
+                <span>تطوير واستثمار عقاري</span>
               </span>
               <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-800/80 px-2.5 py-1 rounded-full">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
@@ -604,7 +614,7 @@
           <div class="flex items-center gap-2.5 pt-2">
             <button onclick="openCaseStudy('elghanem')" class="flex-1 py-3 rounded-xl bg-purple-600/30 hover:bg-purple-600/50 border border-purple-500/50 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all">
               <i class="fa-solid fa-chart-pie text-purple-300"></i>
-              <span data-i18n="btn_view_case_study">تفاصيل المشروع ونتائج الحملات 📊</span>
+              <span data-i18n="btn_view_case_study">تفاصيل المشروع ونتائج الحملات</span>
             </button>
             <a href="https://www.facebook.com/profile.php?id=61582942118571" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-blue-400 border border-slate-700 flex items-center justify-center transition-all" title="صفحة الفيسبوك">
               <i class="fa-brands fa-facebook"></i>
@@ -616,8 +626,9 @@
         <div class="portfolio-item glass-panel rounded-3xl p-5 sm:p-7 space-y-5 border border-teal-500/40 group flex flex-col justify-between" data-category="realestate">
           <div class="space-y-4">
             <div class="flex items-center justify-between">
-              <span class="px-3 py-1 rounded-full bg-teal-900/50 border border-teal-500/40 text-teal-300 text-xs font-bold">
-                تسويق فرص عقارية واستثمار 💎
+              <span class="px-3 py-1 rounded-full bg-teal-900/50 border border-teal-500/40 text-teal-300 text-xs font-bold flex items-center gap-1.5">
+                <i class="fa-solid fa-gem text-[11px] text-teal-400"></i>
+                <span>تسويق فرص عقارية واستثمار</span>
               </span>
               <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-800/80 px-2.5 py-1 rounded-full">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
@@ -656,7 +667,7 @@
           <div class="flex items-center gap-2.5 pt-2">
             <button onclick="openCaseStudy('mlki')" class="flex-1 py-3 rounded-xl bg-purple-600/30 hover:bg-purple-600/50 border border-purple-500/50 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all">
               <i class="fa-solid fa-chart-pie text-purple-300"></i>
-              <span data-i18n="btn_view_case_study">تفاصيل المشروع ونتائج الحملات 📊</span>
+              <span data-i18n="btn_view_case_study">تفاصيل المشروع ونتائج الحملات</span>
             </button>
             <a href="https://www.facebook.com/profile.php?id=61561520316184" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-blue-400 border border-slate-700 flex items-center justify-center transition-all" title="صفحة الفيسبوك">
               <i class="fa-brands fa-facebook"></i>
@@ -668,8 +679,9 @@
         <div class="portfolio-item glass-panel rounded-3xl p-5 sm:p-7 space-y-5 border border-emerald-500/30 group flex flex-col justify-between" data-category="hvac">
           <div class="space-y-4">
             <div class="flex items-center justify-between">
-              <span class="px-3 py-1 rounded-full bg-emerald-900/50 border border-emerald-500/40 text-emerald-300 text-xs font-bold">
-                تكييفات وتبريد وأجهزة ❄️
+              <span class="px-3 py-1 rounded-full bg-emerald-900/50 border border-emerald-500/40 text-emerald-300 text-xs font-bold flex items-center gap-1.5">
+                <i class="fa-solid fa-snowflake text-[11px] text-emerald-400"></i>
+                <span>تكييفات وتبريد وأجهزة</span>
               </span>
               <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-800/80 px-2.5 py-1 rounded-full">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
@@ -713,7 +725,7 @@
           <div class="flex items-center gap-2.5 pt-2">
             <button onclick="openCaseStudy('turbocool')" class="flex-1 py-3 rounded-xl bg-purple-600/30 hover:bg-purple-600/50 border border-purple-500/50 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all">
               <i class="fa-solid fa-chart-pie text-purple-300"></i>
-              <span data-i18n="btn_view_case_study">تفاصيل المشروع ونتائج الحملات 📊</span>
+              <span data-i18n="btn_view_case_study">تفاصيل المشروع ونتائج الحملات</span>
             </button>
             <a href="https://turbocool-egypt.shop/" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-400 border border-slate-700 flex items-center justify-center transition-all" title="الموقع المباشر">
               <i class="fa-solid fa-arrow-up-right-from-square"></i>
@@ -759,7 +771,7 @@
           <div class="min-w-0">
             <h4 id="modalCaseTitle" class="text-sm sm:text-base font-black text-white truncate">صالون هبة يوسف للتجميل | Heba Youssef</h4>
             <div class="flex flex-wrap items-center gap-1.5 mt-0.5">
-              <span id="modalCaseBadge" class="text-[11px] font-semibold text-purple-300">صالون تجميل وعرائس بالإسكندرية ✨</span>
+              <span id="modalCaseBadge" class="text-[11px] font-semibold text-purple-300">صالون تجميل وعرائس بالإسكندرية</span>
             </div>
           </div>
         </div>
@@ -779,7 +791,7 @@
             <i class="fa-brands fa-google text-lg"></i>
           </div>
           <div class="min-w-0">
-            <div class="text-xs sm:text-sm font-bold text-white" id="modalGoogleProofText">تصدر المركز #1 في بحث جوجل والذكاء الاصطناعي (Google AI Overview) 🏆</div>
+            <div class="text-xs sm:text-sm font-bold text-white" id="modalGoogleProofText">تصدر المركز #1 في بحث جوجل والذكاء الاصطناعي (Google AI Overview)</div>
             <div class="text-[11px] text-slate-300 mt-0.5">بناء سلطة رقمية وتتصدر عبارات البحث الأكثر طلباً لمنتجات معالجة وفرد الشعر في مصر</div>
           </div>
         </div>
@@ -1126,7 +1138,7 @@
               </div>
             </div>
 
-            <!-- Custom Modern Industry Chips (Replaces Primitive Select) -->
+            <!-- Custom Modern Industry Chips (Pure Vector Icons) -->
             <div class="space-y-2.5">
               <label class="block text-xs sm:text-sm font-bold text-slate-300" data-i18n="calc_industry_label">نوع نشاطك التجاري:</label>
               <div class="grid grid-cols-2 gap-2" id="calcIndustryGrid">
@@ -1149,8 +1161,9 @@
               </div>
             </div>
 
-            <button id="applyCalcBtn" class="w-full glow-btn-purple py-3.5 sm:py-4 rounded-xl font-bold text-xs sm:text-sm text-white flex items-center justify-center gap-2 shadow-lg" data-i18n="calc_btn_apply">
-              <span>طبق هذا النموذج الإعلاني على مشروعي 🚀</span>
+            <button id="applyCalcBtn" class="w-full glow-btn-purple py-3.5 sm:py-4 rounded-xl font-bold text-xs sm:text-sm text-white flex items-center justify-center gap-2 shadow-lg">
+              <span data-i18n="calc_btn_apply">طبق هذا النموذج الإعلاني على مشروعي</span>
+              <i class="fa-solid fa-arrow-left text-cyan-300 text-xs"></i>
             </button>
 
           </div>
@@ -1238,7 +1251,7 @@
           </p>
         </div>
 
-        <div class="glass-panel rounded-3xl p-5 sm:p-6 space-y-4 border border-amber-500/30 relative overflow-hidden group">
+        <div class="glass-panel rounded-3xl p-5 sm:p-6 space-y-3 sm:space-y-4 border border-amber-500/30 relative overflow-hidden group">
           <div class="text-4xl sm:text-5xl font-black text-amber-500/20 group-hover:text-amber-500/40 font-outfit transition-colors" data-i18n="step_4_num">04</div>
           <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-cyan-400 transition-colors" data-i18n="step_4_title">
             الأتمتة وبناء منظومة مستدامة
@@ -1367,8 +1380,8 @@
               <textarea id="formNotes" rows="3" placeholder="أخبرنا عن التحدي الأكبر الذي يواجه مشروعك حالياً..." data-i18n-ph="form_notes_ph" class="w-full bg-slate-900/90 border border-slate-700 rounded-2xl px-4 py-3.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-colors"></textarea>
             </div>
 
-            <button type="submit" class="w-full glow-btn-purple py-4 rounded-2xl font-extrabold text-xs sm:text-sm text-white flex items-center justify-center gap-2.5 shadow-xl" data-i18n="form_btn_submit">
-              <span>إرسال وحجز الاستشارة فوراً ⚡</span>
+            <button type="submit" class="w-full glow-btn-purple py-4 rounded-2xl font-extrabold text-xs sm:text-sm text-white flex items-center justify-center gap-2.5 shadow-xl">
+              <span data-i18n="form_btn_submit">إرسال وحجز الاستشارة فوراً</span>
               <i class="fa-solid fa-paper-plane text-cyan-300"></i>
             </button>
 
@@ -1437,7 +1450,7 @@
           <ul class="space-y-1.5 text-xs sm:text-sm">
             <li class="flex items-center gap-2">
               <i class="fa-solid fa-location-dot text-cyan-400"></i>
-              <span data-i18n="footer_location">القاهرة، جمهورية مصر العربية 🇪🇬</span>
+              <span data-i18n="footer_location">القاهرة، جمهورية مصر العربية</span>
             </li>
             <li class="flex items-center gap-2">
               <i class="fa-solid fa-globe text-purple-400"></i>
@@ -1453,11 +1466,12 @@
       </div>
 
       <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 gap-3">
-        <p data-i18n="footer_rights">جميع الحقوق محفوظة © 2026 Brands Factory | أسسها علي محمد (Ali Mohmed).</p>
+        <p data-i18n="footer_rights">جميع الحقوق محفوظة 2026 Brands Factory | أسسها علي محمد (Ali Mohmed).</p>
         <div class="flex items-center gap-2">
           <span>Hosted on Hostinger</span>
           <span class="w-1 h-1 rounded-full bg-slate-600"></span>
-          <span>SSL Secured 🔒</span>
+          <i class="fa-solid fa-lock text-emerald-400 text-xs"></i>
+          <span>SSL Secured</span>
         </div>
       </div>
 
@@ -1465,7 +1479,7 @@
   </footer>
 
   <!-- Main JavaScript Engine with Cache-Busting -->
-  <script src="assets/js/main.js?v=2026.9.0"></script>
+  <script src="assets/js/main.js?v=2026.10.0"></script>
 
 </body>
 </html>

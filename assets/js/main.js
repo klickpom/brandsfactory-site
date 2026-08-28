@@ -1,7 +1,7 @@
 /**
  * Brands Factory & Ali Mohmed - Ultra High-Performance 2026 Engine
  * 8 Verified Elite Clients with Exact Industries & Verified Links
- * Version: 2026.9.0
+ * Version: 2026.10.0 (Zero Native Emojis - Pure High-Tech Vector Icons)
  */
 
 // ==========================================
@@ -12,14 +12,14 @@ const realClientsData = {
     name_ar: "صالون هبة يوسف للتجميل | Heba Youssef",
     name_en: "Heba Youssef Luxury Beauty Salon",
     category: "beauty_salon",
-    industry_ar: "بيوتي سنتر وتجميل فاخر بالإسكندرية 💇‍♀️",
+    industry_ar: "بيوتي سنتر وتجميل فاخر بالإسكندرية",
     industry_en: "Luxury Beauty Salon & Bridal Center (Alexandria)",
     url: "https://www.hebayoussef.store/",
     display_url: "www.hebayoussef.store",
     facebook_url: "https://www.facebook.com/HebaYoussefSalon",
     facebook_display: "صفحة فيسبوك الرسمية",
-    badge_ar: "صالون تجميل وعرائس بالإسكندرية ✨",
-    badge_en: "Alexandria Luxury Salon & Spa ✨",
+    badge_ar: "صالون تجميل وعرائس بالإسكندرية",
+    badge_en: "Alexandria Luxury Salon & Spa",
     description_ar: "إدارة وتوسيع حملات الحجز الأونلاين لـ 3 فروع راقية في جليم وسموحة بالإسكندرية، مع استهداف دقيق لخدمات فرد الشعر بالبروتين، الهايدرافيشل، وباقات العرائس الملكية.",
     description_en: "Engineered high-converting online booking funnels for 3 flagship branches in Alexandria (Gleem & Smouha), driving consistent bookings for bridal packages and hair therapy.",
     stats: [
@@ -36,17 +36,17 @@ const realClientsData = {
     name_ar: "ماسة لمستحضرات التجميل | HY Cosmetics",
     name_en: "HY Cosmetics MASSA",
     category: "beauty_salon",
-    industry_ar: "مستحضرات فرد وعلاج شعر B2B 🧪",
+    industry_ar: "مستحضرات فرد وعلاج شعر B2B",
     industry_en: "Pro Hair Care & Salon Supplies (B2B)",
     url: "https://www.hycosmeticsmassa.store/",
     display_url: "www.hycosmeticsmassa.store",
     facebook_url: "https://www.facebook.com/profile.php?id=61575211726322",
     facebook_display: "صفحة فيسبوك الرسمية",
-    badge_ar: "توريد جملة لصالونات التجميل 🧪",
-    badge_en: "B2B Salon Wholesale 🧪",
+    badge_ar: "توريد جملة لصالونات التجميل",
+    badge_en: "B2B Salon Wholesale",
     video_id: "oibw_kNHWh4",
-    google_seo_proof_ar: "المركز #1 في نتائج بحث جوجل والذكاء الاصطناعي (Google AI Overview) 🏆",
-    google_seo_proof_en: "#1 Google Search & AI Overview Ranking Leader 🏆",
+    google_seo_proof_ar: "المركز #1 في نتائج بحث جوجل والذكاء الاصطناعي (Google AI Overview)",
+    google_seo_proof_en: "#1 Google Search & AI Overview Ranking Leader",
     description_ar: "استهداف متخصص لأصحاب ومصففي الصالونات ومراكز التجميل في مصر، لبناء شبكة عملاء جملة وتوزيع لمنتجات البروتين والبوتكس والفيلر عبر واتساب المباشر، مع تصدر نتائج البحث العضوي والذكاء الاصطناعي على جوجل.",
     description_en: "Targeted B2B lead generation for professional beauty salons across Egypt for bulk wholesale distribution pipelines, commanding #1 Google organic & AI rankings.",
     stats: [
@@ -63,14 +63,14 @@ const realClientsData = {
     name_ar: "فسخاني العيلة | The Family Seafood",
     name_en: "The Family Seafood & Deli",
     category: "gourmet_food",
-    industry_ar: "مأكولات بحرية وبطارخ فاخرة 🐟",
+    industry_ar: "مأكولات بحرية وبطارخ فاخرة",
     industry_en: "Gourmet Seafood & Egyptian Deli",
     url: "https://thefamilyseafood.shop/",
     display_url: "thefamilyseafood.shop",
     facebook_url: "https://www.facebook.com/TheFamilySeaFood",
     facebook_display: "صفحة فيسبوك الرسمية",
-    badge_ar: "مأكولات بحرية وتوصيل سريع 🦞",
-    badge_en: "Premium Seafood Delivery 🦞",
+    badge_ar: "مأكولات بحرية وتوصيل سريع",
+    badge_en: "Premium Seafood Delivery",
     description_ar: "إطلاق وإدارة حملات المبيعات الموسمية والفورية على تيك توك وفيسبوك لمنتجات الفسيخ والرنجة والبطارخ الفاخرة، مع ربط البكسل وخفض تكلفة الاستحواذ (CPA).",
     description_en: "High-volume seasonal scaling across Meta & TikTok for premium seafood and deli products, maximizing direct delivery conversions with minimized CPA.",
     stats: [
@@ -87,14 +87,14 @@ const realClientsData = {
     name_ar: "دونتس تايم | Donuts Time",
     name_en: "Donuts Time",
     category: "gourmet_food",
-    industry_ar: "سلاسل حلويات ومطاعم F&B 🍩",
+    industry_ar: "سلاسل حلويات ومطاعم F&B",
     industry_en: "Bakery, Sweets & F&B Chain",
     url: "https://donutstime.shop/",
     display_url: "donutstime.shop",
     facebook_url: "https://www.facebook.com/profile.php?id=61591292249283",
     facebook_display: "صفحة فيسبوك الرسمية",
-    badge_ar: "قطاع الأغذية والحلويات 🍩",
-    badge_en: "F&B & Sweets Sector 🍩",
+    badge_ar: "قطاع الأغذية والحلويات",
+    badge_en: "F&B & Sweets Sector",
     description_ar: "حملات إعلانية واسعة الانتشار (Viral Content Testing) لزيادة الطلبات اليومية وتوسيع قاعدة زبائن الفروع وخدمة التوصيل، مع استهداف محلي عالي التحويل.",
     description_en: "High-velocity creative ad testing driving hyper-local foot traffic and daily online delivery orders across multiple branches.",
     stats: [
@@ -111,14 +111,14 @@ const realClientsData = {
     name_ar: "سرايا للشحن الدولي واللوجستيات | Saraya Logistics",
     name_en: "Saraya International Freight & Logistics",
     category: "logistics",
-    industry_ar: "شحن دولي وتخليص جمركي (الصين ⇄ مصر) ✈️🚢",
+    industry_ar: "شحن دولي وتخليص جمركي (الصين / مصر)",
     industry_en: "International Freight & Customs Clearance",
     url: "https://www.facebook.com/profile.php?id=61589489462926",
     display_url: "صفحة سرايا الرسمية",
     facebook_url: "https://www.facebook.com/profile.php?id=61589489462926",
     facebook_display: "صفحة فيسبوك الرسمية",
-    badge_ar: "شحن دولي وتخليص جمركي من الباب للباب 🚢",
-    badge_en: "Door-to-Door Freight & Customs 🚢",
+    badge_ar: "شحن دولي وتخليص جمركي من الباب للباب",
+    badge_en: "Door-to-Door Freight & Customs",
     description_ar: "إدارة وتوسيع حملات الـ B2B وتوليد العملاء المستوردين لخدمات الشحن الجوي والبحري والتخليص الجمركي من الصين إلى مصر والوطن العربي (من كرتونة لكونتينر) مع ميزة الدفع عند الاستلام.",
     description_en: "High-intent B2B acquisition funnels targeting importers, wholesalers, and e-com brands for air/sea cargo and door-to-door customs clearance from China to Egypt.",
     stats: [
@@ -135,14 +135,14 @@ const realClientsData = {
     name_ar: "الغانم إمباير للتطوير العقاري | El Ghanem Empire",
     name_en: "El Ghanem Empire Real Estate Development",
     category: "realestate",
-    industry_ar: "تطوير واستثمار عقاري ومقاولات 🏢",
+    industry_ar: "تطوير واستثمار عقاري ومقاولات",
     industry_en: "Real Estate Development & Construction",
     url: "https://www.facebook.com/profile.php?id=61582942118571",
     display_url: "صفحة الغانم العقارية",
     facebook_url: "https://www.facebook.com/profile.php?id=61582942118571",
     facebook_display: "صفحة فيسبوك الرسمية",
-    badge_ar: "تطوير عقاري واستثماري رائد 🏢",
-    badge_en: "Premier Real Estate Development 🏢",
+    badge_ar: "تطوير عقاري واستثماري رائد",
+    badge_en: "Premier Real Estate Development",
     description_ar: "هندسة وإدارة حملات توليد العملاء المحتملين (Lead Generation) للمشاريع العقارية السكنية والتجارية في مدينة بدر والشروق، مع استهداف دقيق للمستثمرين والمقبلين على الشراء.",
     description_en: "High-intent real estate lead generation campaigns across Meta & Google for premier residential and commercial developments in Badr & El Shorouk cities.",
     stats: [
@@ -159,14 +159,14 @@ const realClientsData = {
     name_ar: "ملكي للفرص العقارية | Mlki Real Estate",
     name_en: "Mlki Real Estate Opportunities",
     category: "realestate",
-    industry_ar: "تسويق وفرص استثمار عقاري فاخر 💎",
+    industry_ar: "تسويق وفرص استثمار عقاري فاخر",
     industry_en: "Luxury Real Estate Investment Marketing",
     url: "https://www.facebook.com/profile.php?id=61561520316184",
     display_url: "صفحة ملكي العقارية",
     facebook_url: "https://www.facebook.com/profile.php?id=61561520316184",
     facebook_display: "صفحة فيسبوك الرسمية",
-    badge_ar: "تسويق واستثمار عقاري متميز 💎",
-    badge_en: "Elite Real Estate Marketing 💎",
+    badge_ar: "تسويق واستثمار عقاري متميز",
+    badge_en: "Elite Real Estate Marketing",
     description_ar: "إطلاق حملات تسويق عقاري موجهة لشرائح الـ High-Ticket في القاهرة لاقتناص أفضل الفرص الاستثمارية السكنية والتجارية ذات العائد المرتفع.",
     description_en: "High-ticket property acquisition campaigns targeting affluent buyers and investors for premium residential and commercial opportunities across Cairo.",
     stats: [
@@ -183,14 +183,14 @@ const realClientsData = {
     name_ar: "تربو كوول للتكييف والتبريد | Turbo Cool",
     name_en: "Turbo Cool Egypt",
     category: "hvac",
-    industry_ar: "تكييفات وتبريد وأجهزة منزلية ❄️",
+    industry_ar: "تكييفات وتبريد وأجهزة منزلية",
     industry_en: "HVAC & Home Cooling Systems",
     url: "https://turbocool-egypt.shop/",
     display_url: "turbocool-egypt.shop",
     facebook_url: "https://www.facebook.com/share/18zCHeSU23/",
     facebook_display: "صفحة فيسبوك الرسمية",
-    badge_ar: "موزع معتمد لأكبر ماركات التكييف ❄️",
-    badge_en: "Certified HVAC & Air Conditioning ❄️",
+    badge_ar: "موزع معتمد لأكبر ماركات التكييف",
+    badge_en: "Certified HVAC & Air Conditioning",
     description_ar: "بناء مسار شراء ذكي لحملات مبيعات وصيانة التكييفات (شارب، كاريير، ميديا)، مع تتبع CAPI وخفض تكلفة المبيعات ومضاعفة الإيرادات الموسمية.",
     description_en: "Conversion-rate optimized sales funnels for top AC brands (Carrier, Sharp, Midea), backed by Server-Side CAPI tracking.",
     stats: [
@@ -205,7 +205,7 @@ const realClientsData = {
 };
 
 // ==========================================
-// 2. Multilingual Dictionary
+// 2. Multilingual Dictionary (Clean Text - No Native Emojis)
 // ==========================================
 const translations = {
   ar: {
@@ -215,14 +215,14 @@ const translations = {
     nav_calculator: "حاسبة العائد",
     nav_portfolio: "عملاؤنا وسابقة الأعمال",
     nav_process: "منهجية العمل",
-    btn_book_call: "احجز استشارة نمو ⚡",
+    btn_book_call: "احجز استشارة نمو",
 
-    hero_badge: "منظومة نمو معتمدة بالذكاء الاصطناعي ⚡ AI-Driven Growth Engine",
+    hero_badge: "منظومة نمو معتمدة بالذكاء الاصطناعي - AI-Driven Growth Engine",
     hero_title_1: "نضاعف مبيعات وتوسع علامتك التجارية بـ",
     hero_title_highlight: "الميديا باينج الذكي وأنظمة الـ AI",
     hero_subtitle: "في Brands Factory ندمج بين وكلاء الذكاء الاصطناعي (AI Agents) وإدارة الحملات الإعلانية فائقة الدقة لتحويل ميزانياتك الإعلانية إلى نمو هائل وعائد استثمار مضاعف (ROAS).",
-    hero_cta_primary: "احجز استشارة استراتيجية مجانية 🚀",
-    hero_cta_secondary: "استكشف نماذج من عملائنا 📊",
+    hero_cta_primary: "احجز استشارة استراتيجية مجانية",
+    hero_cta_secondary: "استكشف نماذج من عملائنا",
     hero_trust: "مُعتمد وموثوق من كبرى المتاجر والشركات والعلامات التجارية الرائدة",
 
     stat_1_val: "$2.5M+",
@@ -280,9 +280,9 @@ const translations = {
     calc_res_revenue: "المبيعات الشهرية المقدرة",
     calc_res_leads: "العملاء / الطلبات المتوقعة",
     calc_res_profit: "صافي الزيادة المتوقعة في الأرباح",
-    calc_btn_apply: "طبق هذا النموذج الإعلاني على مشروعي 🚀",
+    calc_btn_apply: "طبق هذا النموذج الإعلاني على مشروعي",
 
-    port_tag: "سجل نجاحات موثق ⚡ Verified Client Roster",
+    port_tag: "سجل نجاحات موثق - Verified Client Roster",
     port_title: "نماذج من عملائنا والعلامات التجارية التي نقود نموها",
     port_desc: "هذه نماذج لبعض الشركات والمتاجر والبراندات الحقيقية التي ندير ونضاعف حملاتها التسويقية ونقود مسارات نموها في مصر والشرق الأوسط.",
     tab_all: "جميع العملاء (8 نماذج)",
@@ -291,7 +291,7 @@ const translations = {
     tab_realestate: "عقارات واستثمار",
     tab_logistics: "شحن ولوجستيات",
     tab_ecom: "تكييفات وتجارة إلكترونية",
-    btn_view_case_study: "تفاصيل المشروع ونتائج الحملات 📊",
+    btn_view_case_study: "تفاصيل المشروع ونتائج الحملات",
 
     proc_tag: "طريقك للقمة",
     proc_title: "منهجية العمل المكونة من 4 مراحل",
@@ -322,7 +322,7 @@ const translations = {
     form_goal_lbl: "الخدمة أو الهدف الأساسي المطلوب:",
     form_notes_lbl: "ملاحظات أو تفاصيل إضافية:",
     form_notes_ph: "أخبرنا عن التحدي الأكبر الذي يواجه مشروعك حالياً...",
-    form_btn_submit: "إرسال وحجز الاستشارة فوراً ⚡",
+    form_btn_submit: "إرسال وحجز الاستشارة فوراً",
     form_or_whatsapp: "أو تواصل فوراً عبر واتساب بنقرة واحدة",
     form_whatsapp_btn: "محادثة مباشرة مع علي محمد (WhatsApp)",
 
@@ -330,8 +330,8 @@ const translations = {
     footer_quick_links: "روابط سريعة",
     footer_services: "خدماتنا",
     footer_contact_info: "معلومات التواصل",
-    footer_rights: "جميع الحقوق محفوظة © 2026 Brands Factory | أسسها علي محمد (Ali Mohmed).",
-    footer_location: "القاهرة، جمهورية مصر العربية 🇪🇬",
+    footer_rights: "جميع الحقوق محفوظة 2026 Brands Factory | أسسها علي محمد (Ali Mohmed).",
+    footer_location: "القاهرة، جمهورية مصر العربية",
     footer_domain: "Domain: brandsfactory.site"
   },
 
@@ -342,14 +342,14 @@ const translations = {
     nav_calculator: "ROAS Calculator",
     nav_portfolio: "Our Clients & Work",
     nav_process: "Our Framework",
-    btn_book_call: "Book Strategy Call ⚡",
+    btn_book_call: "Book Strategy Call",
 
-    hero_badge: "AI-Driven Growth Engine ⚡ Verified Scaling Partner",
+    hero_badge: "AI-Driven Growth Engine - Verified Scaling Partner",
     hero_title_1: "Scale Your Brand Revenue with",
     hero_title_highlight: "AI-Driven Media Buying & Growth Systems",
     hero_subtitle: "At Brands Factory, we bridge autonomous AI agents with precision media buying architectures to convert your ad spend into predictable, high-ROAS hyper-growth.",
-    hero_cta_primary: "Book a Free Strategy Call 🚀",
-    hero_cta_secondary: "Explore Selected Clients 📊",
+    hero_cta_primary: "Book a Free Strategy Call",
+    hero_cta_secondary: "Explore Selected Clients",
     hero_trust: "Trusted by top e-commerce founders, luxury beauty salons, and high-growth brands",
 
     stat_1_val: "$2.5M+",
@@ -407,7 +407,7 @@ const translations = {
     calc_res_revenue: "Estimated Monthly Revenue",
     calc_res_leads: "Estimated Sales / Bookings",
     calc_res_profit: "Estimated Net Profit Delta",
-    calc_btn_apply: "Apply This Blueprint To My Business 🚀",
+    calc_btn_apply: "Apply This Blueprint To My Business",
 
     port_tag: "Verified Success Roster",
     port_title: "Selected Client Brands We Proudly Scale",
@@ -418,7 +418,7 @@ const translations = {
     tab_realestate: "Real Estate & Growth",
     tab_logistics: "Logistics & Freight",
     tab_ecom: "HVAC & E-Commerce",
-    btn_view_case_study: "Case Study & Growth Details 📊",
+    btn_view_case_study: "Case Study & Growth Details",
 
     proc_tag: "Roadmap to Scale",
     proc_title: "Our Proven 4-Step Scaling Architecture",
@@ -449,7 +449,7 @@ const translations = {
     form_goal_lbl: "Primary Goal / Required Service:",
     form_notes_lbl: "Additional Details & Current Bottlenecks:",
     form_notes_ph: "Tell us about your biggest growth hurdle right now...",
-    form_btn_submit: "Submit & Confirm Consultation ⚡",
+    form_btn_submit: "Submit & Confirm Consultation",
     form_or_whatsapp: "Or connect immediately via WhatsApp",
     form_whatsapp_btn: "Instant WhatsApp Direct with Ali Mohmed",
 
@@ -457,8 +457,8 @@ const translations = {
     footer_quick_links: "Quick Navigation",
     footer_services: "Core Capabilities",
     footer_contact_info: "Direct Contact",
-    footer_rights: "All Rights Reserved © 2026 Brands Factory | Founded by Ali Mohmed.",
-    footer_location: "Cairo, Egypt 🇪🇬",
+    footer_rights: "All Rights Reserved 2026 Brands Factory | Founded by Ali Mohmed.",
+    footer_location: "Cairo, Egypt",
     footer_domain: "Domain: brandsfactory.site"
   }
 };
@@ -603,7 +603,7 @@ window.openCaseStudy = function(clientKey) {
   const liveLinkBtn2 = document.getElementById('modalCaseLiveBtn2');
   if (liveLinkBtn2) {
     liveLinkBtn2.href = data.url;
-    liveLinkBtn2.innerHTML = `<span>${currentLang === 'ar' ? 'زيارة الرابط الرسمي ↗' : 'Visit Official Page ↗'}</span><i class="fa-solid fa-arrow-up-right-from-square"></i>`;
+    liveLinkBtn2.innerHTML = `<span>${currentLang === 'ar' ? 'زيارة الرابط الرسمي' : 'Visit Official Page'}</span><i class="fa-solid fa-arrow-up-right-from-square"></i>`;
   }
 
   // Set Facebook Link in modal if available
@@ -853,16 +853,16 @@ function initForm() {
         return;
       }
 
-      const msg = `*طلب استشارة نمو جديدة من موقع Brands Factory 🚀*
+      const msg = `*طلب استشارة نمو جديدة من موقع Brands Factory*
 ----------------------------------
-👤 *الاسم:* ${name}
-📱 *رقم الواتساب:* ${phone}
-🏢 *البراند / الموقع:* ${brand || 'غير محدد'}
-💰 *الميزانية الشهرية:* ${budget}
-🎯 *الهدف الأساسي:* ${goal}
-📝 *ملاحظات:* ${notes || 'لا توجد'}
+*الاسم:* ${name}
+*رقم الواتساب:* ${phone}
+*البراند / الموقع:* ${brand || 'غير محدد'}
+*الميزانية الشهرية:* ${budget}
+*الهدف الأساسي:* ${goal}
+*ملاحظات:* ${notes || 'لا توجد'}
 ----------------------------------
-🌐 مرسل عبر: brandsfactory.site`;
+مرسل عبر: brandsfactory.site`;
 
       const encodedMsg = encodeURIComponent(msg);
       const waURL = `https://wa.me/201015632296?text=${encodedMsg}`;
