@@ -140,17 +140,43 @@
     document.getElementById('reset-data').addEventListener('click', BF.resetAll);
   }
 
+  /* ---------- كروت الباقات — مزامنة مع الوضع الحالي ---------- */
+  function renderTierCards() {
+    const mode = BF.getMode();
+    document.querySelectorAll('.tier-card').forEach(card => {
+      const isCurrent = card.dataset.tier === mode;
+      card.classList.toggle('current', isCurrent);
+      const badge = card.querySelector('.tier-current');
+      if (badge) badge.hidden = !isCurrent;
+      const btn = card.querySelector('.tier-btn');
+      if (btn) {
+        btn.disabled = isCurrent;
+        btn.textContent = isCurrent ? 'دي الباقة اللي بتتفرج عليها' : 'شوف الديمو بالباقة دي';
+      }
+    });
+  }
+
+  function bindTierCards() {
+    document.querySelectorAll('.tier-btn').forEach(btn =>
+      btn.addEventListener('click', () => {
+        BF.setMode(btn.dataset.go);
+        document.getElementById('pricing').scrollIntoView({ block: 'start' });
+      }));
+  }
+
   /* ---------- إعادة الرسم عند تغيير الباقة ---------- */
   window.renderPage = function () {
     renderPublicLocks();
     renderPanelEntry();
     renderPayZone();
+    renderTierCards();
   };
 
   document.addEventListener('DOMContentLoaded', () => {
     fillStatic();
     bindForm();
     bindReset();
+    bindTierCards();
     window.renderPage();
   });
 })();
