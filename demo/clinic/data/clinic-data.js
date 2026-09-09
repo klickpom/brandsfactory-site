@@ -5,18 +5,16 @@
 
 const CLINIC_DATA = {
 
-  // رقم واتساب صاحب الوكالة (اللي بيستلم طلبات "عاجبك؟ اعمل واحد زي ده")
-  OWNER_WHATSAPP: '201092629424',
-
   clinic: {
     name: 'عيادة د. أحمد سليم لطب وتجميل الأسنان',
     shortName: 'عيادة د. أحمد سليم',
-    positioning: 'أسنانك في إيد أمينة — حجز ومتابعة من غير مكالمات',
     address: '٦ ش التسعين الشمالي، التجمع الخامس، القاهرة الجديدة',
     hours: 'السبت – الخميس، 4:00 م – 11:00 م',
     friday: 'الجمعة إجازة',
-    phone: '0100 000 0000',
-    phoneIntl: '201000000000',
+    // رقم واتساب العيادة في الديمو = رقم الوكالة الحقيقي
+    // عشان أي حجز تجريبي يوصلك فعلاً على واتساب وتحس بالتجربة كاملة
+    phoneDisplay: '0109 262 9424',
+    phoneIntl: '201092629424',
     mapsUrl: 'https://maps.google.com/?q=التسعين+الشمالي+التجمع+الخامس+القاهرة+الجديدة',
   },
 
@@ -31,7 +29,14 @@ const CLINIC_DATA = {
     ],
   },
 
+  stats: [
+    { to: 14,  suffix: '', label: 'سنة خبرة' },
+    { to: 5200, suffix: '+', label: 'مريض تم علاجه' },
+    { to: 98,  suffix: '%', label: 'نسبة رضا المرضى' },
+  ],
+
   services: [
+    { name: 'كشف واستشارة',        price: '400 جنيه' },
     { name: 'تنظيف وتلميع الأسنان', price: 'من 600 جنيه' },
     { name: 'حشو تجميلي',          price: 'من 900 جنيه' },
     { name: 'علاج عصب',            price: 'من 2,000 جنيه' },
@@ -41,109 +46,152 @@ const CLINIC_DATA = {
     { name: 'ابتسامة هوليوود',     price: 'حسب الحالة' },
   ],
 
-  // الباقات
-  tiers: {
-    basic:  { label: 'عيادة',  price: '6,500 جنيه' },
-    plus:   { label: 'عيادة+', price: '13,000 جنيه' },
-    center: { label: 'مركز',   price: '22,000 جنيه' },
-  },
-
-  // مواعيد بكرة — الخميس 11 سبتمبر
-  tomorrow: { day: 'الخميس', date: '11 سبتمبر' },
-
-  // مواعيد النهاردة (عدد ثابت للعرض في شريط الملخص)
-  todayCount: 9,
-
-  doctors: [
-    { id: 'ahmed', name: 'د. أحمد سليم',     specialty: 'تركيبات وعلاج جذور' },
-    { id: 'menna', name: 'د. منة الله شريف', specialty: 'تقويم الأسنان' },
-    { id: 'tarek', name: 'د. طارق العدل',    specialty: 'جراحة الفم والأسنان' },
+  // المواعيد المتاحة في اليوم — h هو الساعة بصيغة 24 عشان المقارنة
+  slots: [
+    { label: '4:00 م', h: 16 }, { label: '5:00 م', h: 17 },
+    { label: '6:00 م', h: 18 }, { label: '7:00 م', h: 19 },
+    { label: '8:00 م', h: 20 }, { label: '9:00 م', h: 21 },
+    { label: '10:00 م', h: 22 },
   ],
 
-  // صفّين يبدأوا في حالة "تم التذكير" عشان الفرق يبان فوراً
-  appointments: [
-    { id: 'a1', time: '4:30 م', patient: 'محمد سيد إبراهيم',   phone: '0100 111 2233', service: 'حشو تجميلي',        type: 'متابعة',  doctor: 'ahmed', reminded: false },
-    { id: 'a2', time: '5:00 م', patient: 'أميرة حسن عبد الله', phone: '0111 222 3344', service: 'تنظيف وتلميع',      type: 'كشف أول', doctor: 'ahmed', reminded: true  },
-    { id: 'a3', time: '5:30 م', patient: 'كريم مصطفى فؤاد',    phone: '0122 333 4455', service: 'علاج عصب — جلسة 2', type: 'متابعة',  doctor: 'ahmed', reminded: false },
-    { id: 'a4', time: '6:15 م', patient: 'نورهان أحمد لطفي',   phone: '0155 444 5566', service: 'تقويم — شد',        type: 'متابعة',  doctor: 'menna', reminded: false },
-    { id: 'a5', time: '7:00 م', patient: 'عمرو خالد الشناوي',  phone: '0100 555 6677', service: 'تركيب زيركون',      type: 'متابعة',  doctor: 'ahmed', reminded: true  },
-    { id: 'a6', time: '8:00 م', patient: 'سلمى وليد جاد',      phone: '0112 666 7788', service: 'كشف واستشارة',      type: 'كشف أول', doctor: 'tarek', reminded: false },
-    { id: 'a7', time: '9:00 م', patient: 'يوسف طارق منصور',    phone: '0128 777 8899', service: 'خلع ضرس عقل',       type: 'كشف أول', doctor: 'tarek', reminded: false },
-  ],
-
-  // قائمة المرضى — 20 مريض
-  patients: [
-    { name: 'محمد سيد إبراهيم',   phone: '0100 111 2233', lastVisit: '4 سبتمبر',   next: '11 سبتمبر' },
-    { name: 'أميرة حسن عبد الله', phone: '0111 222 3344', lastVisit: '—',          next: '11 سبتمبر' },
-    { name: 'كريم مصطفى فؤاد',    phone: '0122 333 4455', lastVisit: '7 سبتمبر',   next: '11 سبتمبر' },
-    { name: 'نورهان أحمد لطفي',   phone: '0155 444 5566', lastVisit: '28 أغسطس',   next: '11 سبتمبر' },
-    { name: 'عمرو خالد الشناوي',  phone: '0100 555 6677', lastVisit: '1 سبتمبر',   next: '11 سبتمبر' },
-    { name: 'سلمى وليد جاد',      phone: '0112 666 7788', lastVisit: '—',          next: '11 سبتمبر' },
-    { name: 'يوسف طارق منصور',    phone: '0128 777 8899', lastVisit: '—',          next: '11 سبتمبر' },
-    { name: 'هبة سامي رضوان',     phone: '0101 888 9900', lastVisit: '25 أغسطس',   next: '14 سبتمبر' },
-    { name: 'مصطفى جمال الدين',   phone: '0114 999 0011', lastVisit: '20 أغسطس',   next: '18 سبتمبر' },
-    { name: 'دينا عصمت فخري',     phone: '0127 101 1122', lastVisit: '2 سبتمبر',   next: '16 سبتمبر' },
-    { name: 'شريف عادل توفيق',    phone: '0106 202 2233', lastVisit: '30 أغسطس',   next: '13 سبتمبر' },
-    { name: 'مريم نبيل حنا',      phone: '0115 303 3344', lastVisit: '5 سبتمبر',   next: '19 سبتمبر' },
-    { name: 'طارق فؤاد رزق',      phone: '0120 404 4455', lastVisit: '22 أغسطس',   next: '15 سبتمبر' },
-    { name: 'سارة مجدي الألفي',   phone: '0109 505 5566', lastVisit: '6 سبتمبر',   next: '20 سبتمبر' },
-    { name: 'حسام الدين عوض',     phone: '0118 606 6677', lastVisit: '27 أغسطس',   next: '17 سبتمبر' },
-    { name: 'رانيا سمير قطب',     phone: '0123 707 7788', lastVisit: '3 سبتمبر',   next: '21 سبتمبر' },
-    { name: 'باسم وجيه البنا',    phone: '0102 808 8899', lastVisit: '24 أغسطس',   next: '22 سبتمبر' },
-    { name: 'إيمان لطفي سرور',    phone: '0110 909 9900', lastVisit: '8 سبتمبر',   next: '23 سبتمبر' },
-    { name: 'خالد رمزي شعبان',    phone: '0125 010 1122', lastVisit: '26 أغسطس',   next: '24 سبتمبر' },
-    { name: 'منى حازم الديب',     phone: '0105 121 2233', lastVisit: '31 أغسطس',   next: '25 سبتمبر' },
-  ],
+  offDays: [5],           // الجمعة إجازة (5 = Friday في جافاسكربت)
+  bookingWindowDays: 14,  // الحجز متاح لحد ١٤ يوم قدام
 
   // قوالب الرسايل — قابلة للتعديل من لوحة التحكم
   templates: {
-    reminder:
-`أهلاً أ. {الاسم} 👋
-تذكير بموعدك في عيادة د. أحمد سليم
-📅 {اليوم} {التاريخ} الساعة {الوقت}
-🦷 {الخدمة}
-
-لو محتاج تأجيل أو إلغاء، ردّ على الرسالة دي وهنظبطلك ميعاد تاني.`,
     confirm:
-`حجز جديد من الموقع
+`حجز جديد من الموقع ✅
+رقم الحجز: {الرقم}
 الاسم: {الاسم}
 الموبايل: {الموبايل}
 الخدمة: {الخدمة}
-اليوم المفضل: {اليوم} — {الوقت}`,
+الميعاد: {اليوم} — {الوقت}`,
+    reminder:
+`أهلاً أ. {الاسم} 👋
+تذكير بموعدك في عيادة د. أحمد سليم
+📅 {اليوم} الساعة {الوقت}
+🦷 {الخدمة}
+
+لو محتاج تأجيل أو إلغاء، ردّ على الرسالة دي وهنظبطلك ميعاد تاني.`,
     followup:
 `أهلاً أ. {الاسم} 👋
 إزيك بعد جلسة {الخدمة}؟ نطمئن عليك.
-لو حاسس بأي ألم أو تورم زيادة عن الطبيعي، ردّ علينا هنا أو كلمنا على 0100 000 0000.
+لو حاسس بأي ألم أو تورم زيادة عن الطبيعي، ردّ علينا هنا أو كلمنا على 0109 262 9424.
 مع تمنياتنا بالسلامة 🦷`,
   },
 
   templateNames: {
-    reminder: 'تذكير بموعد',
-    confirm: 'تأكيد حجز',
+    confirm: 'رسالة الحجز (من المريض للعيادة)',
+    reminder: 'تذكير بموعد (من العيادة للمريض)',
     followup: 'متابعة بعد الجلسة',
   },
 
-  // بيانات التقارير (باقة مركز)
-  reports: {
-    weekly: [
-      { label: 'أسبوع 1', value: 18 },
-      { label: 'أسبوع 2', value: 24 },
-      { label: 'أسبوع 3', value: 21 },
-      { label: 'أسبوع 4', value: 27 },
-    ],
-    noShow: { before: 22, after: 7 },
-    busiestHours: [
-      { hour: '4 م',  value: 30 },
-      { hour: '5 م',  value: 55 },
-      { hour: '6 م',  value: 80 },
-      { hour: '7 م',  value: 100 },
-      { hour: '8 م',  value: 90 },
-      { hour: '9 م',  value: 70 },
-      { hour: '10 م', value: 40 },
-    ],
-  },
+  /* ============================================================
+     توليد البيانات التجريبية — بتواريخ حقيقية نسبة لليوم الحالي
+     بتتخزن أول مرة في المتصفح وتفضل ثابتة لحد ما تعمل إعادة تعيين
+     ============================================================ */
+  generateSeed(helpers) {
+    const { addDays, iso, labelFor, isWorkingDay, slotLabel } = helpers;
 
-  // أيام ومواعيد الحجز في الفورم
-  bookingDays: ['السبت', 'الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'],
-  bookingTimes: ['4:00 م', '5:00 م', '6:00 م', '7:00 م', '8:00 م', '9:00 م', '10:00 م'],
+    // مولّد أرقام شبه عشوائي ثابت لنفس اليوم — نفس البيانات على أي جهاز
+    const seedNum = Number(iso(new Date()).replace(/-/g, ''));
+    let s = seedNum;
+    const rnd = () => { s |= 0; s = (s + 0x6D2B79F5) | 0; let t = Math.imul(s ^ (s >>> 15), 1 | s); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+    const pick = arr => arr[Math.floor(rnd() * arr.length)];
+
+    const names = [
+      'محمد سيد إبراهيم', 'أميرة حسن عبد الله', 'كريم مصطفى فؤاد', 'نورهان أحمد لطفي',
+      'عمرو خالد الشناوي', 'سلمى وليد جاد', 'يوسف طارق منصور', 'هبة سامي رضوان',
+      'مصطفى جمال الدين', 'دينا عصمت فخري', 'شريف عادل توفيق', 'مريم نبيل حنا',
+      'طارق فؤاد رزق', 'سارة مجدي الألفي', 'حسام الدين عوض', 'رانيا سمير قطب',
+      'باسم وجيه البنا', 'إيمان لطفي سرور', 'خالد رمزي شعبان', 'منى حازم الديب',
+      'عبد الرحمن فتحي', 'حبيبة أشرف زكي', 'زياد وليد قنديل', 'ماجدة صلاح نور',
+    ];
+    const usedNames = new Set();
+    const nextName = () => {
+      let n = pick(names), guard = 0;
+      while (usedNames.has(n) && guard++ < 50) n = pick(names);
+      usedNames.add(n);
+      return n;
+    };
+    const nextPhone = () => '01' + pick(['0', '1', '2', '5']) + String(10000000 + Math.floor(rnd() * 89999999));
+    const svc = () => pick(CLINIC_DATA.services).name;
+
+    const bookings = [];
+    let counter = 1000;
+    const mk = (date, slotH, status, opts = {}) => {
+      const d = new Date(date);
+      counter += 1 + Math.floor(rnd() * 3);
+      const slot = CLINIC_DATA.slots.find(x => x.h === slotH) || CLINIC_DATA.slots[0];
+      return {
+        id: 'b' + counter.toString(36) + Math.floor(rnd() * 999).toString(36),
+        ref: 'B-' + counter,
+        name: nextName(),
+        phone: nextPhone(),
+        service: svc(),
+        date: iso(d),
+        dayLabel: labelFor(d),
+        time: slot.label,
+        hour: slotH,
+        status,
+        remindedAt: opts.reminded ? '4:10 م' : null,
+        createdAt: opts.createdAt || iso(addDays(d, -1)) + 'T10:00:00',
+      };
+    };
+
+    // أيام شغال قادمة
+    const workingAhead = [];
+    for (let i = 1; workingAhead.length < 10 && i < 20; i++) {
+      const d = addDays(new Date(), i);
+      if (isWorkingDay(d)) workingAhead.push(d);
+    }
+
+    // النهاردة (لو يوم شغال): موعدين خلصوا + اتنين جايين
+    const today = new Date();
+    if (isWorkingDay(today)) {
+      bookings.push(mk(today, 16, 'done'));
+      bookings.push(mk(today, 17, 'done'));
+      bookings.push(mk(today, 20, 'confirmed', { reminded: true }));
+      bookings.push(mk(today, 21, 'confirmed', { reminded: true }));
+    }
+
+    // بكرة (أول يوم شغال جاي): ٧ مواعيد — ٢ جداد من الموقع
+    const t1 = workingAhead[0];
+    bookings.push(mk(t1, 16, 'new',       { createdAt: iso(today) + 'T09:20:00' }));
+    bookings.push(mk(t1, 17, 'confirmed', { reminded: true }));
+    bookings.push(mk(t1, 18, 'confirmed'));
+    bookings.push(mk(t1, 19, 'confirmed', { reminded: true }));
+    bookings.push(mk(t1, 20, 'confirmed'));
+    bookings.push(mk(t1, 21, 'new',       { createdAt: iso(today) + 'T11:45:00' }));
+    bookings.push(mk(t1, 22, 'confirmed'));
+
+    // بعد بكرة: ٤
+    const t2 = workingAhead[1];
+    [16, 18, 19, 21].forEach(h => bookings.push(mk(t2, h, 'confirmed')));
+
+    // تالت يوم: ٣ (واحد جديد)
+    const t3 = workingAhead[2];
+    bookings.push(mk(t3, 17, 'confirmed'));
+    bookings.push(mk(t3, 19, 'new', { createdAt: iso(today) + 'T13:05:00' }));
+    bookings.push(mk(t3, 21, 'confirmed'));
+
+    // مواعيد متفرقة الأسبوعين الجايين
+    [4, 5, 7, 9].forEach(i => {
+      if (workingAhead[i]) bookings.push(mk(workingAhead[i], pick([16, 18, 20]), 'confirmed'));
+    });
+
+    // تاريخ الشهر اللي فات — عشان التقارير والمرضى
+    for (let back = 1; back <= 28; back++) {
+      const d = addDays(today, -back);
+      if (!isWorkingDay(d)) continue;
+      const n = 1 + Math.floor(rnd() * 3);
+      for (let k = 0; k < n; k++) {
+        const r = rnd();
+        const status = r < 0.78 ? 'done' : (r < 0.9 ? 'cancelled' : 'noshow');
+        bookings.push(mk(d, pick(CLINIC_DATA.slots).h, status, { createdAt: iso(addDays(d, -1)) + 'T12:00:00' }));
+      }
+    }
+
+    return bookings;
+  },
 };

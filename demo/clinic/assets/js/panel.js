@@ -1,5 +1,6 @@
 /* ============================================================
-   لوحة التحكم — مواعيد بكرة، المرضى، القوالب، التقارير
+   لوحة التحكم — إدارة حقيقية كاملة للحجوزات والمرضى والرسايل
+   كل حاجة شغالة: تأكيد، إلغاء، تذكير واتساب، بحث، تقارير حية
    ============================================================ */
 
 (function () {
@@ -7,95 +8,65 @@
   const root = () => document.getElementById('panel-root');
   const live = () => document.getElementById('live-region');
 
-  let activeTab = 'tomorrow';   // tomorrow | patients | templates | reports
-  let activeDoctor = 'all';
-
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let activeTab = 'bookings';   // bookings | patients | templates | reports
+  let activeFilter = 'all';     // all | new | today | tomorrow | upcoming | cancelled
 
   function announce(msg) { live().textContent = msg; }
 
-  /* ============================================================
-     بوابة القفل (باقة عيادة)
-     ============================================================ */
-  function renderGate() {
-    document.getElementById('role-zone').innerHTML = '';
-    root().innerHTML = `
-      <div class="gate">
-        <div class="gate-icon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-        </div>
-        <h2>لوحة التحكم متاحة من باقة عيادة+</h2>
-        <p>اللي شايفه قدامك ده موقع العيادة بس. الباقة الأعلى بتضيف لوحة تحكم كاملة: مواعيد، تذكير واتساب، مرضى، وقوالب رسايل.</p>
-        <button class="btn btn-primary" id="gate-try">جرّبها دلوقتي</button>
-      </div>`;
-    document.getElementById('gate-try').addEventListener('click', () => BF.setMode('plus'));
+  /* ---------- توست ---------- */
+  let toastTimer = null;
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 3500);
+  }
+
+  /* ---------- تقسيم الحجوزات ---------- */
+  function splitBookings() {
+    const all = BF.getBookings();
+    const todayIso = BF.iso(new Date());
+    const tomorrowWorking = BF.nextWorkingDays(2).map(BF.iso)[1] || null;
+    // بكرة = أول يوم شغال بعد النهاردة
+    const nextDay = BF.nextWorkingDays(3).map(BF.iso).find(d => d > todayIso) || null;
+    return {
+      all,
+      newOnes: all.filter(b => b.status === 'new'),
+      today: all.filter(b => b.date === todayIso && b.status !== 'cancelled'),
+      tomorrow: all.filter(b => b.date === nextDay && b.status !== 'cancelled'),
+      upcoming: all.filter(b => b.date >= todayIso && b.status !== 'cancelled'),
+      cancelled: all.filter(b => b.status === 'cancelled'),
+      todayIso, nextDay,
+    };
   }
 
   /* ============================================================
-     تسجيل الدخول التجريبي
-     ============================================================ */
-  function renderLogin() {
-    root().innerHTML = `
-      <div class="card login-card">
-        <h2 style="margin-block-end:6px">دخول العيادة</h2>
-        <p class="section-sub">منطقة خاصة بإدارة العيادة.</p>
-        <div class="login-hint">
-          <b>دخول تجريبي:</b> اضغط دخول مباشرة، مش محتاج بيانات.
-        </div>
-        <form id="login-form">
-          <div class="field">
-            <label for="lg-user">اسم المستخدم</label>
-            <input type="text" id="lg-user" autocomplete="username" placeholder="اختياري في الديمو">
-          </div>
-          <div class="field">
-            <label for="lg-pass">كلمة السر</label>
-            <input type="password" id="lg-pass" autocomplete="current-password" placeholder="اختياري في الديمو">
-          </div>
-          <button type="submit" class="btn btn-primary btn-block">دخول</button>
-        </form>
-      </div>`;
-    document.getElementById('login-form').addEventListener('submit', e => {
-      e.preventDefault();
-      BF.store.set('auth', true);
-      window.renderPage();
-    });
-  }
-
-  /* ============================================================
-     اللوحة الرئيسية
+     الرسم الرئيسي
      ============================================================ */
   function renderDashboard() {
-    renderRoleZone();
-
-    const isManager = BF.getRole() === 'manager';
-    const canReports = BF.canUse('center') && isManager;
-    if (activeTab === 'reports' && !canReports && BF.canUse('center')) activeTab = 'tomorrow';
-
-    const unsent = D.appointments.filter(a => !BF.isReminded(a)).length;
+    const s = splitBookings();
+    const patients = buildPatients();
 
     root().innerHTML = `
-      <div class="summary-strip" aria-label="ملخص المواعيد">
-        <div class="summary-item"><b>${D.todayCount}</b><span>مواعيد النهاردة</span></div>
-        <div class="summary-item"><b>${D.appointments.length}</b><span>مواعيد بكرة</span></div>
-        <div class="summary-item"><b id="sum-unsent">${unsent}</b><span>محتاجين تذكير</span></div>
+      <div class="summary-strip" aria-label="ملخص العيادة">
+        <div class="summary-item ${s.newOnes.length ? 'hot' : ''}"><b id="sum-new">${s.newOnes.length}</b><span>حجز جديد محتاج تأكيد</span></div>
+        <div class="summary-item"><b>${s.today.length}</b><span>مواعيد النهاردة</span></div>
+        <div class="summary-item"><b>${s.tomorrow.length}</b><span>مواعيد بكرة</span></div>
+        <div class="summary-item"><b>${patients.length}</b><span>مريض مسجّل</span></div>
       </div>
 
       <div class="tabs" role="tablist" aria-label="أقسام لوحة التحكم">
-        <button class="tab" role="tab" data-tab="tomorrow" aria-selected="${activeTab === 'tomorrow'}">مواعيد بكرة</button>
-        <button class="tab" role="tab" data-tab="patients" aria-selected="${activeTab === 'patients'}">قائمة المرضى</button>
+        <button class="tab" role="tab" data-tab="bookings" aria-selected="${activeTab === 'bookings'}">الحجوزات${s.newOnes.length ? ` <span class="tab-badge">${s.newOnes.length}</span>` : ''}</button>
+        <button class="tab" role="tab" data-tab="patients" aria-selected="${activeTab === 'patients'}">المرضى</button>
         <button class="tab" role="tab" data-tab="templates" aria-selected="${activeTab === 'templates'}">قوالب الرسايل</button>
-        ${BF.canUse('center')
-          ? (isManager
-              ? `<button class="tab" role="tab" data-tab="reports" aria-selected="${activeTab === 'reports'}">التقارير</button>`
-              : '')
-          : `<button class="tab" role="tab" data-tab="reports-locked" aria-selected="false" data-feature="reports"><span class="tab-lock">${BF.LOCK_ICON}</span> التقارير</button>`}
+        <button class="tab" role="tab" data-tab="reports" aria-selected="${activeTab === 'reports'}">التقارير</button>
       </div>
 
       <div id="tab-content"></div>`;
 
     root().querySelectorAll('.tab').forEach(tab => {
       tab.addEventListener('click', () => {
-        if (tab.dataset.tab === 'reports-locked') { BF.showLock('reports'); return; }
         activeTab = tab.dataset.tab;
         root().querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', String(t === tab)));
         renderTabContent();
@@ -105,180 +76,180 @@
     renderTabContent();
   }
 
-  function updateSummary() {
-    const el = document.getElementById('sum-unsent');
-    if (el) el.textContent = D.appointments.filter(a => !BF.isReminded(a)).length;
-  }
-
   function renderTabContent() {
-    if (activeTab === 'tomorrow') renderTomorrow();
+    if (activeTab === 'bookings') renderBookings();
     else if (activeTab === 'patients') renderPatients();
     else if (activeTab === 'templates') renderTemplates();
     else if (activeTab === 'reports') renderReports();
   }
 
   /* ============================================================
-     مواعيد بكرة — شاشة البطل
+     الحجوزات — شاشة البطل
      ============================================================ */
-  function renderTomorrow() {
+  const FILTERS = [
+    ['all', 'الكل'], ['new', 'جديدة'], ['today', 'النهاردة'],
+    ['tomorrow', 'بكرة'], ['upcoming', 'القادمة'], ['cancelled', 'الملغية'],
+  ];
+
+  function renderBookings() {
     const host = document.getElementById('tab-content');
-    const isCenter = BF.canUse('center');
+    const s = splitBookings();
 
     host.innerHTML = `
-      <div class="remind-all-bar">
-        <div>
-          <h2 style="font-size:20px">${D.tomorrow.day} ${D.tomorrow.date}</h2>
-          <p class="section-sub" style="margin-block-end:0">${D.appointments.length} مواعيد</p>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-          <button type="button" class="btn btn-primary btn-sm" id="remind-all">تذكير الكل</button>
-          <button type="button" class="reset-link" id="reset-reminders">إعادة تعيين</button>
-        </div>
+      <div class="filter-pills" role="group" aria-label="فلترة الحجوزات">
+        ${FILTERS.map(([k, label]) => {
+          const count = k === 'all' ? s.all.length
+            : k === 'new' ? s.newOnes.length
+            : k === 'today' ? s.today.length
+            : k === 'tomorrow' ? s.tomorrow.length
+            : k === 'upcoming' ? s.upcoming.length
+            : s.cancelled.length;
+          return `<button class="filter-pill" data-filter="${k}" aria-pressed="${activeFilter === k}">${label} <small>${count}</small></button>`;
+        }).join('')}
       </div>
-      <div id="doctor-zone"></div>
       <ul class="appt-list" id="appt-list"></ul>`;
 
-    renderDoctorZone();
+    host.querySelectorAll('.filter-pill').forEach(btn =>
+      btn.addEventListener('click', () => {
+        activeFilter = btn.dataset.filter;
+        host.querySelectorAll('.filter-pill').forEach(b =>
+          b.setAttribute('aria-pressed', String(b === btn)));
+        renderApptRows();
+      }));
+
     renderApptRows();
-
-    document.getElementById('remind-all').addEventListener('click', remindAll);
-    document.getElementById('reset-reminders').addEventListener('click', () => {
-      BF.resetReminders();
-      renderTomorrow();
-      updateSummary();
-      announce('اتعاد تعيين كل التذكيرات');
-    });
   }
 
-  function renderDoctorZone() {
-    const zone = document.getElementById('doctor-zone');
-    if (BF.canUse('center')) {
-      zone.innerHTML = `
-        <div class="doctor-tabs" role="group" aria-label="فلترة حسب الدكتور">
-          <button class="doctor-tab" data-doc="all" aria-pressed="${activeDoctor === 'all'}">الكل</button>
-          ${D.doctors.map(d => `
-            <button class="doctor-tab" data-doc="${d.id}" aria-pressed="${activeDoctor === d.id}">${d.name}</button>`).join('')}
-        </div>`;
-      zone.querySelectorAll('.doctor-tab').forEach(btn =>
-        btn.addEventListener('click', () => {
-          activeDoctor = btn.dataset.doc;
-          zone.querySelectorAll('.doctor-tab').forEach(b =>
-            b.setAttribute('aria-pressed', String(b === btn)));
-          renderApptRows();
-        }));
-    } else {
-      zone.innerHTML = `
-        <div class="lock-strip" style="margin-block-end:14px">
-          <button type="button" class="lock-chip" data-feature="doctors" id="doctors-lock">
-            ${BF.LOCK_ICON} تعدد الأطباء — 3 دكاترة في المركز
-          </button>
-        </div>`;
-      zone.querySelector('#doctors-lock').addEventListener('click', () => BF.showLock('doctors'));
-    }
+  function filteredBookings() {
+    const s = splitBookings();
+    let arr;
+    if (activeFilter === 'new') arr = s.newOnes;
+    else if (activeFilter === 'today') arr = s.today;
+    else if (activeFilter === 'tomorrow') arr = s.tomorrow;
+    else if (activeFilter === 'upcoming') arr = s.upcoming;
+    else if (activeFilter === 'cancelled') arr = s.cancelled;
+    else arr = s.all;
+    return [...arr].sort((a, b) =>
+      activeFilter === 'cancelled' || (activeFilter === 'all' && a.date < BF.iso(new Date()))
+        ? (b.date + b.time).localeCompare(a.date + a.time)   // السابقة: الأحدث الأول
+        : (a.date + String(a.hour)).localeCompare(b.date + String(b.hour))); // القادمة: الأقرب الأول
   }
 
-  function visibleAppointments() {
-    return D.appointments.filter(a => activeDoctor === 'all' || a.doctor === activeDoctor);
+  const CHECK_SVG = '<svg class="check" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>';
+  const WA_SVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.7-2.9-1.1-4.7-4-4.9-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.5.5c-.2.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.2 1.1 2.2 1.4 2.5 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.2 1.3z"/></svg>';
+  const TEL_SVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>';
+
+  function statusBadge(b) {
+    const st = BF.STATUS[b.status] || BF.STATUS.new;
+    return `<span class="status-badge ${st.cls}">${st.label}</span>`;
   }
 
-  const CHECK_SVG = '<svg class="check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>';
-
-  function rowHtml(a) {
-    const sentAt = BF.isReminded(a);
-    const doctorName = BF.canUse('center') && activeDoctor === 'all'
-      ? ` · ${D.doctors.find(d => d.id === a.doctor).name.replace('د. ', 'د. ')}` : '';
+  function rowHtml(b) {
+    const isNew = b.status === 'new';
+    const canConfirm = b.status === 'new';
+    const canDone = b.status === 'confirmed';
+    const canCancel = b.status === 'new' || b.status === 'confirmed';
+    const canRemind = b.status === 'confirmed' || b.status === 'new';
     return `
-      <li class="appt-row ${sentAt ? 'sent' : ''}" data-id="${a.id}">
-        <span class="appt-time">${a.time}</span>
+      <li class="appt-row ${isNew ? 'is-new' : ''}" data-id="${b.id}">
+        <div class="appt-when">
+          <span class="appt-time">${b.time}</span>
+          <span class="appt-date">${b.dayLabel}</span>
+        </div>
         <div class="appt-info">
-          <div class="appt-name">${a.patient}</div>
+          <div class="appt-name">${b.name} ${statusBadge(b)}</div>
           <div class="appt-meta">
-            <span>${a.service}</span>
-            <span class="visit-pill ${a.type === 'كشف أول' ? 'first' : ''}">${a.type}</span>
+            <span>${b.service}</span>
+            <span class="num" dir="ltr">${b.phone}</span>
+            <span class="appt-ref">${b.ref}</span>
+            ${b.remindedAt ? `<span class="reminded-tag">اتذكّر ${b.remindedAt}</span>` : ''}
           </div>
         </div>
-        ${sentAt
-          ? `<button type="button" class="remind-btn sent" disabled aria-label="اتبعت تذكير لـ ${a.patient} الساعة ${sentAt}">
-               <span>${CHECK_SVG} تم التذكير</span><small>اتبعت ${sentAt}</small>
-             </button>`
-          : `<button type="button" class="remind-btn" data-remind="${a.id}" aria-label="ابعت تذكير واتساب لـ ${a.patient}">تذكير</button>`}
+        <div class="row-actions">
+          ${canConfirm ? `<button type="button" class="act act-confirm" data-act="confirm" data-id="${b.id}">${CHECK_SVG} تأكيد</button>` : ''}
+          ${canRemind ? `<button type="button" class="act act-wa" data-act="remind" data-id="${b.id}">${WA_SVG} تذكير</button>` : ''}
+          ${canDone ? `<button type="button" class="act act-done" data-act="done" data-id="${b.id}">حضر</button>` : ''}
+          <a class="act act-call" href="tel:+2${b.phone.slice(1)}" aria-label="اتصل بـ ${b.name}">${TEL_SVG}</a>
+          ${canCancel ? `<button type="button" class="act act-cancel" data-act="cancel" data-id="${b.id}">إلغاء</button>` : ''}
+        </div>
       </li>`;
   }
 
   function renderApptRows() {
     const list = document.getElementById('appt-list');
-    const rows = visibleAppointments();
+    const rows = filteredBookings();
     list.innerHTML = rows.length
       ? rows.map(rowHtml).join('')
-      : '<li class="empty-note">مفيش مواعيد للدكتور ده بكرة</li>';
-    list.querySelectorAll('[data-remind]').forEach(btn =>
-      btn.addEventListener('click', () => sendReminder(btn)));
+      : '<li class="empty-note">مفيش حجوزات في الفلتر ده</li>';
+    list.querySelectorAll('[data-act]').forEach(btn =>
+      btn.addEventListener('click', () => handleAction(btn.dataset.act, btn.dataset.id)));
   }
 
-  function markRowSent(id, time, animate) {
-    const row = document.querySelector(`.appt-row[data-id="${id}"]`);
-    if (!row) return;
-    const a = D.appointments.find(x => x.id === id);
-    const btn = row.querySelector('.remind-btn');
-    btn.classList.add('sent');
-    if (animate) btn.classList.add('just-sent');
-    btn.disabled = true;
-    btn.setAttribute('aria-label', `اتبعت تذكير لـ ${a.patient} الساعة ${time}`);
-    btn.innerHTML = `<span>${CHECK_SVG} تم التذكير</span><small>اتبعت ${time}</small>`;
-    row.classList.add('sent');
-    updateSummary();
-  }
+  function handleAction(act, id) {
+    const b = BF.getBooking(id);
+    if (!b) return;
 
-  /* تذكير فردي — بيفتح واتساب بالرسالة الجاهزة */
-  function sendReminder(btn) {
-    const id = btn.dataset.remind;
-    const a = D.appointments.find(x => x.id === id);
-    const msg = BF.fillTemplate(BF.getTemplates().reminder, {
-      name: a.patient, day: D.tomorrow.day, date: D.tomorrow.date,
-      time: a.time, service: a.service,
-    });
-    window.open(BF.waLink(a.phone, msg), '_blank', 'noopener');
-    BF.markReminded(id);
-    markRowSent(id, BF.getReminders()[id], true);
-    announce(`اتبعت تذكير لـ ${a.patient}`);
-  }
-
-  /* تذكير الكل — أنيميشن متتابع 400ms بين كل صف */
-  function remindAll() {
-    const rows = visibleAppointments().filter(a => !BF.isReminded(a));
-    if (!rows.length) return;
-    const btn = document.getElementById('remind-all');
-    btn.disabled = true;
-
-    const step = reducedMotion.matches ? 0 : 400;
-    rows.forEach((a, i) => {
-      setTimeout(() => {
-        BF.markReminded(a.id);
-        markRowSent(a.id, BF.getReminders()[a.id], !reducedMotion.matches);
-        if (i === rows.length - 1) {
-          announce(`اتبعت تذكير لـ ${rows.length} مرضى`);
-          btn.disabled = false;
-        }
-      }, i * step);
-    });
+    if (act === 'confirm') {
+      BF.patchBooking(id, { status: 'confirmed' });
+      toast(`تم تأكيد حجز ${b.name}`);
+      announce(`تم تأكيد حجز ${b.name}`);
+    } else if (act === 'remind') {
+      const msg = BF.fillTemplate(BF.getTemplates().reminder, {
+        name: b.name, day: b.dayLabel, date: b.dayLabel,
+        time: b.time, service: b.service,
+      });
+      window.open(BF.waLink(b.phone, msg), '_blank', 'noopener');
+      BF.patchBooking(id, { remindedAt: BF.nowEgyptian() });
+      toast(`اتفتح واتساب برسالة تذكير لـ ${b.name}`);
+      announce(`اتبعت تذكير لـ ${b.name}`);
+    } else if (act === 'done') {
+      BF.patchBooking(id, { status: 'done' });
+      toast(`اتسجّل حضور ${b.name}`);
+    } else if (act === 'cancel') {
+      BF.patchBooking(id, { status: 'cancelled' });
+      toast(`اتلغى حجز ${b.name} — المعاد بقى متاح تاني على الموقع`);
+      announce(`اتلغى حجز ${b.name}`);
+    }
+    renderDashboard(); // يحدّث الملخص والأرقام كلها
   }
 
   /* ============================================================
-     قائمة المرضى
+     المرضى — بتتبنى تلقائياً من الحجوزات الحقيقية
      ============================================================ */
+  function buildPatients() {
+    const map = new Map();
+    const todayIso = BF.iso(new Date());
+    for (const b of BF.getBookings()) {
+      if (b.status === 'cancelled') continue;
+      if (!map.has(b.phone)) {
+        map.set(b.phone, { name: b.name, phone: b.phone, visits: 0, last: null, next: null });
+      }
+      const p = map.get(b.phone);
+      if (b.date <= todayIso) {
+        p.visits += 1;
+        if (!p.last || b.date > p.last.date) p.last = b;
+      } else if (!p.next || b.date < p.next.date) {
+        p.next = b;
+      }
+    }
+    return [...map.values()].sort((a, b2) => (b2.last?.date || '').localeCompare(a.last?.date || ''));
+  }
+
   function renderPatients() {
     const host = document.getElementById('tab-content');
+    const patients = buildPatients();
+
     host.innerHTML = `
       <h2 style="font-size:20px;margin-block-end:4px">قائمة المرضى</h2>
-      <p class="section-sub">${D.patients.length} مريض مسجّل</p>
+      <p class="section-sub">${patients.length} مريض — بتتجمّع تلقائياً من كل حجز بيحصل</p>
       <div class="search-box">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
         <input type="search" id="patient-search" placeholder="دوّر بالاسم أو رقم الموبايل…" aria-label="بحث في المرضى">
       </div>
-      <div class="card" style="padding:6px 10px">
+      <div class="card" style="padding:6px 10px;overflow-x:auto">
         <table class="patients-table">
           <thead>
-            <tr><th>الاسم</th><th>الموبايل</th><th>آخر زيارة</th><th>المعاد الجاي</th></tr>
+            <tr><th>الاسم</th><th>الموبايل</th><th>الزيارات</th><th>آخر زيارة</th><th>المعاد الجاي</th></tr>
           </thead>
           <tbody id="patients-body"></tbody>
         </table>
@@ -290,14 +261,15 @@
 
     function draw(filter = '') {
       const q = filter.trim();
-      const rows = D.patients.filter(p =>
-        !q || p.name.includes(q) || p.phone.replace(/\s/g, '').includes(q.replace(/\s/g, '')));
+      const rows = patients.filter(p =>
+        !q || p.name.includes(q) || p.phone.includes(q.replace(/\s/g, '')));
       body.innerHTML = rows.map(p => `
         <tr>
           <td>${p.name}</td>
           <td class="num" dir="ltr" style="text-align:end">${p.phone}</td>
-          <td class="num">${p.lastVisit}</td>
-          <td class="num">${p.next}</td>
+          <td class="num">${p.visits}</td>
+          <td class="num">${p.last ? p.last.dayLabel : '—'}</td>
+          <td class="num">${p.next ? `${p.next.dayLabel} ${p.next.time}` : '—'}</td>
         </tr>`).join('');
       empty.hidden = rows.length > 0;
     }
@@ -312,11 +284,11 @@
   function renderTemplates() {
     const host = document.getElementById('tab-content');
     const tpls = BF.getTemplates();
-    const sample = D.appointments[0];
+    const sample = BF.getBookings().find(b => b.status === 'confirmed') || BF.getBookings()[0];
 
     host.innerHTML = `
       <h2 style="font-size:20px;margin-block-end:4px">قوالب الرسايل</h2>
-      <p class="section-sub">أي تعديل هنا بيغيّر الرسالة اللي بتتبعت فوراً. جرّب تعدّل وبعدين ابعت تذكير من مواعيد بكرة.</p>
+      <p class="section-sub">أي تعديل هنا بيغيّر الرسالة اللي بتتبعت فوراً. المتغيرات المتاحة: {الاسم} {الرقم} {الخدمة} {اليوم} {الوقت} {الموبايل}</p>
       ${Object.keys(D.templateNames).map(key => `
         <div class="card" style="margin-block-end:16px">
           <h3 style="font-size:16px;margin-block-end:12px">${D.templateNames[key]}</h3>
@@ -326,7 +298,7 @@
               <textarea id="tpl-${key}" data-tpl="${key}">${tpls[key]}</textarea>
             </div>
             <div>
-              <p class="tpl-label">معاينة حية (ببيانات ${sample.patient})</p>
+              <p class="tpl-label">معاينة حية (ببيانات ${sample.name})</p>
               <div class="tpl-preview" id="preview-${key}"></div>
             </div>
           </div>
@@ -335,8 +307,8 @@
     function preview(key) {
       const text = document.getElementById(`tpl-${key}`).value;
       document.getElementById(`preview-${key}`).textContent = BF.fillTemplate(text, {
-        name: sample.patient, phone: sample.phone,
-        day: D.tomorrow.day, date: D.tomorrow.date,
+        name: sample.name, phone: sample.phone, ref: sample.ref,
+        day: sample.dayLabel, date: sample.dayLabel,
         time: sample.time, service: sample.service,
       });
     }
@@ -351,55 +323,97 @@
   }
 
   /* ============================================================
-     التقارير — باقة مركز
+     التقارير — بتتحسب من الحجوزات الحقيقية
      ============================================================ */
   function renderReports() {
     const host = document.getElementById('tab-content');
-    const R = D.reports;
-    const max = Math.max(...R.weekly.map(w => w.value));
+    const all = BF.getBookings();
+    const todayIso = BF.iso(new Date());
 
-    // رسم بياني SVG مرسوم باليد — 4 أسابيع
+    // حجوزات آخر ٧ أيام (بتاريخ الميعاد)
+    const last7 = [];
+    for (let i = 6; i >= 0; i--) {
+      const d = BF.addDays(new Date(), -i);
+      const dIso = BF.iso(d);
+      last7.push({
+        label: BF.DAYS[d.getDay()],
+        value: all.filter(b => b.date === dIso && b.status !== 'cancelled').length,
+      });
+    }
+    const max7 = Math.max(...last7.map(x => x.value), 1);
+
     const W = 320, H = 170, PAD_B = 28, PAD_T = 20;
-    const barW = 44, gap = (W - barW * R.weekly.length) / (R.weekly.length + 1);
-    const bars = R.weekly.map((w, i) => {
-      const h = Math.round((w.value / max) * (H - PAD_B - PAD_T));
+    const barW = 30, gap = (W - barW * 7) / 8;
+    const bars = last7.map((w, i) => {
+      const h = Math.round((w.value / max7) * (H - PAD_B - PAD_T));
       const x = gap + i * (barW + gap);
       const y = H - PAD_B - h;
       return `
-        <rect x="${x}" y="${y}" width="${barW}" height="${h}" rx="6" fill="var(--accent)" opacity="${i === R.weekly.length - 1 ? 1 : 0.4}"/>
+        <rect x="${x}" y="${y}" width="${barW}" height="${h}" rx="6" fill="var(--accent)" opacity="${i === 6 ? 1 : 0.4}"/>
         <text x="${x + barW / 2}" y="${y - 6}" text-anchor="middle" font-size="12" font-weight="600" fill="var(--ink)">${w.value}</text>
-        <text x="${x + barW / 2}" y="${H - 8}" text-anchor="middle" font-size="12" fill="var(--ink-soft)">${w.label}</text>`;
+        <text x="${x + barW / 2}" y="${H - 8}" text-anchor="middle" font-size="11" fill="var(--ink-soft)">${w.label}</text>`;
     }).join('');
 
-    const peak = Math.max(...R.busiestHours.map(h => h.value));
+    // توزيع الحالات
+    const statusCounts = Object.keys(BF.STATUS).map(k => ({
+      ...BF.STATUS[k],
+      count: all.filter(b => b.status === k).length,
+    }));
+
+    // أكثر الخدمات
+    const svcCounts = {};
+    all.forEach(b => { if (b.status !== 'cancelled') svcCounts[b.service] = (svcCounts[b.service] || 0) + 1; });
+    const topSvc = Object.entries(svcCounts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+    const maxSvc = topSvc.length ? topSvc[0][1] : 1;
+
+    // أكثر الأوقات زحمة
+    const hourCounts = {};
+    all.forEach(b => { if (b.status !== 'cancelled') hourCounts[b.time] = (hourCounts[b.time] || 0) + 1; });
+    const hours = D.slots.map(s => ({ hour: s.label.replace(':00', ''), value: hourCounts[s.label] || 0 }));
+    const peak = Math.max(...hours.map(h => h.value), 1);
+
+    // نسبة الغياب الحقيقية
+    const past = all.filter(b => b.date < todayIso);
+    const noShows = past.filter(b => b.status === 'noshow').length;
+    const noShowRate = past.length ? Math.round(noShows / past.length * 100) : 0;
 
     host.innerHTML = `
       <h2 style="font-size:20px;margin-block-end:4px">التقارير</h2>
-      <p class="section-sub">3 حقائق واضحة عن شغل العيادة — من غير دوشة أرقام.</p>
+      <p class="section-sub">كل الأرقام دي محسوبة من الحجوزات الفعلية — جرّب تحجز أو تلغي وارجع شوفها بتتغير.</p>
 
       <div class="report-block card">
-        <h3>المواعيد في آخر 4 أسابيع</h3>
-        <p class="report-sub">آخر أسبوع هو الأعلى — 27 معاد</p>
-        <svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="رسم بياني: المواعيد الأسبوعية، 18 ثم 24 ثم 21 ثم 27">
+        <h3>المواعيد آخر ٧ أيام</h3>
+        <p class="report-sub">النهاردة آخر عمود</p>
+        <svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="رسم بياني للمواعيد في آخر سبعة أيام">
           ${bars}
         </svg>
       </div>
 
       <div class="report-block card">
-        <h3>نسبة اللي ميجوش في ميعادهم</h3>
-        <p class="report-sub">قبل وبعد تفعيل تذكير الواتساب</p>
-        <div class="noshow">
-          <div class="ns before"><b>${R.noShow.before}%</b><span>قبل التذكير</span></div>
-          <div class="ns after"><b>${R.noShow.after}%</b><span>بعد التذكير</span></div>
+        <h3>توزيع الحجوزات حسب الحالة</h3>
+        <p class="report-sub">إجمالي ${all.length} حجز</p>
+        <div class="status-dist">
+          ${statusCounts.map(s => `
+            <div class="sd-item"><span class="status-badge ${s.cls}">${s.label}</span><b>${s.count}</b></div>`).join('')}
         </div>
+        <p class="report-sub" style="margin-block-start:10px">نسبة الغياب الفعلية في المواعيد اللي فاتت: <b>${noShowRate}%</b> (${noShows} من ${past.length})</p>
       </div>
 
       <div class="report-block card">
-        <h3>أكثر الساعات زحمة</h3>
-        <p class="report-sub">ذروة الحجوزات من 6 لـ 9 مساءً</p>
-        <div class="hours-strip" role="img" aria-label="أكثر الساعات زحمة: من 6 لـ 9 مساءً">
-          ${R.busiestHours.map(h => `
-            <div class="hb ${h.value === peak ? 'peak' : ''}">
+        <h3>أكثر الخدمات طلباً</h3>
+        ${topSvc.map(([name, n]) => `
+          <div class="svc-bar">
+            <span class="svc-name">${name}</span>
+            <span class="svc-track"><i style="width:${Math.round(n / maxSvc * 100)}%"></i></span>
+            <b class="num">${n}</b>
+          </div>`).join('')}
+      </div>
+
+      <div class="report-block card">
+        <h3>أكثر الأوقات زحمة</h3>
+        <div class="hours-strip" role="img" aria-label="أكثر الأوقات زحمة">
+          ${hours.map(h => `
+            <div class="hb ${h.value === peak && peak > 0 ? 'peak' : ''}">
               <i style="height:${Math.round(h.value / peak * 100)}%"></i>
               <span>${h.hour}</span>
             </div>`).join('')}
@@ -408,44 +422,30 @@
   }
 
   /* ============================================================
-     مبدّل الصلاحيات — باقة مركز
+     التحديث اللحظي — لو حجز جديد وصل واللوحة مفتوحة
      ============================================================ */
-  function renderRoleZone() {
-    const zone = document.getElementById('role-zone');
-    if (!BF.canUse('center')) { zone.innerHTML = ''; return; }
-    const role = BF.getRole();
-    zone.innerHTML = `
-      <span class="role-switch" role="group" aria-label="الصلاحيات">
-        <button type="button" data-role="manager" aria-pressed="${role === 'manager'}">مدير</button>
-        <button type="button" data-role="secretary" aria-pressed="${role === 'secretary'}">سكرتارية</button>
-      </span>`;
-    zone.querySelectorAll('[data-role]').forEach(btn =>
-      btn.addEventListener('click', () => {
-        BF.setRole(btn.dataset.role);
-        if (btn.dataset.role === 'secretary' && activeTab === 'reports') activeTab = 'tomorrow';
-        window.renderPage();
-        announce(btn.dataset.role === 'secretary'
-          ? 'وضع السكرتارية: التقارير والأرقام المالية مخفية'
-          : 'وضع المدير: كل الصلاحيات متاحة');
-      }));
+  let knownIds = new Set(BF.getBookings().map(b => b.id));
+
+  function watchChanges() {
+    BF.onChange(() => {
+      const now = BF.getBookings();
+      const fresh = now.filter(b => !knownIds.has(b.id));
+      knownIds = new Set(now.map(b => b.id));
+      if (fresh.length) {
+        toast(`حجز جديد وصل دلوقتي: ${fresh[0].name} — ${fresh[0].dayLabel} ${fresh[0].time}`);
+        announce('وصل حجز جديد');
+      }
+      renderDashboard();
+    });
   }
 
   /* ============================================================
-     الرسم الرئيسي
+     تشغيل
      ============================================================ */
-  window.renderPage = function () {
-    BF.closeSheet();
-    if (!BF.canUse('plus')) { renderGate(); return; }
-    if (!BF.store.get('auth', false)) { renderLogin(); return; }
-    renderDashboard();
-  };
-
   document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('back-home').addEventListener('click', e => {
-      e.preventDefault();
-      location.href = 'index.html' + location.hash;
-    });
+    document.getElementById('panel-date').textContent = BF.labelFor(new Date());
     document.getElementById('reset-data').addEventListener('click', BF.resetAll);
-    window.renderPage();
+    renderDashboard();
+    watchChanges();
   });
 })();

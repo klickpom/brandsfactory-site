@@ -3,32 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>عيادة د. أحمد سليم لطب وتجميل الأسنان — احجز موعدك</title>
-  <meta name="description" content="عيادة د. أحمد سليم لطب وتجميل الأسنان في التجمع الخامس. احجز موعدك أونلاين في أقل من دقيقة.">
+  <title>عيادة د. أحمد سليم لطب وتجميل الأسنان — احجز موعدك أونلاين</title>
+  <meta name="description" content="عيادة د. أحمد سليم لطب وتجميل الأسنان في التجمع الخامس. احجز موعدك أونلاين في أقل من دقيقة وهيوصلك تأكيد على واتساب.">
   <link rel="preload" href="fonts/plex-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/plex-arabic-600.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="fonts/fonts.css?v=3">
-  <link rel="stylesheet" href="assets/css/main.css?v=3">
+  <link rel="stylesheet" href="fonts/fonts.css?v=4">
+  <link rel="stylesheet" href="assets/css/main.css?v=4">
 </head>
 <body>
-
-  <header class="switcher" id="bf-switcher"></header>
 
   <div class="wrap">
     <div class="site-header" id="top">
       <div class="brand">عيادة <span>د. أحمد سليم</span></div>
       <nav class="site-nav" aria-label="التنقل الرئيسي">
-        <a href="#pricing">الباقات</a>
         <a href="#services">الخدمات</a>
         <a href="#doctor">عن الدكتور</a>
         <a href="#booking">الحجز</a>
         <a href="#location">العنوان</a>
-        <button type="button" id="nav-panel" data-feature="panel">دخول العيادة</button>
+        <a class="btn btn-primary btn-sm" href="panel.html" id="nav-panel">دخول العيادة</a>
       </nav>
     </div>
   </div>
 
-  <!-- ================= الهيرو الداكن ================= -->
+  <!-- ================= الهيرو ================= -->
   <section class="hero-dark">
     <div class="glow glow-1" aria-hidden="true"></div>
     <div class="glow glow-2" aria-hidden="true"></div>
@@ -40,176 +37,58 @@
           طب وتجميل الأسنان — التجمع الخامس
         </p>
         <h1 class="reveal">عيادة د. أحمد سليم<br><span class="grad-text">لطب وتجميل الأسنان</span></h1>
-        <p class="lead reveal">احجز موعدك في أقل من دقيقة، وهيوصلك تذكير بموعدك على واتساب. من غير مكالمات ولا انتظار في السنترال.</p>
+        <p class="lead reveal">احجز موعدك أونلاين في أقل من دقيقة، وهيوصلك تأكيد وتذكير على واتساب. من غير مكالمات ولا انتظار.</p>
         <p class="hours reveal">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
           <span id="hero-hours"></span>
         </p>
         <div class="hero-cta reveal">
           <a class="btn btn-primary btn-shine" href="#booking">احجز موعدك</a>
-          <a class="btn btn-glass" href="#pricing">شوف الباقات</a>
+          <a class="btn btn-glass" href="#services">الخدمات والأسعار</a>
         </div>
-        <div class="lock-strip reveal" id="public-locks" aria-label="مزايا إضافية في الباقات الأعلى"></div>
       </div>
 
-      <!-- موك-أب حي — بيعرض التذكير أوتوماتيك -->
-      <div class="phone-mock float-anim" aria-hidden="true">
+      <!-- مواعيد متاحة حقيقية — بتتحسب من الحجوزات الفعلية -->
+      <div class="phone-mock float-anim">
         <div class="phone-frame">
           <div class="phone-notch"></div>
           <div class="phone-screen">
             <div class="pm-head">
-              <b>مواعيد بكرة</b>
-              <span>الخميس 11 سبتمبر</span>
+              <b>أقرب المواعيد المتاحة</b>
+              <span id="pm-today"></span>
             </div>
-            <div class="pm-row" data-pm="1">
-              <span class="pm-time">4:30 م</span>
-              <span class="pm-name">محمد سيد إبراهيم</span>
-              <span class="pm-btn">تذكير</span>
-            </div>
-            <div class="pm-row" data-pm="2">
-              <span class="pm-time">5:00 م</span>
-              <span class="pm-name">أميرة حسن عبد الله</span>
-              <span class="pm-btn">تذكير</span>
-            </div>
-            <div class="pm-row" data-pm="3">
-              <span class="pm-time">5:30 م</span>
-              <span class="pm-name">كريم مصطفى فؤاد</span>
-              <span class="pm-btn">تذكير</span>
-            </div>
-            <div class="pm-row" data-pm="4">
-              <span class="pm-time">6:15 م</span>
-              <span class="pm-name">نورهان أحمد لطفي</span>
-              <span class="pm-btn">تذكير</span>
-            </div>
-            <div class="pm-foot">تذكير واتساب بضغطة واحدة</div>
+            <div id="live-slots"></div>
+            <div class="pm-foot">المعاد اللي تحجزه بيتقفل فوراً</div>
           </div>
         </div>
-        <p class="phone-caption">اللوحة بتشتغل قدامك — ادخل جرّب بنفسك</p>
+        <p class="phone-caption">اضغط على أي معاد وهيتملى فورم الحجز لوحده</p>
       </div>
     </div>
 
     <!-- شريط الأرقام -->
     <div class="wrap">
-      <div class="proof-strip reveal">
-        <div class="proof-item"><b><span class="counter" data-to="7">0</span>%</b><span>نسبة الغياب بعد التذكير</span></div>
-        <div class="proof-item"><b><span class="counter" data-to="3">0</span></b><span>باقات في موقع واحد</span></div>
-        <div class="proof-item"><b><span class="counter" data-to="1">0</span></b><span>ضغطة للتذكير — مش أكتر</span></div>
-      </div>
+      <div class="proof-strip reveal" id="stats-strip"></div>
     </div>
   </section>
 
   <div class="wrap">
 
-    <!-- ================= الباقات ================= -->
-    <section id="pricing" aria-labelledby="pricing-h">
-      <h2 class="section-title reveal" id="pricing-h">3 باقات — نفس الموقع، إمكانيات أكبر</h2>
-      <p class="section-sub reveal">بدّل من الشريط اللي فوق أو من الكروت دي، وشوف الموقع بيتغيّر قدامك في الحال.</p>
-      <div class="tier-cards" id="tier-cards">
-
-        <article class="tier-card reveal" data-tier="basic">
-          <span class="tier-current" hidden>بتتفرج عليها دلوقتي</span>
-          <h3>عيادة</h3>
-          <p class="tier-price">6,500 <small>جنيه</small></p>
-          <p class="tier-tag">موقع حجز شيك لعيادتك</p>
-          <ul class="tier-feats">
-            <li>موقع تعريفي كامل باسم عيادتك</li>
-            <li>فورم حجز يوصلك واتساب جاهز</li>
-            <li>خدماتك وأسعارك وعنوانك على الخريطة</li>
-            <li>شغال على الموبايل بسرعة فائقة</li>
-          </ul>
-          <button type="button" class="btn btn-ghost btn-block tier-btn" data-go="basic">شوف الديمو بالباقة دي</button>
-        </article>
-
-        <article class="tier-card featured reveal" data-tier="plus">
-          <span class="tier-best pulse">الأكثر طلباً</span>
-          <span class="tier-current" hidden>بتتفرج عليها دلوقتي</span>
-          <h3>عيادة+</h3>
-          <p class="tier-price">13,000 <small>جنيه</small></p>
-          <p class="tier-tag">موقع + لوحة تحكم كاملة</p>
-          <ul class="tier-feats">
-            <li>كل اللي في باقة عيادة</li>
-            <li><b>لوحة تحكم بمواعيد النهاردة وبكرة</b></li>
-            <li><b>تذكير واتساب للمرضى بضغطة واحدة</b></li>
-            <li>قائمة مرضى ببحث فوري</li>
-            <li>قوالب رسايل تعدّلها بنفسك</li>
-          </ul>
-          <button type="button" class="btn btn-primary btn-block tier-btn" data-go="plus">شوف الديمو بالباقة دي</button>
-        </article>
-
-        <article class="tier-card reveal" data-tier="center">
-          <span class="tier-current" hidden>بتتفرج عليها دلوقتي</span>
-          <h3>مركز</h3>
-          <p class="tier-price">22,000 <small>جنيه</small></p>
-          <p class="tier-tag">للمراكز متعددة الأطباء</p>
-          <ul class="tier-feats">
-            <li>كل اللي في باقة عيادة+</li>
-            <li><b>جدول منفصل لكل دكتور في المركز</b></li>
-            <li><b>تقارير: الحجوزات ونسبة الغياب والزحمة</b></li>
-            <li>صلاحيات: مدير وسكرتارية</li>
-            <li>دفع أونلاين مع الحجز</li>
-          </ul>
-          <button type="button" class="btn btn-ghost btn-block tier-btn" data-go="center">شوف الديمو بالباقة دي</button>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- ================= مزية التذكير ================= -->
-    <section class="feat-band reveal" aria-labelledby="wa-h">
-      <div class="feat-grid">
-        <div>
-          <h2 class="section-title" id="wa-h">تذكير الواتساب — المزية اللي بتمنع الغياب</h2>
-          <p class="section-sub">بدل ما السكرتيرة تكلم كل مريض، ضغطة واحدة تبعت تذكير مهذب بكل تفاصيل المعاد. دي الرسالة اللي المريض بيستلمها فعلاً:</p>
-          <ul class="feat-points">
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-              الرسالة بتتفتح جاهزة في واتساب — تضغط إرسال بس
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-              نصها تقدر تعدّله بنفسك من لوحة التحكم
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-              نسبة الغياب في الديمو نزلت من 22% لـ 7%
-            </li>
-          </ul>
-        </div>
-        <div class="wa-mock float-anim-slow" aria-hidden="true">
-          <div class="wa-head">
-            <span class="wa-avatar">ع</span>
-            <div><b>عيادة د. أحمد سليم</b><span>متصل الآن</span></div>
-          </div>
-          <div class="wa-body">
-            <div class="wa-bubble">أهلاً أ. محمد سيد إبراهيم 👋
-تذكير بموعدك في عيادة د. أحمد سليم
-📅 الخميس 11 سبتمبر الساعة 4:30 م
-🦷 حشو تجميلي
-
-لو محتاج تأجيل أو إلغاء، ردّ على الرسالة دي وهنظبطلك ميعاد تاني.
-              <span class="wa-time">4:10 م ✓✓</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= إزاي بيشتغل ================= -->
+    <!-- ================= خطوات الحجز ================= -->
     <section aria-labelledby="how-h">
-      <h2 class="section-title reveal" id="how-h">المريض بيحجز إزاي؟</h2>
-      <p class="section-sub reveal">3 خطوات من غير ما يكلم حد.</p>
+      <h2 class="section-title reveal" id="how-h">تحجز إزاي؟</h2>
+      <p class="section-sub reveal">3 خطوات من غير ما تكلم حد.</p>
       <ol class="steps">
         <li class="reveal">
           <span class="step-num">1</span>
-          <div><b>يفتح موقعك</b><p>من لينك تبعته أو من جوجل، يلاقي خدماتك وأسعارك ومواعيدك قدامه.</p></div>
+          <div><b>اختار الخدمة والمعاد</b><p>المواعيد المتاحة ظاهرة قدامك بشكل لحظي — المحجوز بيتقفل أوتوماتيك.</p></div>
         </li>
         <li class="reveal">
           <span class="step-num">2</span>
-          <div><b>يملأ الحجز في دقيقة</b><p>اسمه ورقمه والخدمة واليوم المناسب له — من غير مكالمة.</p></div>
+          <div><b>اكتب اسمك ورقمك</b><p>دقيقة واحدة بالظبط — من غير مكالمات ولا انتظار في السنترال.</p></div>
         </li>
         <li class="reveal">
           <span class="step-num">3</span>
-          <div><b>يوصلك واتساب جاهز</b><p>الحجز يظهر عندك رسالة مرتبة، والتذكير بيتبعتله قبل المعاد.</p></div>
+          <div><b>استلم تأكيدك على واتساب</b><p>برقم حجز واضح، وقبل ميعادك هيوصلك تذكير مهذب.</p></div>
         </li>
       </ol>
     </section>
@@ -217,7 +96,7 @@
     <!-- ================= الخدمات ================= -->
     <section id="services" aria-labelledby="services-h">
       <h2 class="section-title reveal" id="services-h">الخدمات والأسعار</h2>
-      <p class="section-sub reveal">أسعار واضحة من غير مفاجآت — الكشف يتحدد بعد المعاينة.</p>
+      <p class="section-sub reveal">أسعار واضحة من غير مفاجآت — الخطة النهائية بتتحدد بعد المعاينة.</p>
       <ul class="services-list reveal" id="services-list"></ul>
     </section>
 
@@ -239,34 +118,49 @@
     <!-- ================= الحجز ================= -->
     <section id="booking" aria-labelledby="booking-h">
       <h2 class="section-title reveal" id="booking-h">احجز موعدك</h2>
-      <p class="section-sub reveal">املأ البيانات وهيفتح واتساب بطلب الحجز جاهز — اضغط إرسال بس.</p>
-      <form class="card reveal" id="booking-form">
+      <p class="section-sub reveal">اختار اليوم والوقت المتاحين، واملأ بياناتك — وهيظهرلك تأكيد برقم حجز فوراً.</p>
+
+      <form class="card reveal" id="booking-form" novalidate>
         <div class="field">
           <label for="bk-name">الاسم</label>
           <input type="text" id="bk-name" name="name" autocomplete="name" required placeholder="اسمك بالكامل">
+          <p class="field-err" id="err-name" hidden>اكتب اسمك بالكامل</p>
         </div>
         <div class="field">
           <label for="bk-phone">رقم الموبايل</label>
           <input type="tel" id="bk-phone" name="phone" inputmode="tel" autocomplete="tel" required placeholder="01xxxxxxxxx" dir="ltr" style="text-align:end">
+          <p class="field-err" id="err-phone" hidden>اكتب رقم موبايل مصري صحيح — 11 رقم ويبدأ بـ 01</p>
         </div>
         <div class="field">
           <label for="bk-service">الخدمة</label>
           <select id="bk-service" name="service" required></select>
         </div>
         <div class="field">
-          <label for="bk-day">اليوم المفضل</label>
+          <label for="bk-day">اليوم</label>
           <select id="bk-day" name="day" required></select>
         </div>
         <div class="field">
-          <label for="bk-time">الوقت المفضل</label>
-          <select id="bk-time" name="time" required></select>
+          <label>الوقت المتاح</label>
+          <div class="slot-grid" id="slot-grid" role="radiogroup" aria-label="الأوقات المتاحة"></div>
+          <p class="field-err" id="err-time" hidden>اختار وقت من المتاح</p>
         </div>
-
-        <!-- الدفع أونلاين — باقة مركز -->
-        <div id="pay-zone"></div>
-
-        <button type="submit" class="btn btn-primary btn-block btn-shine">ابعت الحجز على واتساب</button>
+        <button type="submit" class="btn btn-primary btn-block btn-shine">أكّد الحجز</button>
       </form>
+
+      <!-- شاشة نجاح الحجز -->
+      <div class="card success-card" id="booking-success" hidden>
+        <div class="big-check" aria-hidden="true">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>
+        </div>
+        <h3>تم استلام حجزك بنجاح</h3>
+        <p class="section-sub" style="margin-inline:auto">رقم الحجز <b class="booking-ref" id="bs-ref"></b> — احتفظ بيه.</p>
+        <dl class="bs-summary" id="bs-summary"></dl>
+        <div class="bs-actions">
+          <a class="btn btn-primary btn-block" id="bs-wa" href="#" target="_blank" rel="noopener">ابعت التأكيد على واتساب العيادة</a>
+          <button type="button" class="btn btn-ghost btn-block" id="bs-ics">أضف الميعاد لتقويم موبايلك</button>
+          <button type="button" class="reset-link" id="bs-again">احجز موعد تاني</button>
+        </div>
+      </div>
     </section>
 
     <!-- ================= العنوان ================= -->
@@ -294,17 +188,16 @@
           <p id="footer-address"></p>
         </div>
       </div>
-      <p style="margin-block-start:20px">
-        <button type="button" class="reset-link" id="reset-data">إعادة تعيين البيانات</button>
+      <p class="demo-credit">
+        نسخة تجريبية كاملة من <a href="offers.html">BrandsFactory — شوف الباقات والأسعار</a>
+        · <button type="button" class="reset-link" id="reset-data">إعادة تعيين البيانات</button>
       </p>
     </footer>
 
   </div>
 
-  <div class="lead-bar" id="bf-leadbar"></div>
-
-  <script src="data/clinic-data.js?v=3"></script>
-  <script src="assets/js/app.js?v=3"></script>
-  <script src="assets/js/site.js?v=3"></script>
+  <script src="data/clinic-data.js?v=4"></script>
+  <script src="assets/js/app.js?v=4"></script>
+  <script src="assets/js/site.js?v=4"></script>
 </body>
 </html>

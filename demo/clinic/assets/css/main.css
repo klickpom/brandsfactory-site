@@ -1128,3 +1128,215 @@ section { padding-block: 28px; }
   .reveal { opacity: 1; transform: none; }
   .remind-btn.just-sent .check path { animation: none; stroke-dashoffset: 0; }
 }
+
+/* ============================================================
+   v4 — الديمو الكامل الشغال (من غير مبدّل باقات)
+   ============================================================ */
+body { padding-block-start: 0; padding-block-end: 24px; }
+
+.demo-badge.inline { font-size: 12px; }
+.panel-date { font-size: 13px; color: var(--ink-soft); }
+.summary-strip { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 640px) { .summary-strip { grid-template-columns: repeat(2, 1fr); } }
+
+/* ---------- ويدجت المواعيد المتاحة الحية ---------- */
+.phone-mock { display: block; margin-block-start: 26px; }
+@media (min-width: 1000px) { .phone-mock { margin-block-start: 0; } }
+.pm-day { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink-soft); font-size: 12px; }
+.pm-row.live .pm-time { font-size: 13px; }
+.pm-book { cursor: pointer; font-size: 11px; padding: 5px 12px; min-height: 30px; }
+.pm-book:hover { background: var(--accent-dk); }
+.pm-book:active { transform: scale(.94); }
+.slot-hint { font-size: 13px; color: var(--ink-soft); margin: 0; }
+
+/* ---------- شبكة الأوقات ---------- */
+.slot-grid {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  min-height: 44px; align-items: center;
+}
+.slot-chip {
+  min-height: 44px; padding: 8px 16px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  font-weight: 600; font-size: 14px; color: var(--ink);
+  transition: border-color .2s ease, background .2s ease, color .2s ease, transform .12s ease;
+}
+.slot-chip:hover:not(:disabled) { border-color: var(--accent-lt); }
+.slot-chip:active:not(:disabled) { transform: scale(.95); }
+.slot-chip[aria-pressed="true"] {
+  background: var(--accent); border-color: var(--accent); color: #fff;
+  box-shadow: 0 4px 14px rgba(15, 118, 110, .35);
+}
+.slot-chip.taken, .slot-chip:disabled {
+  background: var(--bg); color: #B6BFC9;
+  border-color: var(--line); border-style: dashed;
+  cursor: not-allowed; text-decoration: line-through;
+}
+
+/* ---------- أخطاء الحقول ---------- */
+.field-err {
+  margin-block-start: 6px;
+  font-size: 13px; font-weight: 600; color: #B42318;
+}
+.field input:invalid:not(:placeholder-shown) { border-color: #FDA29B; }
+
+/* ---------- وميض الفورم عند التعبئة التلقائية ---------- */
+@keyframes flashring {
+  0% { box-shadow: 0 0 0 0 rgba(45, 212, 191, .55); }
+  100% { box-shadow: 0 0 0 18px rgba(45, 212, 191, 0); }
+}
+.card.flash { animation: flashring .9s ease-out 2; border-color: var(--accent-lt); }
+
+/* ---------- شاشة نجاح الحجز ---------- */
+.success-card { text-align: center; }
+.big-check {
+  width: 68px; height: 68px; margin: 4px auto 14px;
+  border-radius: 50%;
+  background: var(--accent-sf); color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  animation: pop .45s cubic-bezier(.2, .9, .3, 1.4);
+}
+@keyframes pop { from { transform: scale(.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.booking-ref { color: var(--accent); letter-spacing: .5px; }
+.bs-summary {
+  margin: 18px 0; padding: 0;
+  display: grid; gap: 8px; text-align: start;
+}
+.bs-summary > div {
+  display: flex; justify-content: space-between; gap: 10px;
+  background: var(--bg); border: 1px solid var(--line);
+  border-radius: 10px; padding: 10px 14px; font-size: 14px;
+}
+.bs-summary dt { color: var(--ink-soft); margin: 0; }
+.bs-summary dd { margin: 0; font-weight: 600; }
+.bs-actions { display: grid; gap: 10px; }
+.bs-actions .reset-link { justify-self: center; }
+
+/* ---------- التوست ---------- */
+.toast {
+  position: fixed; inset-block-end: 18px; inset-inline: 16px;
+  max-width: 440px; margin-inline: auto;
+  background: #101828; color: #fff;
+  border-radius: 12px; padding: 13px 18px;
+  font-size: 14px; font-weight: 600; text-align: center;
+  box-shadow: 0 12px 32px rgba(16, 24, 40, .35);
+  opacity: 0; transform: translateY(16px);
+  pointer-events: none;
+  transition: opacity .3s ease, transform .3s ease;
+  z-index: 90;
+}
+.toast.show { opacity: 1; transform: none; }
+
+/* ---------- فلترة الحجوزات ---------- */
+.filter-pills {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  margin-block-end: 14px;
+}
+.filter-pill {
+  min-height: 40px; padding: 7px 14px;
+  border: 1px solid var(--line); border-radius: var(--r-pill);
+  background: var(--surface); font-size: 13px; font-weight: 600; color: var(--ink-soft);
+  transition: all .2s ease;
+}
+.filter-pill small { color: var(--accent); font-weight: 700; }
+.filter-pill[aria-pressed="true"] {
+  background: var(--accent); border-color: var(--accent); color: #fff;
+}
+.filter-pill[aria-pressed="true"] small { color: #A7F3D0; }
+
+/* ---------- شارات الحالة ---------- */
+.status-badge {
+  display: inline-block; font-size: 11px; font-weight: 700;
+  border-radius: var(--r-pill); padding: 2px 9px;
+  vertical-align: middle;
+}
+.st-new       { background: #FFFBEB; color: #B45309; border: 1px solid #FCD34D; }
+.st-confirmed { background: var(--accent-sf); color: var(--accent); border: 1px solid #A7F3D0; }
+.st-done      { background: #F2F4F7; color: #475467; border: 1px solid #E4E7EC; }
+.st-cancelled { background: #FEF3F2; color: #B42318; border: 1px solid #FECDCA; }
+.st-noshow    { background: #FFF6ED; color: #C4320A; border: 1px solid #FEDF89; }
+
+/* ---------- صف الحجز الجديد ---------- */
+.appt-row.is-new { border-color: #FCD34D; background: #FFFDF5; }
+.appt-when { display: flex; flex-direction: column; min-width: 64px; }
+.appt-date { font-size: 11px; color: var(--ink-soft); white-space: nowrap; }
+.appt-ref {
+  font-size: 11px; font-weight: 700; color: var(--accent);
+  background: var(--accent-sf); border-radius: 6px; padding: 0 6px;
+}
+.reminded-tag { font-size: 11px; color: var(--accent); font-weight: 600; }
+
+/* ---------- أزرار الإجراءات ---------- */
+.row-actions {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  justify-content: flex-end; align-items: center;
+}
+.act {
+  min-height: 38px; padding: 6px 12px;
+  border-radius: 8px; border: 1px solid var(--line);
+  background: var(--surface);
+  font-size: 12.5px; font-weight: 700;
+  display: inline-flex; align-items: center; gap: 5px;
+  transition: all .15s ease; text-decoration: none !important;
+}
+.act:active { transform: scale(.94); }
+.act-confirm { background: var(--accent); border-color: var(--accent); color: #fff; }
+.act-confirm:hover { background: var(--accent-dk); }
+.act-wa { background: #25D366; border-color: #25D366; color: #fff; }
+.act-wa:hover { background: #1EBE5B; }
+.act-done { color: var(--accent); border-color: #A7F3D0; background: var(--accent-sf); }
+.act-call { color: var(--ink-soft); padding: 6px 10px; }
+.act-call:hover { color: var(--accent); border-color: var(--accent-lt); }
+.act-cancel { color: #B42318; }
+.act-cancel:hover { background: #FEF3F2; border-color: #FECDCA; }
+
+/* ---------- ملخص ساخن ---------- */
+.summary-item.hot { border-block-start-color: #F59E0B; }
+.summary-item.hot b { color: #B45309; }
+.tab-badge {
+  background: #F59E0B; color: #fff;
+  border-radius: var(--r-pill); font-size: 11px; font-weight: 700;
+  padding: 1px 7px; margin-inline-start: 4px;
+}
+
+/* ---------- التقارير ---------- */
+.status-dist { display: flex; flex-wrap: wrap; gap: 10px; }
+.sd-item {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg); border: 1px solid var(--line);
+  border-radius: 10px; padding: 8px 12px;
+}
+.sd-item b { font-size: 17px; }
+.svc-bar {
+  display: flex; align-items: center; gap: 10px;
+  padding-block: 7px; font-size: 14px;
+}
+.svc-name { min-width: 130px; }
+.svc-track {
+  flex: 1; height: 10px; border-radius: var(--r-pill);
+  background: var(--bg); border: 1px solid var(--line);
+  overflow: hidden; display: block;
+}
+.svc-track i {
+  display: block; height: 100%;
+  background: linear-gradient(90deg, var(--accent-lt), var(--accent));
+  border-radius: var(--r-pill);
+}
+
+/* ---------- صفحة العروض ---------- */
+.offers-hero { padding-block: 56px 40px; }
+.offers-hero .lead { color: #B6C2CE; }
+.faq-grid { display: grid; gap: 14px; }
+@media (min-width: 720px) { .faq-grid { grid-template-columns: repeat(3, 1fr); } }
+.demo-credit {
+  margin-block-start: 20px; font-size: 13px; color: var(--ink-soft);
+  border-block-start: 1px solid var(--line); padding-block-start: 14px;
+}
+
+/* ---------- موبايل: صف الحجز ---------- */
+@media (max-width: 640px) {
+  .appt-row { flex-wrap: wrap; }
+  .appt-row .row-actions { width: 100%; justify-content: flex-start; }
+  .summary-strip { grid-template-columns: repeat(2, 1fr); }
+}

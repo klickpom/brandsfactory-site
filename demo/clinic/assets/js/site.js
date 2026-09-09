@@ -1,5 +1,5 @@
 /* ============================================================
-   منطق الصفحة العامة — الموقع العام للعيادة
+   منطق الصفحة العامة — موقع العيادة + محرك الحجز الحقيقي
    ============================================================ */
 
 (function () {
@@ -13,11 +13,11 @@
     document.getElementById('footer-address').textContent = D.clinic.address;
 
     const phoneLink = document.getElementById('footer-phone');
-    phoneLink.textContent = D.clinic.phone;
-    phoneLink.href = 'tel:' + D.clinic.phone.replace(/\s/g, '');
+    phoneLink.textContent = D.clinic.phoneDisplay;
+    phoneLink.href = 'tel:+2' + D.clinic.phoneIntl.slice(2);
 
     document.getElementById('footer-wa').href =
-      BF.waLink(D.clinic.phone, 'أهلاً، عايز أستفسر عن موعد في العيادة');
+      BF.waLink(D.clinic.phoneIntl, 'أهلاً، عايز أستفسر عن موعد في العيادة');
 
     document.getElementById('map-link').href = D.clinic.mapsUrl;
 
@@ -33,146 +33,213 @@
     document.getElementById('doctor-creds').innerHTML = D.doctor.credentials
       .map(c => `<li>${c}</li>`).join('');
 
-    // قوائم الحجز
+    // شريط الأرقام
+    document.getElementById('stats-strip').innerHTML = D.stats.map(s => `
+      <div class="proof-item"><b><span class="counter" data-to="${s.to}">0</span>${s.suffix}</b><span>${s.label}</span></div>
+    `).join('');
+
+    // الخدمة في الفورم
     document.getElementById('bk-service').innerHTML =
       '<option value="" disabled selected>اختار الخدمة</option>' +
       D.services.map(s => `<option>${s.name}</option>`).join('');
+
+    // الأيام المتاحة — تواريخ حقيقية
     document.getElementById('bk-day').innerHTML =
       '<option value="" disabled selected>اختار اليوم</option>' +
-      D.bookingDays.map(d => `<option>${d}</option>`).join('');
-    document.getElementById('bk-time').innerHTML =
-      '<option value="" disabled selected>اختار الوقت</option>' +
-      D.bookingTimes.map(t => `<option>${t}</option>`).join('');
+      BF.nextWorkingDays(D.bookingWindowDays).map(d => {
+        const dIso = BF.iso(d);
+        const today = dIso === BF.iso(new Date());
+        return `<option value="${dIso}">${BF.labelFor(d)}${today ? ' — النهاردة' : ''}</option>`;
+      }).join('');
   }
 
-  /* ---------- المزايا المقفولة على الصفحة العامة ---------- */
-  function renderPublicLocks() {
-    const host = document.getElementById('public-locks');
-    const chips = [];
-    if (!BF.canUse('plus')) {
-      chips.push(['panel', 'لوحة التحكم'], ['reminder', 'تذكير الواتساب']);
+  /* ---------- شبكة الأوقات — بتتقفل لحظياً حسب الحجوزات ---------- */
+  let selectedSlot = null;
+
+  function renderSlots() {
+    const grid = document.getElementById('slot-grid');
+    const dayVal = document.getElementById('bk-day').value;
+    if (!dayVal) {
+      grid.innerHTML = '<p class="slot-hint">اختار اليوم الأول وهتظهرلك الأوقات المتاحة</p>';
+      return;
     }
-    if (!BF.canUse('center')) {
-      chips.push(['reports', 'التقارير']);
+    const date = BF.fromIso(dayVal);
+    const slots = BF.slotsForDate(date);
+    const anyFree = slots.some(s => !s.taken && !s.passed);
+
+    grid.innerHTML = anyFree
+      ? slots.map(s => {
+          const off = s.taken || s.passed;
+          return `<button type="button" class="slot-chip ${off ? 'taken' : ''}" data-slot="${s.label}"
+                    ${off ? 'disabled' : ''}
+                    title="${s.taken ? 'محجوز' : (s.passed ? 'فات' : 'متاح')}"
+                    aria-pressed="${selectedSlot === s.label}">${s.label}</button>`;
+        }).join('')
+      : '<p class="slot-hint">اليوم ده مكتمل الحجز — جرّب يوم تاني</p>';
+
+    if (selectedSlot && !slots.some(s => s.label === selectedSlot && !s.taken && !s.passed)) {
+      selectedSlot = null; // المعاد اللي كان مختار بقى محجوز
     }
-    host.innerHTML = chips.map(([key, label]) => `
-      <button type="button" class="lock-chip" data-lock="${key}" data-feature="${key}">
-        ${BF.LOCK_ICON} ${label}
-      </button>`).join('');
-    host.querySelectorAll('[data-lock]').forEach(btn =>
-      btn.addEventListener('click', () => BF.showLock(btn.dataset.lock)));
-  }
 
-  /* ---------- زر دخول العيادة ---------- */
-  function renderPanelEntry() {
-    const btn = document.getElementById('nav-panel');
-    if (BF.canUse('plus')) {
-      btn.onclick = () => { location.href = 'panel.html' + location.hash; };
-      btn.classList.remove('locked');
-      btn.innerHTML = 'دخول العيادة';
-    } else {
-      btn.onclick = () => BF.showLock('panel');
-      btn.innerHTML = 'دخول العيادة';
-    }
-  }
-
-  /* ---------- الدفع أونلاين (محاكاة — باقة مركز) ---------- */
-  function renderPayZone() {
-    const zone = document.getElementById('pay-zone');
-    if (BF.canUse('center')) {
-      zone.innerHTML = `
-        <div class="field">
-          <label style="display:flex;align-items:center;gap:10px;min-height:44px;cursor:pointer">
-            <input type="checkbox" id="bk-pay" style="width:22px;height:22px;accent-color:var(--accent)">
-            <span>عايز أدفع أونلاين</span>
-          </label>
-        </div>
-        <div class="pay-sim" id="pay-sim" hidden>
-          <span class="sim-tag">محاكاة — مش دفع حقيقي</span>
-          <p style="font-size:14px;color:var(--ink-soft);margin-block-end:10px">
-            في النسخة الحقيقية هنا بيظهر للمريض ملخص الدفع (عربون أو الكشف كامل) ويكمل من موبايله.
-          </p>
-          <div class="field" style="margin-block-end:10px">
-            <label for="pay-amount">المبلغ</label>
-            <select id="pay-amount">
-              <option>عربون 200 جنيه</option>
-              <option>الكشف كامل 400 جنيه</option>
-            </select>
-          </div>
-        </div>`;
-      zone.querySelector('#bk-pay').addEventListener('change', e => {
-        zone.querySelector('#pay-sim').hidden = !e.target.checked;
-      });
-    } else {
-      zone.innerHTML = `
-        <div class="lock-strip" style="margin-block:4px 16px">
-          <button type="button" class="lock-chip" id="pay-lock" data-feature="payment">
-            ${BF.LOCK_ICON} الدفع أونلاين
-          </button>
-        </div>`;
-      zone.querySelector('#pay-lock').addEventListener('click', () => BF.showLock('payment'));
-    }
-  }
-
-  /* ---------- إرسال الحجز ---------- */
-  function bindForm() {
-    document.getElementById('booking-form').addEventListener('submit', e => {
-      e.preventDefault();
-      const f = e.target;
-      const payOn = f.querySelector('#bk-pay');
-      let msg = BF.fillTemplate(BF.getTemplates().confirm, {
-        name: f.name.value.trim(),
-        phone: f.phone.value.trim(),
-        service: f.service.value,
-        day: f.day.value,
-        time: f.time.value,
-      });
-      if (payOn && payOn.checked) {
-        const amount = f.querySelector('#pay-amount').value;
-        msg += `\nالدفع أونلاين: نعم — ${amount} (محاكاة)`;
-      }
-      window.open(BF.waLink(D.clinic.phone, msg), '_blank', 'noopener');
-    });
-  }
-
-  /* ---------- إعادة تعيين ---------- */
-  function bindReset() {
-    document.getElementById('reset-data').addEventListener('click', BF.resetAll);
-  }
-
-  /* ---------- كروت الباقات — مزامنة مع الوضع الحالي ---------- */
-  function renderTierCards() {
-    const mode = BF.getMode();
-    document.querySelectorAll('.tier-card').forEach(card => {
-      const isCurrent = card.dataset.tier === mode;
-      card.classList.toggle('current', isCurrent);
-      const badge = card.querySelector('.tier-current');
-      if (badge) badge.hidden = !isCurrent;
-      const btn = card.querySelector('.tier-btn');
-      if (btn) {
-        btn.disabled = isCurrent;
-        btn.textContent = isCurrent ? 'دي الباقة اللي بتتفرج عليها' : 'شوف الديمو بالباقة دي';
-      }
-    });
-  }
-
-  function bindTierCards() {
-    document.querySelectorAll('.tier-btn').forEach(btn =>
+    grid.querySelectorAll('.slot-chip:not(.taken)').forEach(btn =>
       btn.addEventListener('click', () => {
-        BF.setMode(btn.dataset.go);
-        document.getElementById('pricing').scrollIntoView({ block: 'start' });
+        selectedSlot = btn.dataset.slot;
+        grid.querySelectorAll('.slot-chip').forEach(b =>
+          b.setAttribute('aria-pressed', String(b === btn)));
+        hideErr('err-time');
       }));
   }
 
-  /* ---------- إعادة الرسم عند تغيير الباقة ---------- */
-  window.renderPage = function () {
-    renderPublicLocks();
-    renderPanelEntry();
-    renderPayZone();
-    renderTierCards();
-  };
+  /* ---------- أقرب المواعيد المتاحة — ويدجت حية ---------- */
+  function renderLiveSlots() {
+    const host = document.getElementById('live-slots');
+    if (!host) return;
+    const free = BF.nextFreeSlots(4);
+    host.innerHTML = free.length
+      ? free.map(s => `
+          <div class="pm-row live">
+            <span class="pm-day">${s.label}</span>
+            <span class="pm-time">${s.time}</span>
+            <button type="button" class="pm-btn pm-book" data-date="${s.dateIso}" data-time="${s.time}">احجز</button>
+          </div>`).join('')
+      : '<p class="slot-hint" style="padding:14px">كل المواعيد محجوزة الفترة الجاية — كلمنا على واتساب</p>';
 
-  /* ---------- أنيميشن الدخول (reveal) ---------- */
+    host.querySelectorAll('.pm-book').forEach(btn =>
+      btn.addEventListener('click', () => prefillBooking(btn.dataset.date, btn.dataset.time)));
+
+    const todayEl = document.getElementById('pm-today');
+    if (todayEl) todayEl.textContent = BF.labelFor(new Date());
+  }
+
+  function prefillBooking(dateIso, timeLabel) {
+    const daySel = document.getElementById('bk-day');
+    daySel.value = dateIso;
+    selectedSlot = timeLabel;
+    renderSlots();
+    document.getElementById('booking').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const card = document.getElementById('booking-form');
+    card.classList.add('flash');
+    setTimeout(() => card.classList.remove('flash'), 1200);
+  }
+
+  /* ---------- التحقق ---------- */
+  function showErr(id) { document.getElementById(id).hidden = false; }
+  function hideErr(id) { document.getElementById(id).hidden = true; }
+  const PHONE_RE = /^01[0125]\d{8}$/;
+
+  /* ---------- إرسال الحجز ---------- */
+  function bindForm() {
+    document.getElementById('bk-day').addEventListener('change', () => {
+      selectedSlot = null;
+      renderSlots();
+    });
+
+    ['bk-name', 'bk-phone'].forEach(id =>
+      document.getElementById(id).addEventListener('input', () => {
+        hideErr(id === 'bk-name' ? 'err-name' : 'err-phone');
+      }));
+
+    document.getElementById('booking-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const f = e.target;
+      const name = f.name.value.trim();
+      const phone = f.phone.value.replace(/\D/g, '');
+      const service = f.service.value;
+      const dayIso = f.day.value;
+
+      let ok = true;
+      if (name.length < 3) { showErr('err-name'); ok = false; }
+      if (!PHONE_RE.test(phone)) { showErr('err-phone'); ok = false; }
+      if (!selectedSlot) { showErr('err-time'); ok = false; }
+      if (!ok) return;
+
+      // تأكيد إن المعاد لسه فاضي لحظة الحجز
+      if (BF.isSlotTaken(dayIso, selectedSlot)) {
+        selectedSlot = null;
+        renderSlots();
+        showErr('err-time');
+        document.getElementById('err-time').textContent = 'المعاد ده اتحجز للتو — اختار وقت تاني';
+        return;
+      }
+
+      const slot = D.slots.find(s => s.label === selectedSlot);
+      const booking = BF.addBooking({
+        id: 'b' + Date.now().toString(36),
+        ref: BF.nextRef(),
+        name, phone, service,
+        date: dayIso,
+        dayLabel: BF.labelFor(BF.fromIso(dayIso)),
+        time: selectedSlot,
+        hour: slot ? slot.h : 16,
+        status: 'new',
+        remindedAt: null,
+        createdAt: new Date().toISOString(),
+      });
+
+      showSuccess(booking);
+    });
+  }
+
+  /* ---------- شاشة النجاح ---------- */
+  function showSuccess(b) {
+    document.getElementById('booking-form').hidden = true;
+    const card = document.getElementById('booking-success');
+    card.hidden = false;
+
+    document.getElementById('bs-ref').textContent = b.ref;
+    document.getElementById('bs-summary').innerHTML = `
+      <div><dt>الاسم</dt><dd>${b.name}</dd></div>
+      <div><dt>الخدمة</dt><dd>${b.service}</dd></div>
+      <div><dt>الميعاد</dt><dd>${b.dayLabel} — ${b.time}</dd></div>
+      <div><dt>الموبايل</dt><dd dir="ltr">${b.phone}</dd></div>`;
+
+    const msg = BF.fillTemplate(BF.getTemplates().confirm, {
+      ref: b.ref, name: b.name, phone: b.phone,
+      service: b.service, day: b.dayLabel, time: b.time,
+    });
+    document.getElementById('bs-wa').href = BF.waLink(D.clinic.phoneIntl, msg);
+
+    document.getElementById('bs-ics').onclick = () => downloadICS(b);
+    document.getElementById('bs-again').onclick = () => {
+      card.hidden = true;
+      const f = document.getElementById('booking-form');
+      f.hidden = false;
+      f.reset();
+      selectedSlot = null;
+      renderSlots();
+    };
+
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  /* ---------- ملف تقويم ICS حقيقي ---------- */
+  function downloadICS(b) {
+    const dt = b.date.replace(/-/g, '');
+    const h = String(b.hour).padStart(2, '0');
+    const hEnd = String(Math.min(b.hour + 1, 23)).padStart(2, '0');
+    const ics = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//ClinicDemo//AR',
+      'BEGIN:VEVENT',
+      `UID:${b.id}@clinic-demo`,
+      `DTSTART:${dt}T${h}0000`,
+      `DTEND:${dt}T${hEnd}0000`,
+      `SUMMARY:موعد في ${D.clinic.shortName} — ${b.service}`,
+      `DESCRIPTION:رقم الحجز ${b.ref}`,
+      `LOCATION:${D.clinic.address}`,
+      'BEGIN:VALARM', 'TRIGGER:-PT2H', 'ACTION:DISPLAY', 'DESCRIPTION:تذكير بموعد العيادة', 'END:VALARM',
+      'END:VEVENT', 'END:VCALENDAR',
+    ].join('\r\n');
+    const url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `mo3ad-${b.ref}.ics`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+  }
+
+  /* ---------- أنيميشن الدخول ---------- */
   function initReveal() {
     const els = document.querySelectorAll('.reveal');
     if (!('IntersectionObserver' in window) ||
@@ -188,7 +255,7 @@
     els.forEach(el => io.observe(el));
   }
 
-  /* ---------- عدّادات الأرقام ---------- */
+  /* ---------- العدّادات ---------- */
   function initCounters() {
     const counters = document.querySelectorAll('.counter');
     if (!counters.length) return;
@@ -198,13 +265,13 @@
         if (!e.isIntersecting) return;
         io.unobserve(e.target);
         const to = Number(e.target.dataset.to);
-        if (reduced) { e.target.textContent = to; return; }
+        if (reduced) { e.target.textContent = to.toLocaleString('en'); return; }
         const t0 = performance.now();
         const dur = 900;
         (function tick(t) {
           const p = Math.min((t - t0) / dur, 1);
           const eased = 1 - Math.pow(1 - p, 3);
-          e.target.textContent = Math.round(to * eased);
+          e.target.textContent = Math.round(to * eased).toLocaleString('en');
           if (p < 1) requestAnimationFrame(tick);
         })(t0);
       });
@@ -212,47 +279,26 @@
     counters.forEach(c => io.observe(c));
   }
 
-  /* ---------- الموك-أب الحي: بيبعت تذكيرات لوحده ---------- */
-  function initPhoneDemo() {
-    const rows = [...document.querySelectorAll('.pm-row[data-pm]')];
-    if (!rows.length) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      rows.slice(0, 2).forEach(r => {
-        r.classList.add('sent');
-        r.querySelector('.pm-btn').textContent = 'تم ✓';
-      });
-      return;
-    }
-    let i = 0;
-    function cycle() {
-      if (i < rows.length) {
-        const row = rows[i];
-        row.classList.add('sent');
-        row.querySelector('.pm-btn').textContent = 'تم ✓';
-        i++;
-        setTimeout(cycle, 1400);
-      } else {
-        setTimeout(() => {
-          rows.forEach(r => {
-            r.classList.remove('sent');
-            r.querySelector('.pm-btn').textContent = 'تذكير';
-          });
-          i = 0;
-          setTimeout(cycle, 1400);
-        }, 2600);
-      }
-    }
-    setTimeout(cycle, 1200);
+  /* ---------- تحديث لحظي لو حجز حصل في تاب تاني ---------- */
+  function watchChanges() {
+    BF.onChange(() => {
+      renderLiveSlots();
+      if (!document.getElementById('booking-form').hidden) renderSlots();
+    });
+  }
+
+  function bindReset() {
+    document.getElementById('reset-data').addEventListener('click', BF.resetAll);
   }
 
   document.addEventListener('DOMContentLoaded', () => {
     fillStatic();
+    renderSlots();
+    renderLiveSlots();
     bindForm();
     bindReset();
-    bindTierCards();
     initReveal();
     initCounters();
-    initPhoneDemo();
-    window.renderPage();
+    watchChanges();
   });
 })();
