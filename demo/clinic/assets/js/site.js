@@ -172,11 +172,87 @@
     renderTierCards();
   };
 
+  /* ---------- أنيميشن الدخول (reveal) ---------- */
+  function initReveal() {
+    const els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window) ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      els.forEach(el => el.classList.add('in'));
+      return;
+    }
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(el => io.observe(el));
+  }
+
+  /* ---------- عدّادات الأرقام ---------- */
+  function initCounters() {
+    const counters = document.querySelectorAll('.counter');
+    if (!counters.length) return;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        const to = Number(e.target.dataset.to);
+        if (reduced) { e.target.textContent = to; return; }
+        const t0 = performance.now();
+        const dur = 900;
+        (function tick(t) {
+          const p = Math.min((t - t0) / dur, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          e.target.textContent = Math.round(to * eased);
+          if (p < 1) requestAnimationFrame(tick);
+        })(t0);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => io.observe(c));
+  }
+
+  /* ---------- الموك-أب الحي: بيبعت تذكيرات لوحده ---------- */
+  function initPhoneDemo() {
+    const rows = [...document.querySelectorAll('.pm-row[data-pm]')];
+    if (!rows.length) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      rows.slice(0, 2).forEach(r => {
+        r.classList.add('sent');
+        r.querySelector('.pm-btn').textContent = 'تم ✓';
+      });
+      return;
+    }
+    let i = 0;
+    function cycle() {
+      if (i < rows.length) {
+        const row = rows[i];
+        row.classList.add('sent');
+        row.querySelector('.pm-btn').textContent = 'تم ✓';
+        i++;
+        setTimeout(cycle, 1400);
+      } else {
+        setTimeout(() => {
+          rows.forEach(r => {
+            r.classList.remove('sent');
+            r.querySelector('.pm-btn').textContent = 'تذكير';
+          });
+          i = 0;
+          setTimeout(cycle, 1400);
+        }, 2600);
+      }
+    }
+    setTimeout(cycle, 1200);
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     fillStatic();
     bindForm();
     bindReset();
     bindTierCards();
+    initReveal();
+    initCounters();
+    initPhoneDemo();
     window.renderPage();
   });
 })();

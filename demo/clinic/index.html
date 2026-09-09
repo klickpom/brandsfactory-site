@@ -28,29 +28,32 @@
     </div>
   </div>
 
-  <!-- ================= الهيرو ================= -->
-  <section class="hero-band">
+  <!-- ================= الهيرو الداكن ================= -->
+  <section class="hero-dark">
+    <div class="glow glow-1" aria-hidden="true"></div>
+    <div class="glow glow-2" aria-hidden="true"></div>
+    <div class="hero-grid-lines" aria-hidden="true"></div>
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <p class="kicker">
+        <p class="kicker reveal">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C8 2 5 5 5 9c0 5 3 6 3 9 0 2 1 4 2 4s1.5-2 2-4c.5 2 1 4 2 4s2-2 2-4c0-3 3-4 3-9 0-4-3-7-7-7z"/></svg>
           طب وتجميل الأسنان — التجمع الخامس
         </p>
-        <h1>عيادة د. أحمد سليم لطب وتجميل الأسنان</h1>
-        <p class="lead">احجز موعدك في أقل من دقيقة، وهيوصلك تذكير بموعدك على واتساب. من غير مكالمات ولا انتظار في السنترال.</p>
-        <p class="hours">
+        <h1 class="reveal">عيادة د. أحمد سليم<br><span class="grad-text">لطب وتجميل الأسنان</span></h1>
+        <p class="lead reveal">احجز موعدك في أقل من دقيقة، وهيوصلك تذكير بموعدك على واتساب. من غير مكالمات ولا انتظار في السنترال.</p>
+        <p class="hours reveal">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
           <span id="hero-hours"></span>
         </p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="#booking">احجز موعدك</a>
-          <a class="btn btn-ghost" href="#pricing">شوف الباقات</a>
+        <div class="hero-cta reveal">
+          <a class="btn btn-primary btn-shine" href="#booking">احجز موعدك</a>
+          <a class="btn btn-glass" href="#pricing">شوف الباقات</a>
         </div>
-        <div class="lock-strip" id="public-locks" aria-label="مزايا إضافية في الباقات الأعلى"></div>
+        <div class="lock-strip reveal" id="public-locks" aria-label="مزايا إضافية في الباقات الأعلى"></div>
       </div>
 
-      <!-- موك-أب حي للوحة التحكم -->
-      <div class="phone-mock" aria-hidden="true">
+      <!-- موك-أب حي — بيعرض التذكير أوتوماتيك -->
+      <div class="phone-mock float-anim" aria-hidden="true">
         <div class="phone-frame">
           <div class="phone-notch"></div>
           <div class="phone-screen">
@@ -58,22 +61,22 @@
               <b>مواعيد بكرة</b>
               <span>الخميس 11 سبتمبر</span>
             </div>
-            <div class="pm-row">
+            <div class="pm-row" data-pm="1">
               <span class="pm-time">4:30 م</span>
               <span class="pm-name">محمد سيد إبراهيم</span>
               <span class="pm-btn">تذكير</span>
             </div>
-            <div class="pm-row sent">
+            <div class="pm-row" data-pm="2">
               <span class="pm-time">5:00 م</span>
               <span class="pm-name">أميرة حسن عبد الله</span>
-              <span class="pm-done">تم ✓</span>
+              <span class="pm-btn">تذكير</span>
             </div>
-            <div class="pm-row">
+            <div class="pm-row" data-pm="3">
               <span class="pm-time">5:30 م</span>
               <span class="pm-name">كريم مصطفى فؤاد</span>
               <span class="pm-btn">تذكير</span>
             </div>
-            <div class="pm-row">
+            <div class="pm-row" data-pm="4">
               <span class="pm-time">6:15 م</span>
               <span class="pm-name">نورهان أحمد لطفي</span>
               <span class="pm-btn">تذكير</span>
@@ -81,20 +84,29 @@
             <div class="pm-foot">تذكير واتساب بضغطة واحدة</div>
           </div>
         </div>
-        <p class="phone-caption">ده شكل لوحة التحكم جوه الديمو — جرّبها بنفسك</p>
+        <p class="phone-caption">اللوحة بتشتغل قدامك — ادخل جرّب بنفسك</p>
+      </div>
+    </div>
+
+    <!-- شريط الأرقام -->
+    <div class="wrap">
+      <div class="proof-strip reveal">
+        <div class="proof-item"><b><span class="counter" data-to="7">0</span>%</b><span>نسبة الغياب بعد التذكير</span></div>
+        <div class="proof-item"><b><span class="counter" data-to="3">0</span></b><span>باقات في موقع واحد</span></div>
+        <div class="proof-item"><b><span class="counter" data-to="1">0</span></b><span>ضغطة للتذكير — مش أكتر</span></div>
       </div>
     </div>
   </section>
 
   <div class="wrap">
 
-    <!-- ================= الباقات — الفرق واضح ================= -->
+    <!-- ================= الباقات ================= -->
     <section id="pricing" aria-labelledby="pricing-h">
-      <h2 class="section-title" id="pricing-h">3 باقات — نفس الموقع، إمكانيات أكبر</h2>
-      <p class="section-sub">بدّل من الشريط اللي فوق أو من الكروت دي، وشوف الموقع بيتغيّر قدامك في الحال.</p>
+      <h2 class="section-title reveal" id="pricing-h">3 باقات — نفس الموقع، إمكانيات أكبر</h2>
+      <p class="section-sub reveal">بدّل من الشريط اللي فوق أو من الكروت دي، وشوف الموقع بيتغيّر قدامك في الحال.</p>
       <div class="tier-cards" id="tier-cards">
 
-        <article class="tier-card" data-tier="basic">
+        <article class="tier-card reveal" data-tier="basic">
           <span class="tier-current" hidden>بتتفرج عليها دلوقتي</span>
           <h3>عيادة</h3>
           <p class="tier-price">6,500 <small>جنيه</small></p>
@@ -108,8 +120,8 @@
           <button type="button" class="btn btn-ghost btn-block tier-btn" data-go="basic">شوف الديمو بالباقة دي</button>
         </article>
 
-        <article class="tier-card featured" data-tier="plus">
-          <span class="tier-best">الأكثر طلباً</span>
+        <article class="tier-card featured reveal" data-tier="plus">
+          <span class="tier-best pulse">الأكثر طلباً</span>
           <span class="tier-current" hidden>بتتفرج عليها دلوقتي</span>
           <h3>عيادة+</h3>
           <p class="tier-price">13,000 <small>جنيه</small></p>
@@ -124,7 +136,7 @@
           <button type="button" class="btn btn-primary btn-block tier-btn" data-go="plus">شوف الديمو بالباقة دي</button>
         </article>
 
-        <article class="tier-card" data-tier="center">
+        <article class="tier-card reveal" data-tier="center">
           <span class="tier-current" hidden>بتتفرج عليها دلوقتي</span>
           <h3>مركز</h3>
           <p class="tier-price">22,000 <small>جنيه</small></p>
@@ -142,8 +154,8 @@
       </div>
     </section>
 
-    <!-- ================= مزية التذكير — محاكاة واتساب ================= -->
-    <section class="feat-band" aria-labelledby="wa-h">
+    <!-- ================= مزية التذكير ================= -->
+    <section class="feat-band reveal" aria-labelledby="wa-h">
       <div class="feat-grid">
         <div>
           <h2 class="section-title" id="wa-h">تذكير الواتساب — المزية اللي بتمنع الغياب</h2>
@@ -163,7 +175,7 @@
             </li>
           </ul>
         </div>
-        <div class="wa-mock" aria-hidden="true">
+        <div class="wa-mock float-anim-slow" aria-hidden="true">
           <div class="wa-head">
             <span class="wa-avatar">ع</span>
             <div><b>عيادة د. أحمد سليم</b><span>متصل الآن</span></div>
@@ -184,18 +196,18 @@
 
     <!-- ================= إزاي بيشتغل ================= -->
     <section aria-labelledby="how-h">
-      <h2 class="section-title" id="how-h">المريض بيحجز إزاي؟</h2>
-      <p class="section-sub">3 خطوات من غير ما يكلم حد.</p>
+      <h2 class="section-title reveal" id="how-h">المريض بيحجز إزاي؟</h2>
+      <p class="section-sub reveal">3 خطوات من غير ما يكلم حد.</p>
       <ol class="steps">
-        <li>
+        <li class="reveal">
           <span class="step-num">1</span>
           <div><b>يفتح موقعك</b><p>من لينك تبعته أو من جوجل، يلاقي خدماتك وأسعارك ومواعيدك قدامه.</p></div>
         </li>
-        <li>
+        <li class="reveal">
           <span class="step-num">2</span>
           <div><b>يملأ الحجز في دقيقة</b><p>اسمه ورقمه والخدمة واليوم المناسب له — من غير مكالمة.</p></div>
         </li>
-        <li>
+        <li class="reveal">
           <span class="step-num">3</span>
           <div><b>يوصلك واتساب جاهز</b><p>الحجز يظهر عندك رسالة مرتبة، والتذكير بيتبعتله قبل المعاد.</p></div>
         </li>
@@ -204,16 +216,16 @@
 
     <!-- ================= الخدمات ================= -->
     <section id="services" aria-labelledby="services-h">
-      <h2 class="section-title" id="services-h">الخدمات والأسعار</h2>
-      <p class="section-sub">أسعار واضحة من غير مفاجآت — الكشف يتحدد بعد المعاينة.</p>
-      <ul class="services-list" id="services-list"></ul>
+      <h2 class="section-title reveal" id="services-h">الخدمات والأسعار</h2>
+      <p class="section-sub reveal">أسعار واضحة من غير مفاجآت — الكشف يتحدد بعد المعاينة.</p>
+      <ul class="services-list reveal" id="services-list"></ul>
     </section>
 
     <!-- ================= عن الدكتور ================= -->
     <section id="doctor" aria-labelledby="doctor-h">
-      <h2 class="section-title" id="doctor-h">عن الدكتور</h2>
-      <p class="section-sub">خبرة تقدر تسند عليها.</p>
-      <div class="about">
+      <h2 class="section-title reveal" id="doctor-h">عن الدكتور</h2>
+      <p class="section-sub reveal">خبرة تقدر تسند عليها.</p>
+      <div class="about reveal">
         <img src="assets/img/doctor.webp" alt="صورة رمزية للدكتور أحمد سليم" width="96" height="96" loading="lazy">
         <div>
           <h3 id="doctor-name"></h3>
@@ -226,9 +238,9 @@
 
     <!-- ================= الحجز ================= -->
     <section id="booking" aria-labelledby="booking-h">
-      <h2 class="section-title" id="booking-h">احجز موعدك</h2>
-      <p class="section-sub">املأ البيانات وهيفتح واتساب بطلب الحجز جاهز — اضغط إرسال بس.</p>
-      <form class="card" id="booking-form">
+      <h2 class="section-title reveal" id="booking-h">احجز موعدك</h2>
+      <p class="section-sub reveal">املأ البيانات وهيفتح واتساب بطلب الحجز جاهز — اضغط إرسال بس.</p>
+      <form class="card reveal" id="booking-form">
         <div class="field">
           <label for="bk-name">الاسم</label>
           <input type="text" id="bk-name" name="name" autocomplete="name" required placeholder="اسمك بالكامل">
@@ -253,15 +265,15 @@
         <!-- الدفع أونلاين — باقة مركز -->
         <div id="pay-zone"></div>
 
-        <button type="submit" class="btn btn-primary btn-block">ابعت الحجز على واتساب</button>
+        <button type="submit" class="btn btn-primary btn-block btn-shine">ابعت الحجز على واتساب</button>
       </form>
     </section>
 
     <!-- ================= العنوان ================= -->
     <section id="location" aria-labelledby="location-h">
-      <h2 class="section-title" id="location-h">العنوان</h2>
-      <p class="section-sub" id="clinic-address"></p>
-      <a class="map-link" id="map-link" target="_blank" rel="noopener" aria-label="افتح العنوان على خرائط جوجل">
+      <h2 class="section-title reveal" id="location-h">العنوان</h2>
+      <p class="section-sub reveal" id="clinic-address"></p>
+      <a class="map-link reveal" id="map-link" target="_blank" rel="noopener" aria-label="افتح العنوان على خرائط جوجل">
         <img src="assets/img/map.webp" alt="خريطة توضح موقع العيادة في التجمع الخامس" width="800" height="420" loading="lazy">
       </a>
     </section>
