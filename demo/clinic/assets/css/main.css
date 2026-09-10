@@ -173,8 +173,159 @@ button {
 }
 
 /* ============================================================
-   الهيدر
+   الشريط العلوي
    ============================================================ */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(252, 252, 253, .92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-block-end: 1px solid var(--line);
+}
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 58px;
+}
+.brand {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex: 1;
+  text-decoration: none;
+}
+.brand:hover { text-decoration: none; color: var(--ink); }
+.brand span { color: var(--accent); }
+
+.topbar-book {
+  flex-shrink: 0;
+  min-height: 36px;
+  padding: 6px 14px;
+  font-size: 13px;
+}
+
+.nav-menu { position: relative; flex-shrink: 0; }
+.nav-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  cursor: pointer;
+  list-style: none;
+}
+.nav-toggle::-webkit-details-marker { display: none; }
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--ink);
+  border-radius: 2px;
+}
+.nav-menu[open] .nav-toggle {
+  border-color: var(--accent);
+  background: var(--accent-sf);
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+.site-nav a {
+  color: var(--ink-soft);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 10px;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+.site-nav a:hover { background: var(--accent-sf); color: var(--accent); text-decoration: none; }
+.site-nav .nav-panel {
+  margin-inline-start: 4px;
+  border: 1px solid var(--line);
+  font-weight: 600;
+}
+.site-nav .nav-panel:hover { border-color: var(--accent); }
+
+.nav-menu .site-nav {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2px;
+  position: absolute;
+  inset-inline-end: 0;
+  inset-block-start: calc(100% + 8px);
+  min-width: 220px;
+  padding: 8px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow-2);
+}
+.nav-menu .site-nav a {
+  min-height: 44px;
+  padding: 10px 12px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.nav-menu .site-nav .nav-panel {
+  margin-inline-start: 0;
+  margin-block-start: 4px;
+  border: 0;
+  border-block-start: 1px solid var(--line);
+}
+
+@media (min-width: 860px) {
+  .brand { flex: 0 0 auto; }
+  .topbar-book { display: none; }
+  .nav-toggle { display: none; }
+  .nav-menu { display: contents; }
+  .nav-menu .site-nav {
+    display: flex !important;
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1;
+    gap: 6px;
+    min-width: 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+  .nav-menu .site-nav a {
+    min-height: 36px;
+    padding: 6px 12px;
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+  .nav-menu .site-nav .nav-panel {
+    margin-block-start: 0;
+    margin-inline-start: 8px;
+    border: 1px solid var(--line);
+  }
+}
+
+/* توافق مع الهيدر القديم لو اتنادى */
 .site-header {
   padding-block: 20px 8px;
   display: flex;
@@ -182,11 +333,6 @@ button {
   justify-content: space-between;
   gap: 12px;
 }
-.brand { font-weight: 600; font-size: 16px; color: var(--ink); }
-.brand span { color: var(--accent); }
-.site-nav { display: flex; gap: 18px; font-size: 14px; flex-wrap: wrap; }
-.site-nav a, .site-nav button { color: var(--ink-soft); font-size: 14px; font-weight: 500; transition: color 140ms ease; }
-.site-nav a:hover, .site-nav button:hover { color: var(--accent); text-decoration: none; }
 
 /* ============================================================
    الهيرو الداكن الفاخر
@@ -1148,7 +1294,8 @@ body { padding-block-start: 0; padding-block-end: 24px; }
 .demo-badge.inline { font-size: 12px; }
 .panel-date { font-size: 13px; color: var(--ink-soft); }
 /* إصلاح لون زرار اللوحة في الناف — كانت قاعدة الناف بتغلب على الزرار */
-.site-nav a.btn-primary, .site-nav a.btn-primary:hover { color: #fff; }
+.site-nav a.nav-panel, .site-nav a.nav-panel:hover { color: var(--ink-soft); }
+.site-nav a.nav-panel:hover { color: var(--accent); }
 .summary-strip { grid-template-columns: repeat(4, 1fr); }
 @media (max-width: 640px) { .summary-strip { grid-template-columns: repeat(2, 1fr); } }
 

@@ -456,6 +456,14 @@
     });
   }
 
+  function bindNav() {
+    const menu = document.querySelector('.nav-menu');
+    if (!menu) return;
+    menu.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', () => { menu.removeAttribute('open'); });
+    });
+  }
+
   function bindReset() {
     document.getElementById('reset-data').addEventListener('click', BF.resetAll);
   }
@@ -467,6 +475,7 @@
     setStep(1);
     renderLiveSlots();
     bindForm();
+    bindNav();
     bindReset();
     initReveal();
     initCounters();
