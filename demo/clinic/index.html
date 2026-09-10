@@ -7,26 +7,26 @@
   <meta name="description" content="عيادة د. أحمد سليم لطب وتجميل الأسنان في التجمع الخامس. احجز موعدك أونلاين في أقل من دقيقة وهيوصلك تأكيد على واتساب.">
   <link rel="preload" href="fonts/plex-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/plex-arabic-600.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="fonts/fonts.css?v=16">
-  <link rel="stylesheet" href="assets/css/main.css?v=16">
+  <link rel="stylesheet" href="fonts/fonts.css?v=18">
+  <link rel="stylesheet" href="assets/css/main.css?v=18">
 </head>
 <body>
 
   <header class="topbar" id="top">
     <div class="wrap topbar-inner">
       <a class="brand" href="#top">عيادة <span>د. أحمد سليم</span></a>
+      <nav class="site-nav" id="site-nav" aria-label="التنقل الرئيسي">
+        <a href="#services">الخدمات</a>
+        <a href="#doctor">عن الدكتور</a>
+        <a href="#booking">الحجز</a>
+        <a href="#location">العنوان</a>
+        <a href="panel.html" class="nav-panel">لوحة التحكم</a>
+      </nav>
       <a class="btn btn-primary btn-sm topbar-book" href="#booking">احجز</a>
       <details class="nav-menu">
-        <summary class="nav-toggle" aria-label="فتح القائمة">
+        <summary class="nav-toggle" aria-label="فتح القائمة" aria-controls="site-nav">
           <span></span><span></span><span></span>
         </summary>
-        <nav class="site-nav" aria-label="التنقل الرئيسي">
-          <a href="#services">الخدمات</a>
-          <a href="#doctor">عن الدكتور</a>
-          <a href="#booking">الحجز</a>
-          <a href="#location">العنوان</a>
-          <a href="panel.html" class="nav-panel" id="nav-panel">لوحة التحكم</a>
-        </nav>
       </details>
     </div>
   </header>
@@ -233,6 +233,10 @@
           <p style="margin-block-start:6px"><a id="footer-wa" href="#" target="_blank" rel="noopener">واتساب العيادة</a></p>
         </div>
         <div>
+          <h3 style="font-size:16px;margin-block-end:6px">للعيادة</h3>
+          <p><a href="panel.html">لوحة التحكم</a></p>
+        </div>
+        <div>
           <h3 style="font-size:16px;margin-block-end:6px">العنوان</h3>
           <p id="footer-address"></p>
         </div>
@@ -245,8 +249,8 @@
 
   </div>
 
-  <script src="data/clinic-data.js?v=16"></script>
-  <script src="assets/js/app.js?v=16"></script>
-  <script src="assets/js/site.js?v=16"></script>
+  <script src="data/clinic-data.js?v=18"></script>
+  <script src="assets/js/app.js?v=18"></script>
+  <script src="assets/js/site.js?v=18"></script>
 </body>
 </html>

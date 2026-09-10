@@ -195,6 +195,7 @@ button {
   align-items: center;
   gap: 10px;
   min-height: 58px;
+  position: relative;
 }
 .brand {
   font-weight: 600;
@@ -246,38 +247,13 @@ button {
 }
 
 .site-nav {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 6px;
-  flex-wrap: nowrap;
-}
-.site-nav a {
-  color: var(--ink-soft);
-  font-size: 14px;
-  font-weight: 500;
-  text-decoration: none;
-  padding: 6px 12px;
-  border-radius: 10px;
-  min-height: 36px;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-}
-.site-nav a:hover { background: var(--accent-sf); color: var(--accent); text-decoration: none; }
-.site-nav .nav-panel {
-  margin-inline-start: 4px;
-  border: 1px solid var(--line);
-  font-weight: 600;
-}
-.site-nav .nav-panel:hover { border-color: var(--accent); }
-
-.nav-menu .site-nav {
-  flex-direction: column;
+  display: none;
   align-items: stretch;
+  justify-content: flex-end;
   gap: 2px;
+  flex-direction: column;
   position: absolute;
-  inset-inline-end: 0;
+  inset-inline-end: 10px;
   inset-block-start: calc(100% + 8px);
   min-width: 220px;
   padding: 8px;
@@ -285,31 +261,38 @@ button {
   border: 1px solid var(--line);
   border-radius: 14px;
   box-shadow: var(--shadow-2);
+  z-index: 60;
 }
-.nav-menu .site-nav a {
-  min-height: 44px;
-  padding: 10px 12px;
-  font-weight: 600;
+.topbar-inner:has(.nav-menu[open]) .site-nav { display: flex; }
+.site-nav a {
   color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: 10px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
 }
-.nav-menu .site-nav .nav-panel {
-  margin-inline-start: 0;
+.site-nav a:hover { background: var(--accent-sf); color: var(--accent); text-decoration: none; }
+.site-nav .nav-panel {
   margin-block-start: 4px;
-  border: 0;
   border-block-start: 1px solid var(--line);
+  font-weight: 600;
 }
+.site-nav .nav-panel:hover { border-color: var(--accent); }
 
 @media (min-width: 860px) {
   .brand { flex: 0 0 auto; }
-  .topbar-book { display: none; }
-  .nav-toggle { display: none; }
-  .nav-menu { display: contents; }
-  .nav-menu .site-nav {
-    display: flex !important;
+  .btn.topbar-book { display: none; }
+  .nav-menu { display: none; }
+  .site-nav {
+    display: flex;
     position: static;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-end;
     flex: 1;
     gap: 6px;
     min-width: 0;
@@ -318,13 +301,13 @@ button {
     border: 0;
     box-shadow: none;
   }
-  .nav-menu .site-nav a {
+  .site-nav a {
     min-height: 36px;
     padding: 6px 12px;
     font-weight: 500;
     color: var(--ink-soft);
   }
-  .nav-menu .site-nav .nav-panel {
+  .site-nav .nav-panel {
     margin-block-start: 0;
     margin-inline-start: 8px;
     border: 1px solid var(--line);
@@ -409,21 +392,28 @@ button {
 .hero-dark h1 { color: #fff; }
 .exclusive-line {
   display: inline-block;
-  background-image: linear-gradient(
-    90deg,
-    #5EEAD4 0%,
-    #FBBF24 28%,
-    #2DD4BF 52%,
-    #FDE68A 76%,
-    #5EEAD4 100%
-  );
-  background-size: 280% 100%;
-  background-position: 0% 50%;
+  background-image: linear-gradient(90deg, #2DD4BF, #A7F3D0);
+  background-size: 100% 100%;
   -webkit-background-clip: text;
   background-clip: text;
-  color: #5EEAD4;
+  color: #2DD4BF;
   -webkit-text-fill-color: transparent;
-  animation: exclusiveFlow 3s linear infinite;
+  animation: none;
+}
+@media (max-width: 859px) {
+  .exclusive-line {
+    background-image: linear-gradient(
+      90deg,
+      #5EEAD4 0%,
+      #FBBF24 28%,
+      #2DD4BF 52%,
+      #FDE68A 76%,
+      #5EEAD4 100%
+    );
+    background-size: 280% 100%;
+    background-position: 0% 50%;
+    animation: exclusiveFlow 3s linear infinite;
+  }
 }
 @keyframes exclusiveFlow {
   0% { background-position: 0% 50%; }
@@ -1297,8 +1287,11 @@ section { padding-block: 28px; }
    ============================================================ */
 @media (min-width: 720px) {
   section { padding-block: 40px; }
-  .site-footer .cols { grid-template-columns: 1fr 1fr 1fr; }
+  .site-footer .cols { grid-template-columns: 1fr 1fr; }
   .tpl-grid { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+@media (min-width: 960px) {
+  .site-footer .cols { grid-template-columns: repeat(4, 1fr); }
 }
 
 /* ============================================================
@@ -1586,7 +1579,7 @@ body { padding-block-start: 0; padding-block-end: 24px; }
 /* ---------- صفحة الأسعار ---------- */
 .offers-page .topbar-inner { min-height: 56px; }
 .offers-nav {
-  display: flex;
+  display: flex !important;
   align-items: center;
   gap: 8px;
   flex-direction: row;
@@ -1617,10 +1610,18 @@ body { padding-block-start: 0; padding-block-end: 24px; }
 .offers-hero .kicker { justify-content: center; }
 .offers-kicker {
   color: #FDE68A;
-  background: linear-gradient(90deg, rgba(251,191,36,.2), rgba(45,212,191,.18), rgba(251,191,36,.2));
-  background-size: 220% 100%;
-  border-color: rgba(251, 191, 36, .5);
-  animation: exclusiveBadge 5s ease-in-out infinite;
+  background: rgba(45, 212, 191, .12);
+  border-color: rgba(45, 212, 191, .35);
+  animation: none;
+}
+@media (max-width: 859px) {
+  .offers-kicker {
+    color: #FDE68A;
+    background: linear-gradient(90deg, rgba(251,191,36,.2), rgba(45,212,191,.18), rgba(251,191,36,.2));
+    background-size: 220% 100%;
+    border-color: rgba(251, 191, 36, .5);
+    animation: exclusiveBadge 5s ease-in-out infinite;
+  }
 }
 .offers-hero .glow-gold {
   width: 300px;
