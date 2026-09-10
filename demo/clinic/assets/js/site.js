@@ -40,7 +40,7 @@
 
     const phoneLink = document.getElementById('footer-phone');
     phoneLink.textContent = D.clinic.phoneDisplay;
-    phoneLink.href = 'tel:+2' + D.clinic.phoneIntl.slice(2);
+    phoneLink.href = BF.telLink(D.clinic.phoneIntl);
 
     document.getElementById('footer-wa').href =
       BF.waLink(D.clinic.phoneIntl, 'أهلاً، عايز أستفسر عن موعد في العيادة');

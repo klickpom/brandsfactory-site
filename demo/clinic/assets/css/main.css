@@ -874,6 +874,10 @@ section { padding-block: 28px; }
   margin-block-end: 20px;
 }
 .summary-item {
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
   background: var(--surface);
   border: 1px solid var(--line);
   border-block-start: 3px solid var(--accent);
@@ -882,6 +886,7 @@ section { padding-block: 28px; }
   padding: 14px 10px;
   text-align: center;
 }
+.summary-item:hover { border-color: var(--accent-lt); }
 .summary-item b { display: block; font-size: 26px; font-weight: 600; color: var(--accent); line-height: 1.3; }
 .summary-item span { font-size: 13px; color: var(--ink-soft); }
 
@@ -1267,6 +1272,22 @@ body { padding-block-start: 0; padding-block-end: 24px; }
 
 /* ---------- صف الحجز الجديد ---------- */
 .appt-row.is-new { border-color: #FCD34D; background: #FFFDF5; }
+.list-label {
+  list-style: none;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  padding: 6px 4px 0;
+}
+.fresh-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: #B45309;
+  background: #FFFBEB;
+  border: 1px solid #FCD34D;
+  border-radius: var(--r-pill);
+  padding: 1px 8px;
+}
 .appt-when { display: flex; flex-direction: column; min-width: 64px; }
 .appt-date { font-size: 11px; color: var(--ink-soft); white-space: nowrap; }
 .appt-ref {

@@ -153,6 +153,14 @@ const BF = (() => {
     return String(value || '').replace(/\D/g, '');
   }
 
+  function telLink(phone) {
+    let d = digitsPhone(phone);
+    if (d.startsWith('0020')) d = d.slice(2);
+    else if (d.startsWith('0')) d = '20' + d.slice(1);
+    if (!d.startsWith('20')) d = '20' + d;
+    return 'tel:+' + d;
+  }
+
   function gcalUrl(b) {
     const start = `${b.date.replace(/-/g, '')}T${String(b.hour).padStart(2, '0')}0000`;
     const endH = Math.min((b.hour || 16) + 1, 23);
@@ -227,7 +235,7 @@ const BF = (() => {
     DAYS, MONTHS,
     getBookings, addBooking, patchBooking, getBooking, nextRef,
     nextWorkingDays, slotsForDate, nextFreeSlots, isSlotTaken,
-    freeCountFor, gcalUrl, digitsPhone,
+    freeCountFor, gcalUrl, digitsPhone, telLink,
     waLink,
     getTemplates, saveTemplate, fillTemplate,
     onChange, emit,

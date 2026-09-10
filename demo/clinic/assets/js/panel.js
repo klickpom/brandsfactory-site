@@ -9,7 +9,9 @@
   const live = () => document.getElementById('live-region');
 
   let activeTab = 'bookings';   // bookings | patients | templates | reports
-  let activeFilter = 'all';     // all | new | today | tomorrow | upcoming | cancelled
+  let activeFilter = 'new';     // all | new | today | tomorrow | upcoming | cancelled
+  let apptQuery = '';
+  let filterPicked = false;
 
   function announce(msg) { live().textContent = msg; }
 
@@ -46,14 +48,18 @@
      ============================================================ */
   function renderDashboard() {
     const s = splitBookings();
+    if (!filterPicked) {
+      activeFilter = s.newOnes.length ? 'new' : 'today';
+      filterPicked = true;
+    }
     const patients = buildPatients();
 
     root().innerHTML = `
       <div class="summary-strip" aria-label="ملخص العيادة">
-        <div class="summary-item ${s.newOnes.length ? 'hot' : ''}"><b id="sum-new">${s.newOnes.length}</b><span>حجز جديد محتاج تأكيد</span></div>
-        <div class="summary-item"><b>${s.today.length}</b><span>مواعيد النهاردة</span></div>
-        <div class="summary-item"><b>${s.tomorrow.length}</b><span>مواعيد بكرة</span></div>
-        <div class="summary-item"><b>${patients.length}</b><span>مريض مسجّل</span></div>
+        <button type="button" class="summary-item ${s.newOnes.length ? 'hot' : ''}" data-jump="new"><b id="sum-new">${s.newOnes.length}</b><span>حجز جديد محتاج تأكيد</span></button>
+        <button type="button" class="summary-item" data-jump="today"><b>${s.today.length}</b><span>مواعيد النهاردة</span></button>
+        <button type="button" class="summary-item" data-jump="tomorrow"><b>${s.tomorrow.length}</b><span>مواعيد بكرة</span></button>
+        <button type="button" class="summary-item" data-jump="patients"><b>${patients.length}</b><span>مريض مسجّل</span></button>
       </div>
 
       <div class="tabs" role="tablist" aria-label="أقسام لوحة التحكم">
@@ -70,6 +76,20 @@
         activeTab = tab.dataset.tab;
         root().querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', String(t === tab)));
         renderTabContent();
+      });
+    });
+
+    root().querySelectorAll('.summary-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const jump = btn.dataset.jump;
+        filterPicked = true;
+        if (jump === 'patients') {
+          activeTab = 'patients';
+        } else {
+          activeTab = 'bookings';
+          activeFilter = jump;
+        }
+        renderDashboard();
       });
     });
 
@@ -107,17 +127,63 @@
           return `<button class="filter-pill" data-filter="${k}" aria-pressed="${activeFilter === k}">${label} <small>${count}</small></button>`;
         }).join('')}
       </div>
+      <div class="search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input type="search" id="appt-search" placeholder="دوّر بالاسم أو الموبايل أو رقم الحجز…" aria-label="بحث في الحجوزات">
+      </div>
       <ul class="appt-list" id="appt-list"></ul>`;
 
     host.querySelectorAll('.filter-pill').forEach(btn =>
       btn.addEventListener('click', () => {
+        filterPicked = true;
         activeFilter = btn.dataset.filter;
         host.querySelectorAll('.filter-pill').forEach(b =>
           b.setAttribute('aria-pressed', String(b === btn)));
         renderApptRows();
       }));
 
+    const search = document.getElementById('appt-search');
+    search.value = apptQuery;
+    search.addEventListener('input', () => {
+      apptQuery = search.value;
+      renderApptRows();
+    });
+
     renderApptRows();
+  }
+
+  function createdStamp(b) {
+    return Date.parse(b.createdAt || '') || 0;
+  }
+
+  function ago(iso) {
+    const t = Date.parse(iso || '');
+    if (!t) return '';
+    const min = Math.max(0, Math.round((Date.now() - t) / 60000));
+    if (min < 1) return 'وصل دلوقتي';
+    if (min < 60) return `وصل من ${min} د`;
+    const h = Math.floor(min / 60);
+    if (h < 24) return `وصل من ${h} س`;
+    return `وصل من ${Math.floor(h / 24)} يوم`;
+  }
+
+  function slotKey(b) {
+    return b.date + String(b.hour ?? 0).padStart(2, '0');
+  }
+
+  function sortInbox(arr) {
+    const todayIso = BF.iso(new Date());
+    return [...arr].sort((a, b) => {
+      const aNew = a.status === 'new' ? 0 : 1;
+      const bNew = b.status === 'new' ? 0 : 1;
+      if (aNew !== bNew) return aNew - bNew;
+      if (a.status === 'new' && b.status === 'new') return createdStamp(b) - createdStamp(a);
+      const aPast = a.date < todayIso ? 1 : 0;
+      const bPast = b.date < todayIso ? 1 : 0;
+      if (aPast !== bPast) return aPast - bPast;
+      const bySlot = slotKey(a).localeCompare(slotKey(b));
+      return aPast ? -bySlot : bySlot;
+    });
   }
 
   function filteredBookings() {
@@ -129,10 +195,13 @@
     else if (activeFilter === 'upcoming') arr = s.upcoming;
     else if (activeFilter === 'cancelled') arr = s.cancelled;
     else arr = s.all;
-    return [...arr].sort((a, b) =>
-      activeFilter === 'cancelled' || (activeFilter === 'all' && a.date < BF.iso(new Date()))
-        ? (b.date + b.time).localeCompare(a.date + a.time)   // السابقة: الأحدث الأول
-        : (a.date + String(a.hour)).localeCompare(b.date + String(b.hour))); // القادمة: الأقرب الأول
+    arr = sortInbox(arr);
+    const q = apptQuery.trim();
+    if (q) {
+      arr = arr.filter(b =>
+        b.name.includes(q) || b.phone.includes(q) || (b.ref || '').includes(q) || b.service.includes(q));
+    }
+    return arr;
   }
 
   const CHECK_SVG = '<svg class="check" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>';
@@ -162,6 +231,7 @@
             <span>${b.service}</span>
             <span class="num" dir="ltr">${b.phone}</span>
             <span class="appt-ref">${b.ref}</span>
+            ${isNew && b.createdAt ? `<span class="fresh-tag">${ago(b.createdAt)}</span>` : ''}
             ${b.remindedAt ? `<span class="reminded-tag">اتذكّر ${b.remindedAt}</span>` : ''}
           </div>
         </div>
@@ -169,7 +239,7 @@
           ${canConfirm ? `<button type="button" class="act act-confirm" data-act="confirm" data-id="${b.id}">${CHECK_SVG} تأكيد</button>` : ''}
           ${canRemind ? `<button type="button" class="act act-wa" data-act="remind" data-id="${b.id}">${WA_SVG} تذكير</button>` : ''}
           ${canDone ? `<button type="button" class="act act-done" data-act="done" data-id="${b.id}">حضر</button>` : ''}
-          <a class="act act-call" href="tel:+2${b.phone.slice(1)}" aria-label="اتصل بـ ${b.name}">${TEL_SVG}</a>
+          <a class="act act-call" href="${BF.telLink(b.phone)}" aria-label="اتصل بـ ${b.name}">${TEL_SVG}</a>
           ${canCancel ? `<button type="button" class="act act-cancel" data-act="cancel" data-id="${b.id}">إلغاء</button>` : ''}
         </div>
       </li>`;
@@ -178,9 +248,17 @@
   function renderApptRows() {
     const list = document.getElementById('appt-list');
     const rows = filteredBookings();
-    list.innerHTML = rows.length
-      ? rows.map(rowHtml).join('')
-      : '<li class="empty-note">مفيش حجوزات في الفلتر ده</li>';
+    if (!rows.length) {
+      list.innerHTML = `<li class="empty-note">${apptQuery.trim() ? 'مفيش نتيجة للبحث ده' : 'مفيش حجوزات في الفلتر ده'}</li>`;
+      return;
+    }
+    const news = rows.filter(b => b.status === 'new');
+    const rest = rows.filter(b => b.status !== 'new');
+    const showGroups = activeFilter === 'all' && news.length && rest.length;
+    list.innerHTML = showGroups
+      ? `<li class="list-label">جديدة محتاجة تأكيد</li>${news.map(rowHtml).join('')}
+         <li class="list-label">باقي الحجوزات</li>${rest.map(rowHtml).join('')}`
+      : rows.map(rowHtml).join('');
     list.querySelectorAll('[data-act]').forEach(btn =>
       btn.addEventListener('click', () => handleAction(btn.dataset.act, btn.dataset.id)));
   }
@@ -432,7 +510,10 @@
       const fresh = now.filter(b => !knownIds.has(b.id));
       knownIds = new Set(now.map(b => b.id));
       if (fresh.length) {
-        toast(`حجز جديد وصل دلوقتي: ${fresh[0].name} — ${fresh[0].dayLabel} ${fresh[0].time}`);
+        activeTab = 'bookings';
+        activeFilter = 'new';
+        filterPicked = true;
+        toast(`حجز جديد وصل دلوقتي: ${fresh[0].name} ${fresh[0].dayLabel} الساعة ${fresh[0].time}`);
         announce('وصل حجز جديد');
       }
       renderDashboard();
