@@ -1592,6 +1592,41 @@ body { padding-block-start: 0; padding-block-end: 24px; }
   margin-inline: auto;
 }
 .offers-hero .kicker { justify-content: center; }
+.offers-kicker {
+  color: #FDE68A;
+  background: linear-gradient(90deg, rgba(251,191,36,.2), rgba(45,212,191,.18), rgba(251,191,36,.2));
+  background-size: 220% 100%;
+  border-color: rgba(251, 191, 36, .5);
+  animation: exclusiveBadge 5s ease-in-out infinite;
+}
+.exclusive-line {
+  display: inline-block;
+  background: linear-gradient(90deg, #2DD4BF, #FBBF24, #A7F3D0, #F59E0B, #2DD4BF);
+  background-size: 280% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: exclusiveShift 6s ease-in-out infinite;
+  filter: drop-shadow(0 0 16px rgba(45, 212, 191, .35));
+}
+.offers-hero .glow-gold {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(251,191,36,.4), transparent 65%);
+  inset-block-start: 20%;
+  inset-inline-end: 12%;
+  animation: driftGold 12s ease-in-out infinite alternate;
+}
+@keyframes exclusiveBadge {
+  0%, 100% { border-color: rgba(251,191,36,.55); color: #FDE68A; background-position: 0% 50%; }
+  50% { border-color: rgba(45,212,191,.6); color: #5EEAD4; background-position: 100% 50%; }
+}
+@keyframes exclusiveShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes driftGold { to { transform: translate(-40px, 30px) scale(1.2); } }
 .offers-hero .lead {
   color: #B6C2CE;
   margin-inline: auto;
@@ -1619,6 +1654,18 @@ body { padding-block-start: 0; padding-block-end: 24px; }
 }
 .price-trust b { font-size: 14px; }
 .price-trust span { font-size: 13px; color: var(--ink-soft); }
+.price-trust li.is-exclusive {
+  border-color: #F59E0B;
+  background: linear-gradient(180deg, #FFFBEB, #fff);
+}
+.price-trust li.is-exclusive b {
+  background: linear-gradient(90deg, #0F766E, #B45309, #0F766E);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: exclusiveShift 6s ease-in-out infinite;
+}
 
 .offers-page #pricing { scroll-margin-top: 72px; }
 .offers-page .tier-card { padding: 20px 16px; }
