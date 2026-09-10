@@ -45,7 +45,11 @@
     document.getElementById('footer-wa').href =
       BF.waLink(D.clinic.phoneIntl, 'أهلاً، عايز أستفسر عن موعد في العيادة');
 
-    document.getElementById('map-link').href = D.clinic.mapsUrl;
+    document.getElementById('map-directions').href = D.clinic.mapsUrl;
+    document.getElementById('map-address').textContent = D.clinic.address;
+    document.getElementById('map-hours').textContent = D.clinic.hours + ' · ' + D.clinic.friday;
+    document.getElementById('map-wa').href =
+      BF.waLink(D.clinic.phoneIntl, 'أهلاً، عايز العنوان والاتجاهات للعيادة');
 
     document.getElementById('services-list').innerHTML = D.services
       .map(s => `<li>
@@ -468,6 +472,64 @@
     document.getElementById('reset-data').addEventListener('click', BF.resetAll);
   }
 
+  function googleFallback(el) {
+    const src = D.clinic.mapsEmbedUrl;
+    el.innerHTML = `<iframe title="موقع العيادة على خرائط جوجل" src="${src}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+  }
+
+  function initMap() {
+    const el = document.getElementById('clinic-map');
+    if (!el) return;
+    const lat = D.clinic.lat;
+    const lng = D.clinic.lng;
+
+    if (typeof L === 'undefined') {
+      googleFallback(el);
+      return;
+    }
+
+    const map = L.map(el, {
+      zoomControl: false,
+      scrollWheelZoom: false,
+      attributionControl: false,
+    }).setView([lat, lng], 16);
+
+    const tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; OpenStreetMap · CARTO',
+      subdomains: 'abcd',
+      maxZoom: 20,
+    }).addTo(map);
+
+    tiles.on('tileerror', () => {
+      if (el.dataset.tiles === 'osm') return;
+      el.dataset.tiles = 'osm';
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap',
+        maxZoom: 19,
+      }).addTo(map);
+    });
+
+    const icon = L.divIcon({
+      className: 'clinic-marker',
+      html: '<span class="clinic-marker-pulse"></span><svg class="clinic-marker-svg" viewBox="0 0 32 40" width="32" height="40" aria-hidden="true"><path fill="#0F766E" d="M16 0C7.7 0 1 6.5 1 14.6 1 24 16 40 16 40s15-16 15-25.4C31 6.5 24.3 0 16 0z"/><circle cx="16" cy="14" r="5.5" fill="#ECFDF5"/></svg>',
+      iconSize: [48, 56],
+      iconAnchor: [24, 52],
+    });
+    L.marker([lat, lng], { icon, keyboard: false }).addTo(map);
+
+    L.control.zoom({ position: 'topleft' }).addTo(map);
+    L.control.attribution({ position: 'bottomleft', prefix: false }).addTo(map);
+
+    const refresh = () => {
+      map.invalidateSize();
+      map.setView([lat, lng], 16, { animate: false });
+      if (window.innerWidth < 760) map.panBy([0, 78], { animate: false });
+    };
+    requestAnimationFrame(refresh);
+    setTimeout(refresh, 400);
+    window.addEventListener('resize', refresh);
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     fillStatic();
     renderServices();
@@ -477,6 +539,7 @@
     bindForm();
     bindNav();
     bindReset();
+    initMap();
     initReveal();
     initCounters();
     watchChanges();

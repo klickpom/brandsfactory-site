@@ -15,7 +15,10 @@ const CLINIC_DATA = {
     // عشان أي حجز تجريبي يوصلك فعلاً على واتساب وتحس بالتجربة كاملة
     phoneDisplay: '0109 262 9424',
     phoneIntl: '201092629424',
-    mapsUrl: 'https://maps.google.com/?q=التسعين+الشمالي+التجمع+الخامس+القاهرة+الجديدة',
+    lat: 30.0204,
+    lng: 31.4412,
+    mapsUrl: 'https://www.google.com/maps/dir/?api=1&destination=30.0204,31.4412&hl=ar',
+    mapsEmbedUrl: 'https://maps.google.com/maps?q=30.0204,31.4412+(عيادة+د.+أحمد+سليم)&hl=ar&z=16&output=embed',
   },
 
   doctor: {
