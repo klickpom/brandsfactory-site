@@ -2,9 +2,9 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>نظام حجز العيادات مع تأكيد واتساب | Brands Factory</title>
-  <meta name="description" content="نظام حجز للعيادات: موقع باسم العيادة، حجز أونلاين، قفل المعاد، تأكيد وتذكير واتساب، ولوحة للريسبشن. معاينة شغالة. دفعة واحدة مش اشتراك شهري.">
+  <meta name="description" content="نظام حجز للعيادات: موقع باسم العيادة، حجز أونلاين، قفل المعاد، تأكيد واتساب، ولوحة ريسبشن. معاينة حية. دفعة واحدة مش اشتراك شهري.">
   <meta name="author" content="علي محمد، Brands Factory">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <link rel="canonical" href="https://brandsfactory.site/ar/clinic-booking-system/">
@@ -14,295 +14,156 @@
   <meta property="og:locale" content="ar_AR">
   <meta property="og:url" content="https://brandsfactory.site/ar/clinic-booking-system/">
   <meta property="og:title" content="نظام حجز العيادات مع تأكيد واتساب">
-  <meta property="og:description" content="موقع العيادة، حجز أونلاين، واتساب، ولوحة ريسبشن. معاينة حية. دفعة واحدة.">
   <meta property="og:image" content="https://brandsfactory.site/assets/images/logo.png">
   <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../clinic-booking-system/page.css?v=1">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "SoftwareApplication",
-        "name": "نظام حجز العيادات من Brands Factory",
-        "applicationCategory": "HealthApplication",
-        "operatingSystem": "Web",
-        "url": "https://brandsfactory.site/ar/clinic-booking-system/",
-        "inLanguage": "ar",
-        "description": "موقع عيادة مع حجز أونلاين وقفل الميعاد وتأكيد واتساب ولوحة للريسبشن.",
-        "offers": {
-          "@type": "AggregateOffer",
-          "priceCurrency": "EGP",
-          "lowPrice": "6500",
-          "highPrice": "22000",
-          "offerCount": "3"
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { brand: { purple: '#8B5CF6', cyan: '#06B6D4', dark: '#070913' } },
+          fontFamily: { cairo: ['Cairo', 'sans-serif'], outfit: ['Outfit', 'sans-serif'] }
         }
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "إيه هو نظام حجز العيادات؟",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "نظام حجز العيادات هو موقع العيادة مع جدول مواعيد يخلي المريض يختار خدمة ويوم ووقت، ويقفل المعاد، ويبلّغ العيادة. نسخة Brands Factory بتبعت تأكيد وتذكير واتساب وفيها لوحة للريسبشن."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "هل في اشتراك شهري؟",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "لا. النظام بيتسلم كمشروع بدفعة واحدة. باقات مصر أسعارها معلنة بالجنيه، والاستضافة والدومين للسنة الأولى مشمولين. العيادات برا مصر بتاخد عرض سعر لمشروع واحد."
-            }
-          }
-        ]
       }
-    ]
-  }
+    }
+  </script>
+  <link rel="stylesheet" href="../../assets/css/style.css?v=2026.11.1">
+  <link rel="stylesheet" href="../../clinic-booking-system/page.css?v=2">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"نظام حجز العيادات من Brands Factory","url":"https://brandsfactory.site/ar/clinic-booking-system/","applicationCategory":"HealthApplication","operatingSystem":"Web","inLanguage":"ar","offers":{"@type":"AggregateOffer","priceCurrency":"EGP","lowPrice":"6500","highPrice":"22000","offerCount":"3"}}
   </script>
 </head>
-<body>
-  <div class="mesh" aria-hidden="true"></div>
-  <header class="top">
-    <div class="wrap top-inner">
-      <a class="brand" href="https://brandsfactory.site/">
-        <img src="../../assets/images/logo.png" alt="Brands Factory">
-        <span>BRANDS FACTORY<small>نظام العيادات</small></span>
-      </a>
-      <nav class="top-nav" aria-label="التنقل">
-        <a href="#what">النظام</a>
-        <a href="#how">التسليم</a>
-        <a href="#pricing">الباقات</a>
-        <a href="../../demo/clinic/">المعاينة</a>
-      </nav>
-      <div class="lang-switch">
-        <a href="/clinic-booking-system/">EN</a>
-        <a href="/ar/clinic-booking-system/" aria-current="page">عربي</a>
+<body class="bg-brand-dark text-slate-100 font-cairo antialiased selection:bg-brand-purple selection:text-white bg-mesh-glow">
+
+  <header class="fixed top-0 left-0 right-0 z-40 glass-nav">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <a href="../../" class="flex items-center gap-3">
+          <div class="relative w-11 h-11 flex items-center justify-center rounded-2xl bg-gradient-to-br from-purple-600/30 to-cyan-500/20 border border-purple-500/30 p-1">
+            <img src="../../assets/images/logo.png" alt="Brands Factory" class="w-full h-full object-contain">
+          </div>
+          <div class="flex flex-col">
+            <span class="text-lg font-black tracking-tight text-white font-outfit">BRANDS FACTORY</span>
+            <span class="text-[10px] font-semibold text-purple-400 tracking-wider uppercase">Clinic OS</span>
+          </div>
+        </a>
+        <nav class="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-300">
+          <a href="#live" class="hover:text-cyan-400">المعاينة</a>
+          <a href="#pricing" class="hover:text-cyan-400">الباقات</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <a href="/clinic-booking-system/" class="px-3 py-2 rounded-xl bg-slate-800/90 border border-slate-700 text-xs font-bold">EN</a>
+          <a href="https://wa.me/201015632296?text=%D8%B9%D8%A7%D9%8A%D8%B2%20%D9%86%D8%B8%D8%A7%D9%85%20%D8%AD%D8%AC%D8%B2%20%D9%84%D9%84%D8%B9%D9%8A%D8%A7%D8%AF%D8%A9" target="_blank" rel="noopener" class="hidden sm:inline-flex glow-btn-purple px-5 py-2.5 rounded-xl text-sm font-bold text-white">واتساب</a>
+        </div>
       </div>
     </div>
   </header>
 
-  <main class="wrap">
-    <section class="hero">
-      <p class="kicker">للعيادات المستقلة في أي بلد</p>
-      <h1>نظام حجز للعيادة مع تأكيد واتساب</h1>
-      <p class="lede">المريض يحجز الخدمة واليوم والوقت من موقع العيادة. المعاد يتقفل. الريسبشن يؤكد ويذكّر على واتساب. بتاخد موقع باسمك، مش ويدجت على كالندر حد تاني.</p>
-      <div class="define">
-        <p><strong>نظام حجز العيادات</strong> هو موقع العيادة مع جدول مواعيد يخلي المريض يختار خدمة ومعاد فاضي، ويقفل الوقت عشان محدش ياخده، ويبلّغ العيادة. Brands Factory بتسلّمه كمشروع بدفعة واحدة، مع تأكيد واتساب ولوحة للفريق، ومعاينة حية تقدر تجرّبها دلوقتي.</p>
+  <section class="relative pt-32 pb-12 lg:pt-40 lg:pb-16 overflow-hidden bg-grid-pattern">
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[550px] h-[550px] bg-purple-600/15 rounded-full blur-[100px] pointer-events-none animate-pulse-glow"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-6">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glow-badge text-purple-300 text-xs sm:text-sm font-semibold">
+        <i class="fa-solid fa-bolt text-amber-400 text-xs"></i>
+        للعيادات المستقلة في أي بلد
       </div>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="../../demo/clinic/">افتح المعاينة الحية</a>
-        <a class="btn btn-wa" href="https://wa.me/201015632296?text=%D8%B9%D8%A7%D9%8A%D8%B2%20%D9%86%D8%B8%D8%A7%D9%85%20%D8%AD%D8%AC%D8%B2%20%D9%84%D9%84%D8%B9%D9%8A%D8%A7%D8%AF%D8%A9.%20%D8%A7%D9%84%D8%A8%D9%84%D8%AF%3A%20" target="_blank" rel="noopener">واتساب Brands Factory</a>
-        <a class="btn btn-ghost" href="#pricing">شوف الباقات</a>
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.3] max-w-4xl mx-auto">
+        نظام حجز العيادة
+        <span class="text-gradient-purple block mt-2">من الموقع لواتساب</span>
+      </h1>
+      <p class="text-sm sm:text-lg text-slate-300 max-w-3xl mx-auto"><strong>نظام حجز العيادات</strong> هو موقع العيادة مع جدول مواعيد: المريض يختار خدمة ومعاد فاضي، الوقت يتقفل، والريسبشن يؤكد على واتساب. مش ويدجت كالندر. مش اشتراك شهري.</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2">
+        <a href="#live" class="w-full sm:w-auto glow-btn-purple px-8 py-4 rounded-2xl text-base font-extrabold text-white inline-flex items-center justify-center gap-3">افتح النظام الحي</a>
+        <a href="https://wa.me/201015632296?text=%D8%B9%D8%A7%D9%8A%D8%B2%20%D9%86%D8%B8%D8%A7%D9%85%20%D8%AD%D8%AC%D8%B2%20%D9%84%D9%84%D8%B9%D9%8A%D8%A7%D8%AF%D8%A9" target="_blank" rel="noopener" class="w-full sm:w-auto px-8 py-4 rounded-2xl text-base font-bold text-slate-200 glass-panel border border-slate-700 hover:border-cyan-500 inline-flex items-center justify-center gap-2"><i class="fa-brands fa-whatsapp text-emerald-400"></i> اطلب لعيادتك</a>
       </div>
-      <ul class="trust">
-        <li>معاينة تقدر تحجز فيها</li>
-        <li>الإطلاق الأول خلال 24 ساعة بعد بياناتك</li>
-        <li>دفعة واحدة مش اشتراك شهري</li>
-        <li>تأكيد واتساب جاهز للريسبشن</li>
-      </ul>
-      <p class="updated">آخر مراجعة: 10 سبتمبر 2026</p>
-    </section>
+    </div>
+  </section>
 
-    <section id="what">
-      <h2>العيادة بتاخد إيه</h2>
-      <p class="sub">لنظام عيادة أو مركز صغير. مش ملفات مستشفى، ومش دليل أطباء.</p>
-      <div class="grid-3">
-        <article class="card">
-          <h3>موقع باسم العيادة</h3>
-          <p>الاسم، التخصص، الخدمات، الأسعار، نبذة الدكتور، المواعيد، الخريطة، واتساب واتصال. واضح على الموبايل.</p>
-        </article>
-        <article class="card">
-          <h3>حجز أونلاين</h3>
-          <p>ثلاث خطوات: الخدمة، اليوم، الوقت. الميعاد المحجوز يختفي. رقم حجز، وإضافة للتقويم.</p>
-        </article>
-        <article class="card">
-          <h3>واتساب للعيادة وللمريض</h3>
-          <p>كل حجز جديد يوصل على واتساب العيادة. التأكيد والتذكير من اللوحة برسايل جاهزة.</p>
-        </article>
-        <article class="card">
-          <h3>لوحة الريسبشن</h3>
-          <p>الأحدث فوق. تأكيد، تذكير، إلغاء، حضور. سجل مرضى من الحجوزات.</p>
-        </article>
-        <article class="card">
-          <h3>ظهور في البحث والذكاء الاصطناعي</h3>
-          <p>الصفحة متبنية عشان جوجل والـ AI يقرأوا التخصص والمكان والمواعيد وطريقة الحجز.</p>
-        </article>
-        <article class="card">
-          <h3>تسليم مشروع</h3>
-          <p>بتشتري نظام شغال، مش رخصة شهرية. باقات مصر معلنة تحت. العيادة برا مصر: عرض سعر حسب البلد.</p>
-        </article>
+  <section id="live" class="pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div class="os-chrome glass-panel">
+      <div class="os-chrome-bar">
+        <i style="background:#f87171"></i><i style="background:#fbbf24"></i><i style="background:#34d399"></i>
+        <span class="mr-3 text-[11px] text-slate-500 font-semibold">معاينة حية · demo/clinic</span>
       </div>
-    </section>
+      <iframe title="معاينة نظام حجز العيادة" src="../../demo/clinic/index.html" loading="lazy"></iframe>
+    </div>
+    <p class="text-center text-xs text-slate-500 mt-4">احجز من جوه الإطار، وبعدين افتح لوحة التحكم من الهيدر.</p>
+  </section>
 
-    <section id="how">
-      <h2>إزاي النظام يتسلّم</h2>
-      <ol class="steps">
-        <li>
-          <b>تبعت بيانات العيادة</b>
-          الاسم، التخصص، ساعات العمل، الخدمات، رقم واتساب، العنوان. صور الدكتور والعيادة لو موجودة.
-        </li>
-        <li>
-          <b>تجرّب المعاينة</b>
-          افتح <a href="../../demo/clinic/">معاينة عيادة الأسنان</a> واحجز، وبعدين ادخل اللوحة. ده نفس المنتج.
-        </li>
-        <li>
-          <b>الاسم والخدمات تتحط مكان الديمو</b>
-          من غير اختراع ادعاءات طبية.
-        </li>
-        <li>
-          <b>الإطلاق الأول</b>
-          خلال 24 ساعة من استلام البيانات الكاملة. الدومين واستضافة السنة الأولى في باقات مصر.
-        </li>
-        <li>
-          <b>الريسبشن يشتغل واتساب</b>
-          تأكيد، تذكير، حضور. المريض يفضل على واتساب.
-        </li>
-      </ol>
-    </section>
+  <section class="py-16 sm:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-6">
+      <article class="glass-panel rounded-3xl p-7 border border-purple-500/30">
+        <h2 class="text-xl font-bold mb-3">موقع باسم العيادة</h2>
+        <p class="text-sm text-slate-300">الخدمات، الأسعار، الدكتور، المواعيد، الخريطة، اتصال وواتساب. واضح على الموبايل.</p>
+      </article>
+      <article class="glass-panel rounded-3xl p-7 border border-cyan-500/30">
+        <h2 class="text-xl font-bold mb-3">حجز يقفل المعاد</h2>
+        <p class="text-sm text-slate-300">خدمة، يوم، وقت. المحجوز يختفي. رقم حجز وإضافة للتقويم.</p>
+      </article>
+      <article class="glass-panel rounded-3xl p-7 border border-emerald-500/30">
+        <h2 class="text-xl font-bold mb-3">ريسبشن على واتساب</h2>
+        <p class="text-sm text-slate-300">الأحدث فوق. تأكيد، تذكير، إلغاء، حضور.</p>
+      </article>
+    </div>
+  </section>
 
-    <section id="compare">
-      <h2>مقارنة سريعة</h2>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>البند</th>
-              <th>Brands Factory</th>
-              <th>كالندر جاهز</th>
-              <th>اشتراك عيادات شهري</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>الحجز على موقعك</td>
-              <td>نعم</td>
-              <td>ويدجت غالباً</td>
-              <td>نعم</td>
-            </tr>
-            <tr>
-              <td>تأكيد واتساب</td>
-              <td>من جوه النظام</td>
-              <td>لا</td>
-              <td>إضافة أو SMS</td>
-            </tr>
-            <tr>
-              <td>طريقة الدفع</td>
-              <td>دفعة واحدة</td>
-              <td>اشتراك</td>
-              <td>اشتراك</td>
-            </tr>
-            <tr>
-              <td>الأنسب لـ</td>
-              <td>عيادة مستقلة عايزة موقع وتشغيل واتساب</td>
-              <td>رابط مواعيد بس</td>
-              <td>عيادة عايزة سحابة سجلات كاملة</td>
-            </tr>
-          </tbody>
-        </table>
+  <section id="pricing" class="py-20 sm:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-3xl sm:text-5xl font-black">الباقات</h2>
+        <p class="text-slate-400 mt-3">مصر، دفعة واحدة بالجنيه. برا مصر: ابعت البلد على واتساب لعرض سعر.</p>
       </div>
-      <p class="verdict">لو محتاج سجلات طبية عميقة، ده مش بديل لبرنامج مستشفى. لو محتاج موقع وحجز وواتساب من غير اشتراك شهري، ده النظام.</p>
-    </section>
-
-    <section id="pricing">
-      <h2>الباقات</h2>
-      <p>أسعار مصر بالجنيه، دفعة واحدة. العيادة برا مصر: ابعت البلد والتخصص على واتساب لعرض سعر مشروع، من غير تحويل شكلي للدولار.</p>
-      <div class="price-grid">
-        <article class="price">
-          <h3>عيادة</h3>
-          <p class="amt">6,500 <small>جنيه</small></p>
-          <ul>
+      <div class="grid md:grid-cols-3 gap-6">
+        <article class="glass-panel rounded-3xl p-8 border border-slate-700 flex flex-col">
+          <h3 class="text-2xl font-bold">عيادة</h3>
+          <p class="text-4xl font-black font-outfit mt-2">6,500 <span class="text-base text-slate-400">جنيه</span></p>
+          <ul class="text-sm text-slate-300 space-y-2 mt-6 mb-8 flex-1">
             <li>موقع وحجز وقفل معاد</li>
             <li>إشعار واتساب لكل حجز</li>
-            <li>خريطة واتصال</li>
-            <li>تجهيز ظهور محلي</li>
+            <li>خريطة واستضافة السنة الأولى</li>
           </ul>
-          <a class="btn btn-ghost" href="https://wa.me/201015632296?text=%D8%B7%D8%A7%D9%84%D8%A8%20%D8%A8%D8%A7%D9%82%D8%A9%20%D8%B9%D9%8A%D8%A7%D8%AF%D8%A9%206500" target="_blank" rel="noopener">اطلب عيادة</a>
+          <a class="glow-btn-purple text-center py-3 rounded-xl font-bold" href="https://wa.me/201015632296?text=%D8%A8%D8%A7%D9%82%D8%A9%20%D8%B9%D9%8A%D8%A7%D8%AF%D8%A9%206500" target="_blank" rel="noopener">اطلب</a>
         </article>
-        <article class="price featured">
-          <h3>عيادة+</h3>
-          <p class="amt">13,000 <small>جنيه</small></p>
-          <ul>
+        <article class="glass-panel rounded-3xl p-8 border border-purple-500/50 flex flex-col shadow-2xl shadow-purple-900/30">
+          <p class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2">الأنسب لمعظم العيادات</p>
+          <h3 class="text-2xl font-bold">عيادة+</h3>
+          <p class="text-4xl font-black font-outfit mt-2">13,000 <span class="text-base text-slate-400">جنيه</span></p>
+          <ul class="text-sm text-slate-300 space-y-2 mt-6 mb-8 flex-1">
             <li>كل اللي في عيادة</li>
             <li>لوحة تأكيد وتذكير وحضور</li>
-            <li>سجل مرضى</li>
-            <li>تعديل الخدمات والرسايل</li>
+            <li>سجل مرضى ورسايل قابلة للتعديل</li>
           </ul>
-          <a class="btn btn-primary" href="https://wa.me/201015632296?text=%D8%B7%D8%A7%D9%84%D8%A8%20%D8%A8%D8%A7%D9%82%D8%A9%20%D8%B9%D9%8A%D8%A7%D8%AF%D8%A9%2B%2013000" target="_blank" rel="noopener">اطلب عيادة+</a>
+          <a class="glow-btn-purple text-center py-3 rounded-xl font-bold" href="https://wa.me/201015632296?text=%D8%A8%D8%A7%D9%82%D8%A9%20%D8%B9%D9%8A%D8%A7%D8%AF%D8%A9%2B%2013000" target="_blank" rel="noopener">اطلب</a>
         </article>
-        <article class="price">
-          <h3>مركز</h3>
-          <p class="amt">22,000 <small>جنيه</small></p>
-          <ul>
+        <article class="glass-panel rounded-3xl p-8 border border-slate-700 flex flex-col">
+          <h3 class="text-2xl font-bold">مركز</h3>
+          <p class="text-4xl font-black font-outfit mt-2">22,000 <span class="text-base text-slate-400">جنيه</span></p>
+          <ul class="text-sm text-slate-300 space-y-2 mt-6 mb-8 flex-1">
             <li>كل اللي في عيادة+</li>
-            <li>جدول لكل طبيب</li>
-            <li>تقارير وصلاحيات</li>
-            <li>صفحة لكل طبيب</li>
+            <li>جدول لكل طبيب وتقارير</li>
+            <li>صلاحيات للريسبشن</li>
           </ul>
-          <a class="btn btn-ghost" href="https://wa.me/201015632296?text=%D8%B7%D8%A7%D9%84%D8%A8%20%D8%A8%D8%A7%D9%82%D8%A9%20%D9%85%D8%B1%D9%83%D8%B2%2022000" target="_blank" rel="noopener">اطلب مركز</a>
+          <a class="glow-btn-purple text-center py-3 rounded-xl font-bold" href="https://wa.me/201015632296?text=%D8%A8%D8%A7%D9%82%D8%A9%20%D9%85%D8%B1%D9%83%D8%B2%2022000" target="_blank" rel="noopener">اطلب</a>
         </article>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="faq">
-      <h2>أسئلة بتتكرر</h2>
-      <details open>
-        <summary>إيه هو نظام حجز العيادات؟</summary>
-        <p>موقع العيادة مع جدول مواعيد: المريض يختار خدمة ويوم ووقت، المعاد يتقفل، والعيادة تتبلّغ. النسخة دي فيها واتساب ولوحة ريسبشن.</p>
-      </details>
-      <details>
-        <summary>في اشتراك شهري؟</summary>
-        <p>لا. مشروع بدفعة واحدة. باقات مصر معلنة. برا مصر عرض سعر حسب البلد.</p>
-      </details>
-      <details>
-        <summary>المعاينة وهمية؟</summary>
-        <p>لا. <a href="../../demo/clinic/">brandsfactory.site/demo/clinic</a> حجز شغال. البيانات على المتصفح عشان تشوف اللوحة.</p>
-      </details>
-      <details>
-        <summary>هيخليني أول نتيجة على جوجل؟</summary>
-        <p>بنجهّز الصفحة عشان تتقري صح. الترتيب بيتوقف على اسم العيادة والمنطقة والتقييمات. مفيش ضمان مركز أول وهمي.</p>
-      </details>
-    </section>
+  <section class="py-20">
+    <div class="max-w-3xl mx-auto px-4 text-center glass-panel rounded-3xl p-10 border border-purple-500/40">
+      <h2 class="text-3xl sm:text-4xl font-black mb-4">شوف النظام، وابعت بيانات العيادة</h2>
+      <p class="text-slate-300 mb-8">البلد، التخصص، عدد الدكاترة. لو ناقص حاجة في المعاينة، قول.</p>
+      <a href="https://wa.me/201015632296?text=%D8%B9%D8%A7%D9%8A%D8%B2%20%D9%86%D8%B8%D8%A7%D9%85%20%D8%AD%D8%AC%D8%B2%20%D9%84%D9%84%D8%B9%D9%8A%D8%A7%D8%AF%D8%A9" target="_blank" rel="noopener" class="glow-btn-purple inline-flex px-8 py-4 rounded-2xl font-extrabold">واتساب Brands Factory</a>
+    </div>
+  </section>
 
-    <section>
-      <h2>مين اللي بيعمله</h2>
-      <div class="author">
-        <img src="../../assets/images/ali-mohmed.jpg" alt="علي محمد مؤسس Brands Factory" width="88" height="88">
-        <div>
-          <h3>علي محمد · Brands Factory</h3>
-          <p>ستوديو نمو بيسلّم مواقع وأنظمة حجز مربوطة بواتساب. المعاينة علنية، باقات مصر معلنة، الشغل الدولي بيتسعر كمشروع.</p>
-          <p class="meta-line"><a href="mailto:info@brandsfactory.online">info@brandsfactory.online</a> · واتساب +20 101 563 2296</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="close">
-      <h2>جرّب المعاينة وابعت بيانات العيادة</h2>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="../../demo/clinic/">المعاينة</a>
-        <a class="btn btn-wa" href="https://wa.me/201015632296?text=%D8%B9%D8%A7%D9%8A%D8%B2%20%D9%86%D8%B8%D8%A7%D9%85%20%D8%AD%D8%AC%D8%B2%20%D9%84%D9%84%D8%B9%D9%8A%D8%A7%D8%AF%D8%A9" target="_blank" rel="noopener">اطلب على واتساب</a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-foot">
-    <div class="wrap cols">
-      <div>
-        <p>Brands Factory · نظام حجز العيادات. مراجعة 10 سبتمبر 2026.</p>
-      </div>
-      <div>
-        <p><a href="https://brandsfactory.site/">الموقع الرئيسي</a></p>
-        <p><a href="../../demo/clinic/">المعاينة</a></p>
-        <p><a href="/clinic-booking-system/">English</a></p>
-      </div>
-      <div>
-        <p><a href="mailto:info@brandsfactory.online">info@brandsfactory.online</a></p>
-      </div>
+  <footer class="border-t border-slate-800 py-10 text-sm text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between gap-4">
+      <p>Brands Factory · نظام العيادات</p>
+      <p><a href="../../" class="hover:text-cyan-400">الموقع الرئيسي</a> · <a href="/clinic-booking-system/" class="hover:text-cyan-400">English</a></p>
     </div>
   </footer>
 </body>

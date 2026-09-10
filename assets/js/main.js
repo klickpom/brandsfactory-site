@@ -268,8 +268,8 @@ const translations = {
     srv_6_desc: "جلسات استشارية واستراتيجيات مخصصة للشركات والمتاجر التي ترغب في الانتقال من مرحلة الاستقرار إلى مضاعفة المبيعات بأمان.",
     srv_6_tag: "1-on-1 Growth Consulting",
     srv_7_title: "نظام حجز العيادات مع واتساب",
-    srv_7_desc: "موقع العيادة، حجز أونلاين، قفل المعاد، تأكيد واتساب، ولوحة ريسبشن. معاينة حية. مشروع بدفعة واحدة للعيادات في أي بلد.",
-    srv_7_tag: "Clinic OS · Worldwide",
+    srv_7_desc: "موقع العيادة، حجز أونلاين، تأكيد واتساب، ولوحة ريسبشن. معاينة حية.",
+    srv_7_tag: "Clinic OS",
 
     calc_tag: "أداة تفاعلية",
     calc_title: "احسب العائد المتوقع على إعلاناتك مع الذكاء الاصطناعي",
@@ -399,8 +399,8 @@ const translations = {
     srv_6_desc: "1-on-1 strategic roadmap sessions designed for scaling brands ready to unlock their next 7-8 figure revenue milestone safely.",
     srv_6_tag: "1-on-1 Growth Consulting",
     srv_7_title: "Clinic Booking System with WhatsApp",
-    srv_7_desc: "Clinic website, online appointments, slot lock, WhatsApp confirmation, and a front-desk panel. Live demo. One-time project for practices worldwide.",
-    srv_7_tag: "Clinic OS · Worldwide",
+    srv_7_desc: "Clinic website, online booking, WhatsApp confirmation, front-desk panel. Live demo.",
+    srv_7_tag: "Clinic OS",
 
     calc_tag: "Interactive Tool",
     calc_title: "Calculate Your Projected ROAS with AI Scaling",
