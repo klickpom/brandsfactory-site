@@ -11,7 +11,7 @@
   <link rel="preload" href="fonts/plex-arabic-600.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="fonts/fonts.css?v=19">
   <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css?v=19">
-  <link rel="stylesheet" href="assets/css/main.css?v=19">
+  <link rel="stylesheet" href="assets/css/main.css?v=21">
 </head>
 <body>
 
@@ -57,7 +57,7 @@
         </div>
         <div class="doc-badge reveal">
           <span class="doc-ring sm">
-            <img src="assets/img/doctor-sm.webp" alt="صورة د. أحمد سليم" width="52" height="52">
+            <img src="assets/img/doctor-sm.webp?v=21" alt="د. أحمد سليم" width="52" height="52">
           </span>
           <div>
             <b>د. أحمد سليم</b>
@@ -123,13 +123,13 @@
       <h2 class="section-title reveal" id="doctor-h">عن الدكتور</h2>
       <p class="section-sub reveal">خبرة تقدر تسند عليها.</p>
       <div class="about reveal">
-        <span class="doc-ring lg">
-          <img src="assets/img/doctor.webp" alt="صورة د. أحمد سليم استشاري طب وتجميل الأسنان" width="168" height="168" loading="lazy">
-        </span>
-        <div>
+        <figure class="about-photo">
+          <img src="assets/img/doctor.webp?v=21" alt="د. أحمد سليم، استشاري طب وتجميل الأسنان" width="720" height="960">
+        </figure>
+        <div class="about-copy">
           <h3 id="doctor-name"></h3>
-          <p class="section-sub" id="doctor-title" style="margin-block-end:8px"></p>
-          <p id="doctor-bio" style="font-size:14px;color:var(--ink-soft)"></p>
+          <p class="section-sub" id="doctor-title"></p>
+          <p id="doctor-bio"></p>
           <ul class="creds" id="doctor-creds"></ul>
         </div>
       </div>
@@ -284,8 +284,8 @@
   </div>
 
   <script src="assets/vendor/leaflet/leaflet.js?v=19"></script>
-  <script src="data/clinic-data.js?v=19"></script>
+  <script src="data/clinic-data.js?v=21"></script>
   <script src="assets/js/app.js?v=19"></script>
-  <script src="assets/js/site.js?v=19"></script>
+  <script src="assets/js/site.js?v=21"></script>
 </body>
 </html>

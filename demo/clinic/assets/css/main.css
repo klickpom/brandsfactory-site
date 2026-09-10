@@ -831,19 +831,46 @@ section { padding-block: 28px; }
 
 /* عن الدكتور */
 .about {
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: minmax(168px, 220px) minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r-panel);
   box-shadow: var(--shadow-1);
   padding: 20px;
 }
-.about img { width: 96px; height: 96px; border-radius: var(--r-panel); flex-shrink: 0; background: var(--bg); }
-.about .creds { list-style: none; margin: 10px 0 0; padding: 0; font-size: 14px; color: var(--ink-soft); }
+.about-photo {
+  margin: 0;
+  border-radius: calc(var(--r-panel) - 4px);
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  background: var(--bg);
+  box-shadow: 0 8px 24px rgba(15, 118, 110, 0.12);
+}
+.about-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 12%;
+  display: block;
+}
+.about-copy #doctor-title { margin-block-end: 10px; }
+.about-copy #doctor-bio { font-size: 14px; color: var(--ink-soft); line-height: 1.75; }
+.about .creds { list-style: none; margin: 12px 0 0; padding: 0; font-size: 14px; color: var(--ink-soft); }
 .about .creds li { padding-block: 2px; }
 .about .creds li::before { content: '— '; color: var(--accent); }
+@media (max-width: 640px) {
+  .about {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    padding: 18px 16px 22px;
+  }
+  .about-photo { width: min(200px, 58vw); }
+  .about .creds { text-align: start; }
+}
 
 /* فورم الحجز */
 .card {
@@ -1511,7 +1538,6 @@ body { padding-block-start: 0; padding-block-end: 24px; }
 
 /* أفاتار اللوحة */
 .panel-head .brand { display: flex; align-items: center; gap: 10px; }
->>>>>>> 498a91f (Add realistic AI doctor portrait with animated gradient ring (hero badge, about, panel avatar))
 .summary-strip { grid-template-columns: repeat(4, 1fr); }
 @media (max-width: 640px) { .summary-strip { grid-template-columns: repeat(2, 1fr); } }
 

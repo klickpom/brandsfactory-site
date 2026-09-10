@@ -63,6 +63,11 @@
     document.getElementById('doctor-name').textContent = D.doctor.name;
     document.getElementById('doctor-title').textContent = D.doctor.title;
     document.getElementById('doctor-bio').textContent = D.doctor.bio;
+    const docPhoto = document.querySelector('#doctor .about-photo img');
+    if (docPhoto && D.doctor.photo) {
+      docPhoto.src = D.doctor.photo;
+      docPhoto.alt = D.doctor.photoAlt || D.doctor.name;
+    }
     document.getElementById('doctor-creds').innerHTML = D.doctor.credentials
       .map(c => `<li>${c}</li>`).join('');
 
