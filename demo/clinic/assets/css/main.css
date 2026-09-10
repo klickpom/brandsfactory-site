@@ -1463,6 +1463,55 @@ body { padding-block-start: 0; padding-block-end: 24px; }
 /* إصلاح لون زرار اللوحة في الناف — كانت قاعدة الناف بتغلب على الزرار */
 .site-nav a.nav-panel, .site-nav a.nav-panel:hover { color: var(--ink-soft); }
 .site-nav a.nav-panel:hover { color: var(--accent); }
+.site-nav a.btn-primary, .site-nav a.btn-primary:hover { color: #fff; }
+
+/* ---------- صورة الدكتور — حلقة متدرجة بتلف بهدوء ---------- */
+.doc-ring {
+  position: relative;
+  display: inline-flex;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.doc-ring::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: conic-gradient(var(--accent-lt), var(--accent), rgba(45, 212, 191, .15) 70%, var(--accent-lt));
+  animation: ringspin 6s linear infinite;
+}
+.doc-ring img {
+  position: relative;
+  border-radius: 50%;
+  display: block;
+  border: 3px solid #fff;
+  object-fit: cover;
+}
+@keyframes ringspin { to { transform: rotate(360deg); } }
+.doc-ring.lg img { width: 168px; height: 168px; }
+.doc-ring.sm img { width: 52px; height: 52px; border-width: 2px; }
+.doc-ring.xs img { width: 32px; height: 32px; border-width: 2px; }
+
+/* شارة الدكتور في الهيرو */
+.doc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-block-start: 24px;
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: var(--r-pill);
+  padding: 8px 10px;
+  padding-inline-end: 20px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.doc-badge b { color: #fff; font-size: 15px; display: block; line-height: 1.4; }
+.doc-badge span { color: #9FB2C3; font-size: 12.5px; }
+
+/* أفاتار اللوحة */
+.panel-head .brand { display: flex; align-items: center; gap: 10px; }
+>>>>>>> 498a91f (Add realistic AI doctor portrait with animated gradient ring (hero badge, about, panel avatar))
 .summary-strip { grid-template-columns: repeat(4, 1fr); }
 @media (max-width: 640px) { .summary-strip { grid-template-columns: repeat(2, 1fr); } }
 
@@ -1862,6 +1911,8 @@ body { padding-block-start: 0; padding-block-end: 24px; }
   .appt-row { flex-wrap: wrap; }
   .appt-row .row-actions { width: 100%; }
   .summary-strip { grid-template-columns: repeat(2, 1fr); }
+  .about { flex-direction: column; align-items: center; text-align: start; }
+  .about > div { width: 100%; }
 }
 
 /* ---------- نظام الحجز — فون / تاب / لاب ---------- */
