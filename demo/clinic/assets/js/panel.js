@@ -207,18 +207,67 @@
   const CHECK_SVG = '<svg class="check" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>';
   const WA_SVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.7-2.9-1.1-4.7-4-4.9-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.5.5c-.2.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.2 1.1 2.2 1.4 2.5 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.2 1.3z"/></svg>';
   const TEL_SVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>';
+  const MORE_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>';
 
   function statusBadge(b) {
     const st = BF.STATUS[b.status] || BF.STATUS.new;
     return `<span class="status-badge ${st.cls}">${st.label}</span>`;
   }
 
+  function tplVars(b) {
+    return {
+      name: b.name, phone: b.phone, ref: b.ref,
+      day: b.dayLabel, date: b.dayLabel, time: b.time, service: b.service,
+    };
+  }
+
+  function openPatientWa(b, key) {
+    const msg = BF.fillTemplate(BF.getTemplates()[key], tplVars(b));
+    window.open(BF.waLink(b.phone, msg), '_blank', 'noopener');
+  }
+
+  function actBtn(b, act, cls, label) {
+    return `<button type="button" class="act ${cls}" data-act="${act}" data-id="${b.id}">${label}</button>`;
+  }
+
+  function actionsHtml(b) {
+    const todayIso = BF.iso(new Date());
+    const isToday = b.date === todayIso;
+    const isPast = b.date < todayIso;
+    const call = `<a class="act act-icon act-call" href="${BF.telLink(b.phone)}" aria-label="اتصل بـ ${b.name}">${TEL_SVG}</a>`;
+
+    let primary = '';
+    const extras = [];
+
+    if (b.status === 'new') {
+      primary = actBtn(b, 'confirm', 'act-confirm act-primary', CHECK_SVG + ' أكد للمريض');
+      extras.push(actBtn(b, 'cancel', 'act-cancel', 'إلغاء الحجز'));
+    } else if (b.status === 'confirmed' && (isToday || isPast)) {
+      primary = actBtn(b, 'done', 'act-done act-primary', 'حضر');
+      extras.push(actBtn(b, 'remind', 'act-wa', WA_SVG + ' تذكير واتساب'));
+      extras.push(actBtn(b, 'noshow', '', 'ما جاش'));
+      extras.push(actBtn(b, 'cancel', 'act-cancel', 'إلغاء الحجز'));
+    } else if (b.status === 'confirmed') {
+      primary = actBtn(b, 'remind', 'act-wa act-primary', WA_SVG + ' ذكّر المريض');
+      extras.push(actBtn(b, 'cancel', 'act-cancel', 'إلغاء الحجز'));
+    } else if (b.status === 'done') {
+      primary = actBtn(b, 'followup', 'act-wa act-primary', WA_SVG + ' متابعة');
+    } else if (b.status === 'noshow') {
+      primary = actBtn(b, 'remind', 'act-wa act-primary', WA_SVG + ' كلّمه');
+    }
+
+    const more = extras.length
+      ? `<details class="act-more">
+           <summary class="act act-icon" aria-label="المزيد">${MORE_SVG}</summary>
+           <div class="act-menu">${extras.join('')}</div>
+         </details>`
+      : '';
+
+    return `<div class="row-actions">${primary}${call}${more}</div>`;
+  }
+
   function rowHtml(b) {
     const isNew = b.status === 'new';
-    const canConfirm = b.status === 'new';
-    const canDone = b.status === 'confirmed';
-    const canCancel = b.status === 'new' || b.status === 'confirmed';
-    const canRemind = b.status === 'confirmed' || b.status === 'new';
     return `
       <li class="appt-row ${isNew ? 'is-new' : ''}" data-id="${b.id}">
         <div class="appt-when">
@@ -235,13 +284,7 @@
             ${b.remindedAt ? `<span class="reminded-tag">اتذكّر ${b.remindedAt}</span>` : ''}
           </div>
         </div>
-        <div class="row-actions">
-          ${canConfirm ? `<button type="button" class="act act-confirm" data-act="confirm" data-id="${b.id}">${CHECK_SVG} تأكيد</button>` : ''}
-          ${canRemind ? `<button type="button" class="act act-wa" data-act="remind" data-id="${b.id}">${WA_SVG} تذكير</button>` : ''}
-          ${canDone ? `<button type="button" class="act act-done" data-act="done" data-id="${b.id}">حضر</button>` : ''}
-          <a class="act act-call" href="${BF.telLink(b.phone)}" aria-label="اتصل بـ ${b.name}">${TEL_SVG}</a>
-          ${canCancel ? `<button type="button" class="act act-cancel" data-act="cancel" data-id="${b.id}">إلغاء</button>` : ''}
-        </div>
+        ${actionsHtml(b)}
       </li>`;
   }
 
@@ -261,6 +304,11 @@
       : rows.map(rowHtml).join('');
     list.querySelectorAll('[data-act]').forEach(btn =>
       btn.addEventListener('click', () => handleAction(btn.dataset.act, btn.dataset.id)));
+    list.querySelectorAll('.act-more').forEach(d => {
+      d.addEventListener('toggle', () => {
+        if (d.open) list.querySelectorAll('.act-more').forEach(o => { if (o !== d) o.open = false; });
+      });
+    });
   }
 
   function handleAction(act, id) {
@@ -269,26 +317,30 @@
 
     if (act === 'confirm') {
       BF.patchBooking(id, { status: 'confirmed' });
-      toast(`تم تأكيد حجز ${b.name}`);
+      openPatientWa(b, 'accept');
+      toast(`اتأكد حجز ${b.name} — ابعت رسالة التأكيد من واتساب`);
       announce(`تم تأكيد حجز ${b.name}`);
     } else if (act === 'remind') {
-      const msg = BF.fillTemplate(BF.getTemplates().reminder, {
-        name: b.name, day: b.dayLabel, date: b.dayLabel,
-        time: b.time, service: b.service,
-      });
-      window.open(BF.waLink(b.phone, msg), '_blank', 'noopener');
+      openPatientWa(b, 'reminder');
       BF.patchBooking(id, { remindedAt: BF.nowEgyptian() });
       toast(`اتفتح واتساب برسالة تذكير لـ ${b.name}`);
       announce(`اتبعت تذكير لـ ${b.name}`);
+    } else if (act === 'followup') {
+      openPatientWa(b, 'followup');
+      toast(`اتفتح واتساب بمتابعة بعد الجلسة لـ ${b.name}`);
     } else if (act === 'done') {
       BF.patchBooking(id, { status: 'done' });
       toast(`اتسجّل حضور ${b.name}`);
+    } else if (act === 'noshow') {
+      BF.patchBooking(id, { status: 'noshow' });
+      toast(`اتسجّل إن ${b.name} ما جاش`);
     } else if (act === 'cancel') {
+      if (!window.confirm('تلغي حجز ' + b.name + '؟ المعاد هيرجع فاضي على الموقع.')) return;
       BF.patchBooking(id, { status: 'cancelled' });
       toast(`اتلغى حجز ${b.name} — المعاد بقى متاح تاني على الموقع`);
       announce(`اتلغى حجز ${b.name}`);
     }
-    renderDashboard(); // يحدّث الملخص والأرقام كلها
+    renderDashboard();
   }
 
   /* ============================================================
