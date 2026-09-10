@@ -1674,11 +1674,6 @@ body { padding-block-start: 0; padding-block-end: 24px; }
 .offers-page .tier-card.featured { transform: none; }
 .offers-page .tier-card.featured:hover { transform: translateY(-4px); }
 
-.offers-faq .faq-list { display: grid; gap: 10px; }
-.offers-faq .card { padding: 16px; }
-.offers-faq h3 { font-size: 15px; margin-block-end: 6px; }
-.offers-faq p { font-size: 14px; color: var(--ink-soft); margin: 0; }
-
 .offers-close {
   text-align: center;
   background: var(--surface);
@@ -1694,7 +1689,6 @@ body { padding-block-start: 0; padding-block-end: 24px; }
 @media (min-width: 640px) {
   .price-trust { grid-template-columns: repeat(3, 1fr); gap: 10px; }
   .offers-hero { padding-block: 48px 36px; }
-  .offers-faq .faq-list { grid-template-columns: repeat(3, 1fr); gap: 14px; }
 }
 @media (min-width: 880px) {
   .offers-page .tier-card.featured { transform: none; }
