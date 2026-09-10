@@ -4,6 +4,31 @@
 
 (function () {
   const D = CLINIC_DATA;
+  const PHONE_RE = /^01[0125]\d{8}$/;
+
+  const book = {
+    step: 1,
+    service: '',
+    dayIso: '',
+    slot: null,
+  };
+
+  function showErr(id) { document.getElementById(id).hidden = false; }
+  function hideErr(id) { document.getElementById(id).hidden = true; }
+
+  function dayParts(d) {
+    const todayIso = BF.iso(new Date());
+    const tomIso = BF.iso(BF.addDays(new Date(), 1));
+    const dIso = BF.iso(d);
+    let name = BF.DAYS[d.getDay()];
+    if (dIso === todayIso) name = 'النهاردة';
+    else if (dIso === tomIso) name = 'بكرة';
+    return { name, num: d.getDate(), month: BF.MONTHS[d.getMonth()] };
+  }
+
+  function workingDays() {
+    return BF.nextWorkingDays(D.bookingWindowDays);
+  }
 
   /* ---------- تعبئة المحتوى الثابت ---------- */
   function fillStatic() {
@@ -11,6 +36,7 @@
     document.getElementById('footer-hours').innerHTML = D.clinic.hours + '<br>' + D.clinic.friday;
     document.getElementById('clinic-address').textContent = D.clinic.address;
     document.getElementById('footer-address').textContent = D.clinic.address;
+    document.getElementById('ticket-clinic').textContent = D.clinic.shortName;
 
     const phoneLink = document.getElementById('footer-phone');
     phoneLink.textContent = D.clinic.phoneDisplay;
@@ -21,73 +47,152 @@
 
     document.getElementById('map-link').href = D.clinic.mapsUrl;
 
-    // الخدمات
     document.getElementById('services-list').innerHTML = D.services
-      .map(s => `<li><span>${s.name}</span><span class="price">${s.price}</span></li>`)
+      .map(s => `<li>
+        <button type="button" class="svc-pick" data-service="${s.name}">
+          <span>${s.name}</span>
+          <span class="price">${s.price}</span>
+        </button>
+      </li>`)
       .join('');
 
-    // الدكتور
     document.getElementById('doctor-name').textContent = D.doctor.name;
     document.getElementById('doctor-title').textContent = D.doctor.title;
     document.getElementById('doctor-bio').textContent = D.doctor.bio;
     document.getElementById('doctor-creds').innerHTML = D.doctor.credentials
       .map(c => `<li>${c}</li>`).join('');
 
-    // شريط الأرقام
     document.getElementById('stats-strip').innerHTML = D.stats.map(s => `
       <div class="proof-item"><b><span class="counter" data-to="${s.to}">0</span>${s.suffix}</b><span>${s.label}</span></div>
     `).join('');
-
-    // الخدمة في الفورم
-    document.getElementById('bk-service').innerHTML =
-      '<option value="" disabled selected>اختار الخدمة</option>' +
-      D.services.map(s => `<option>${s.name}</option>`).join('');
-
-    // الأيام المتاحة — تواريخ حقيقية
-    document.getElementById('bk-day').innerHTML =
-      '<option value="" disabled selected>اختار اليوم</option>' +
-      BF.nextWorkingDays(D.bookingWindowDays).map(d => {
-        const dIso = BF.iso(d);
-        const today = dIso === BF.iso(new Date());
-        return `<option value="${dIso}">${BF.labelFor(d)}${today ? ' — النهاردة' : ''}</option>`;
-      }).join('');
   }
 
-  /* ---------- شبكة الأوقات — بتتقفل لحظياً حسب الحجوزات ---------- */
-  let selectedSlot = null;
+  function syncHidden() {
+    document.getElementById('bk-service').value = book.service;
+    document.getElementById('bk-day').value = book.dayIso;
+    document.getElementById('bk-time').value = book.slot || '';
+  }
+
+  function renderTicket() {
+    document.getElementById('ticket-service').textContent = book.service || 'لسه ما اخترتش';
+    document.getElementById('ticket-day').textContent = book.dayIso
+      ? BF.labelFor(BF.fromIso(book.dayIso))
+      : 'اختار يوم';
+    document.getElementById('ticket-time').textContent = book.slot || 'اختار وقت';
+
+    const foot = document.getElementById('ticket-foot');
+    if (book.service && book.dayIso && book.slot) {
+      foot.textContent = 'جاهز للتأكيد. المعاد يتقفل فور الحجز ويتبعت على واتساب العيادة.';
+    } else if (book.dayIso && !book.slot) {
+      foot.textContent = 'اختار وقت من المواعيد المتاحة.';
+    } else if (book.service) {
+      foot.textContent = 'اختار يوم ووقت من الخطوة التانية.';
+    } else {
+      foot.textContent = 'المعاد يتقفل فور التأكيد ويتبعت على واتساب العيادة.';
+    }
+    syncHidden();
+  }
+
+  function setStep(n) {
+    book.step = n;
+    document.querySelectorAll('.book-pane').forEach(pane => {
+      pane.hidden = Number(pane.dataset.pane) !== n;
+    });
+    document.querySelectorAll('.book-step').forEach(el => {
+      const s = Number(el.dataset.step);
+      el.classList.toggle('is-done', s < n);
+      if (s === n) el.setAttribute('aria-current', 'step');
+      else el.removeAttribute('aria-current');
+    });
+    if (n === 2) {
+      renderDates();
+      renderSlots();
+    }
+    renderTicket();
+  }
+
+  function renderServices() {
+    const host = document.getElementById('svc-grid');
+    host.innerHTML = D.services.map(s => {
+      const on = book.service === s.name;
+      return `<button type="button" class="svc-chip" role="radio"
+                data-service="${s.name}"
+                aria-checked="${on}">
+                <b>${s.name}</b>
+                <small>${s.price}</small>
+              </button>`;
+    }).join('');
+  }
+
+  function renderDates() {
+    const host = document.getElementById('date-rail');
+    const days = workingDays();
+    if (book.dayIso) {
+      const selected = days.find(d => BF.iso(d) === book.dayIso);
+      if (!selected || BF.freeCountFor(selected) === 0) {
+        const firstFree = days.find(d => BF.freeCountFor(d) > 0);
+        if (firstFree) book.dayIso = BF.iso(firstFree);
+      }
+    } else {
+      const firstFree = days.find(d => BF.freeCountFor(d) > 0) || days[0];
+      if (firstFree) book.dayIso = BF.iso(firstFree);
+    }
+
+    const first = days[0];
+    const last = days[days.length - 1];
+    document.getElementById('date-range-label').textContent =
+      `من ${dayParts(first).num} ${dayParts(first).month} لـ ${dayParts(last).num} ${dayParts(last).month}`;
+
+    host.innerHTML = days.map(d => {
+      const iso = BF.iso(d);
+      const p = dayParts(d);
+      const free = BF.freeCountFor(d);
+      const on = book.dayIso === iso;
+      const full = free === 0;
+      return `<button type="button" class="date-chip${full ? ' is-full' : ''}" role="radio"
+                data-date="${iso}" ${full ? 'disabled' : ''}
+                aria-checked="${on}">
+                <span class="date-name">${p.name}</span>
+                <span class="date-num">${p.num}</span>
+                <span class="date-free">${full ? 'مكتمل' : free + ' فاضي'}</span>
+              </button>`;
+    }).join('');
+  }
 
   function renderSlots() {
     const grid = document.getElementById('slot-grid');
-    const dayVal = document.getElementById('bk-day').value;
-    if (!dayVal) {
-      grid.innerHTML = '<p class="slot-hint">اختار اليوم الأول وهتظهرلك الأوقات المتاحة</p>';
+    const meta = document.getElementById('slot-meta');
+    if (!book.dayIso) {
+      grid.innerHTML = '<p class="slot-hint">اختار اليوم وهتظهر الأوقات المتاحة</p>';
+      meta.textContent = '';
       return;
     }
-    const date = BF.fromIso(dayVal);
+    const date = BF.fromIso(book.dayIso);
     const slots = BF.slotsForDate(date);
-    const anyFree = slots.some(s => !s.taken && !s.passed);
+    const free = slots.filter(s => !s.taken && !s.passed).length;
 
-    grid.innerHTML = anyFree
-      ? slots.map(s => {
-          const off = s.taken || s.passed;
-          return `<button type="button" class="slot-chip ${off ? 'taken' : ''}" data-slot="${s.label}"
-                    ${off ? 'disabled' : ''}
-                    title="${s.taken ? 'محجوز' : (s.passed ? 'فات' : 'متاح')}"
-                    aria-pressed="${selectedSlot === s.label}">${s.label}</button>`;
-        }).join('')
-      : '<p class="slot-hint">اليوم ده مكتمل الحجز — جرّب يوم تاني</p>';
-
-    if (selectedSlot && !slots.some(s => s.label === selectedSlot && !s.taken && !s.passed)) {
-      selectedSlot = null; // المعاد اللي كان مختار بقى محجوز
+    if (book.slot && !slots.some(s => s.label === book.slot && !s.taken && !s.passed)) {
+      book.slot = null;
     }
 
-    grid.querySelectorAll('.slot-chip:not(.taken)').forEach(btn =>
-      btn.addEventListener('click', () => {
-        selectedSlot = btn.dataset.slot;
-        grid.querySelectorAll('.slot-chip').forEach(b =>
-          b.setAttribute('aria-pressed', String(b === btn)));
-        hideErr('err-time');
-      }));
+    meta.textContent = free
+      ? BF.labelFor(date) + ': ' + free + ' مواعيد فاضية'
+      : BF.labelFor(date) + ': اليوم ده مكتمل';
+
+    grid.innerHTML = free
+      ? slots.map(s => {
+          const off = s.taken || s.passed;
+          const why = s.taken ? 'محجوز' : (s.passed ? 'فات' : 'متاح');
+          const on = book.slot === s.label && !off;
+          return `<button type="button" class="book-slot${off ? ' is-off' : ''}"
+                    data-slot="${s.label}" ${off ? 'disabled' : ''}
+                    role="radio" aria-checked="${on}" title="${why}">
+                    <b>${s.label}</b>
+                    <small>${why}</small>
+                  </button>`;
+        }).join('')
+      : '<p class="slot-hint">اليوم ده مكتمل الحجز. جرّب يوم تاني.</p>';
+    renderTicket();
   }
 
   /* ---------- أقرب المواعيد المتاحة — ويدجت حية ---------- */
@@ -102,7 +207,7 @@
             <span class="pm-time">${s.time}</span>
             <button type="button" class="pm-btn pm-book" data-date="${s.dateIso}" data-time="${s.time}">احجز</button>
           </div>`).join('')
-      : '<p class="slot-hint" style="padding:14px">كل المواعيد محجوزة الفترة الجاية — كلمنا على واتساب</p>';
+      : '<p class="slot-hint" style="padding:14px">كل المواعيد محجوزة الفترة الجاية. كلمنا على واتساب</p>';
 
     host.querySelectorAll('.pm-book').forEach(btn =>
       btn.addEventListener('click', () => prefillBooking(btn.dataset.date, btn.dataset.time)));
@@ -111,27 +216,82 @@
     if (todayEl) todayEl.textContent = BF.labelFor(new Date());
   }
 
-  function prefillBooking(dateIso, timeLabel) {
-    const daySel = document.getElementById('bk-day');
-    daySel.value = dateIso;
-    selectedSlot = timeLabel;
-    renderSlots();
-    document.getElementById('booking').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    const card = document.getElementById('booking-form');
-    card.classList.add('flash');
-    setTimeout(() => card.classList.remove('flash'), 1200);
+  function flashBoard() {
+    const board = document.getElementById('booking-form');
+    board.classList.add('flash');
+    setTimeout(() => board.classList.remove('flash'), 1200);
   }
 
-  /* ---------- التحقق ---------- */
-  function showErr(id) { document.getElementById(id).hidden = false; }
-  function hideErr(id) { document.getElementById(id).hidden = true; }
-  const PHONE_RE = /^01[0125]\d{8}$/;
+  function prefillBooking(dateIso, timeLabel, service) {
+    if (service) book.service = service;
+    book.dayIso = dateIso;
+    book.slot = timeLabel;
+    renderServices();
+    setStep(book.service ? 2 : 1);
+    document.getElementById('booking').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    flashBoard();
+  }
+
+  function pickService(name) {
+    book.service = name;
+    hideErr('err-service');
+    renderServices();
+    renderTicket();
+  }
 
   /* ---------- إرسال الحجز ---------- */
   function bindForm() {
-    document.getElementById('bk-day').addEventListener('change', () => {
-      selectedSlot = null;
+    document.getElementById('svc-grid').addEventListener('click', e => {
+      const btn = e.target.closest('[data-service]');
+      if (!btn) return;
+      pickService(btn.dataset.service);
+    });
+
+    document.getElementById('services-list').addEventListener('click', e => {
+      const btn = e.target.closest('.svc-pick');
+      if (!btn) return;
+      pickService(btn.dataset.service);
+      setStep(2);
+      document.getElementById('booking').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      flashBoard();
+    });
+
+    document.getElementById('date-rail').addEventListener('click', e => {
+      const btn = e.target.closest('[data-date]');
+      if (!btn || btn.disabled) return;
+      book.dayIso = btn.dataset.date;
+      book.slot = null;
+      hideErr('err-time');
+      renderDates();
       renderSlots();
+    });
+
+    document.getElementById('slot-grid').addEventListener('click', e => {
+      const btn = e.target.closest('[data-slot]');
+      if (!btn || btn.disabled) return;
+      book.slot = btn.dataset.slot;
+      hideErr('err-time');
+      renderSlots();
+    });
+
+    document.getElementById('bk-next-1').addEventListener('click', () => {
+      if (!book.service) { showErr('err-service'); return; }
+      setStep(book.slot ? 3 : 2);
+    });
+    document.getElementById('bk-back-2').addEventListener('click', () => setStep(1));
+    document.getElementById('bk-next-2').addEventListener('click', () => {
+      if (!book.slot) { showErr('err-time'); return; }
+      setStep(3);
+    });
+    document.getElementById('bk-back-3').addEventListener('click', () => setStep(2));
+
+    document.querySelectorAll('.book-step').forEach(el => {
+      el.addEventListener('click', () => {
+        const s = Number(el.dataset.step);
+        if (s === 1) setStep(1);
+        if (s === 2 && book.service) setStep(2);
+        if (s === 3 && book.service && book.slot) setStep(3);
+      });
     });
 
     ['bk-name', 'bk-phone'].forEach(id =>
@@ -143,33 +303,33 @@
       e.preventDefault();
       const f = e.target;
       const name = f.name.value.trim();
-      const phone = f.phone.value.replace(/\D/g, '');
-      const service = f.service.value;
-      const dayIso = f.day.value;
+      const phone = BF.digitsPhone(f.phone.value);
+      const service = book.service;
+      const dayIso = book.dayIso;
 
       let ok = true;
+      if (!service) { setStep(1); showErr('err-service'); ok = false; }
       if (name.length < 3) { showErr('err-name'); ok = false; }
       if (!PHONE_RE.test(phone)) { showErr('err-phone'); ok = false; }
-      if (!selectedSlot) { showErr('err-time'); ok = false; }
+      if (!book.slot) { setStep(2); showErr('err-time'); ok = false; }
       if (!ok) return;
 
-      // تأكيد إن المعاد لسه فاضي لحظة الحجز
-      if (BF.isSlotTaken(dayIso, selectedSlot)) {
-        selectedSlot = null;
-        renderSlots();
+      if (BF.isSlotTaken(dayIso, book.slot)) {
+        book.slot = null;
+        setStep(2);
         showErr('err-time');
-        document.getElementById('err-time').textContent = 'المعاد ده اتحجز للتو — اختار وقت تاني';
+        document.getElementById('err-time').textContent = 'المعاد ده اتحجز للتو. اختار وقت تاني';
         return;
       }
 
-      const slot = D.slots.find(s => s.label === selectedSlot);
+      const slot = D.slots.find(s => s.label === book.slot);
       const booking = BF.addBooking({
         id: 'b' + Date.now().toString(36),
         ref: BF.nextRef(),
         name, phone, service,
         date: dayIso,
         dayLabel: BF.labelFor(BF.fromIso(dayIso)),
-        time: selectedSlot,
+        time: book.slot,
         hour: slot ? slot.h : 16,
         status: 'new',
         remindedAt: null,
@@ -190,7 +350,7 @@
     document.getElementById('bs-summary').innerHTML = `
       <div><dt>الاسم</dt><dd>${b.name}</dd></div>
       <div><dt>الخدمة</dt><dd>${b.service}</dd></div>
-      <div><dt>الميعاد</dt><dd>${b.dayLabel} — ${b.time}</dd></div>
+      <div><dt>الميعاد</dt><dd>${b.dayLabel} الساعة ${b.time}</dd></div>
       <div><dt>الموبايل</dt><dd dir="ltr">${b.phone}</dd></div>`;
 
     const msg = BF.fillTemplate(BF.getTemplates().confirm, {
@@ -198,6 +358,7 @@
       service: b.service, day: b.dayLabel, time: b.time,
     });
     document.getElementById('bs-wa').href = BF.waLink(D.clinic.phoneIntl, msg);
+    document.getElementById('bs-gcal').href = BF.gcalUrl(b);
 
     document.getElementById('bs-ics').onclick = () => downloadICS(b);
     document.getElementById('bs-again').onclick = () => {
@@ -205,8 +366,12 @@
       const f = document.getElementById('booking-form');
       f.hidden = false;
       f.reset();
-      selectedSlot = null;
-      renderSlots();
+      book.step = 1;
+      book.service = '';
+      book.dayIso = '';
+      book.slot = null;
+      renderServices();
+      setStep(1);
     };
 
     card.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -283,7 +448,11 @@
   function watchChanges() {
     BF.onChange(() => {
       renderLiveSlots();
-      if (!document.getElementById('booking-form').hidden) renderSlots();
+      if (document.getElementById('booking-form').hidden) return;
+      if (book.step >= 2) {
+        renderDates();
+        renderSlots();
+      }
     });
   }
 
@@ -293,7 +462,9 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     fillStatic();
-    renderSlots();
+    renderServices();
+    renderTicket();
+    setStep(1);
     renderLiveSlots();
     bindForm();
     bindReset();

@@ -145,6 +145,29 @@ const BF = (() => {
     return out;
   }
 
+  function freeCountFor(date) {
+    return slotsForDate(date).filter(s => !s.taken && !s.passed).length;
+  }
+
+  function digitsPhone(value) {
+    return String(value || '').replace(/\D/g, '');
+  }
+
+  function gcalUrl(b) {
+    const start = `${b.date.replace(/-/g, '')}T${String(b.hour).padStart(2, '0')}0000`;
+    const endH = Math.min((b.hour || 16) + 1, 23);
+    const end = `${b.date.replace(/-/g, '')}T${String(endH).padStart(2, '0')}0000`;
+    const q = new URLSearchParams({
+      action: 'TEMPLATE',
+      text: `موعد في ${CLINIC_DATA.clinic.shortName} — ${b.service}`,
+      dates: `${start}/${end}`,
+      details: `رقم الحجز ${b.ref}\n${b.service}\n${CLINIC_DATA.clinic.shortName}`,
+      location: CLINIC_DATA.clinic.address,
+      ctz: 'Africa/Cairo',
+    });
+    return `https://calendar.google.com/calendar/render?${q.toString()}`;
+  }
+
   /* ---------- واتساب ---------- */
   function waLink(phone, message) {
     let digits = String(phone).replace(/\D/g, '');
@@ -204,6 +227,7 @@ const BF = (() => {
     DAYS, MONTHS,
     getBookings, addBooking, patchBooking, getBooking, nextRef,
     nextWorkingDays, slotsForDate, nextFreeSlots, isSlotTaken,
+    freeCountFor, gcalUrl, digitsPhone,
     waLink,
     getTemplates, saveTemplate, fillTemplate,
     onChange, emit,

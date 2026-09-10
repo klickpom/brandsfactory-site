@@ -7,8 +7,8 @@
   <meta name="description" content="عيادة د. أحمد سليم لطب وتجميل الأسنان في التجمع الخامس. احجز موعدك أونلاين في أقل من دقيقة وهيوصلك تأكيد على واتساب.">
   <link rel="preload" href="fonts/plex-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/plex-arabic-600.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="fonts/fonts.css?v=4">
-  <link rel="stylesheet" href="assets/css/main.css?v=4">
+  <link rel="stylesheet" href="fonts/fonts.css?v=7">
+  <link rel="stylesheet" href="assets/css/main.css?v=7">
 </head>
 <body>
 
@@ -76,19 +76,19 @@
     <!-- ================= خطوات الحجز ================= -->
     <section aria-labelledby="how-h">
       <h2 class="section-title reveal" id="how-h">تحجز إزاي؟</h2>
-      <p class="section-sub reveal">3 خطوات من غير ما تكلم حد.</p>
+      <p class="section-sub reveal">نفس نظام العيادات الحديثة: خدمة، يوم، وقت، وتأكيد على واتساب.</p>
       <ol class="steps">
         <li class="reveal">
           <span class="step-num">1</span>
-          <div><b>اختار الخدمة والمعاد</b><p>المواعيد المتاحة ظاهرة قدامك بشكل لحظي — المحجوز بيتقفل أوتوماتيك.</p></div>
+          <div><b>اختار الخدمة</b><p>الأسعار ظاهرة. تقدر تبدأ من قائمة الخدمات أو من فورم الحجز.</p></div>
         </li>
         <li class="reveal">
           <span class="step-num">2</span>
-          <div><b>اكتب اسمك ورقمك</b><p>دقيقة واحدة بالظبط — من غير مكالمات ولا انتظار في السنترال.</p></div>
+          <div><b>اختار اليوم والوقت</b><p>المواعيد المتاحة لحظية. المحجوز بيتقفل لوحده حتى لو حد تاني حجز في نفس اللحظة.</p></div>
         </li>
         <li class="reveal">
           <span class="step-num">3</span>
-          <div><b>استلم تأكيدك على واتساب</b><p>برقم حجز واضح، وقبل ميعادك هيوصلك تذكير مهذب.</p></div>
+          <div><b>أكّد واستلم على واتساب</b><p>رقم حجز، رسالة جاهزة للعيادة، والميعاد ينضاف لتقويم الموبايل أو جوجل كالندر.</p></div>
         </li>
       </ol>
     </section>
@@ -118,33 +118,74 @@
     <!-- ================= الحجز ================= -->
     <section id="booking" aria-labelledby="booking-h">
       <h2 class="section-title reveal" id="booking-h">احجز موعدك</h2>
-      <p class="section-sub reveal">اختار اليوم والوقت المتاحين، واملأ بياناتك — وهيظهرلك تأكيد برقم حجز فوراً.</p>
+      <p class="section-sub reveal">اختار الخدمة واليوم والوقت. التذكرة بتتكتب لوحدها، وبعد التأكيد تبعت واتساب وتضيف الميعاد للتقويم.</p>
 
-      <form class="card reveal" id="booking-form" novalidate>
-        <div class="field">
-          <label for="bk-name">الاسم</label>
-          <input type="text" id="bk-name" name="name" autocomplete="name" required placeholder="اسمك بالكامل">
-          <p class="field-err" id="err-name" hidden>اكتب اسمك بالكامل</p>
+      <form class="book-board reveal" id="booking-form" novalidate>
+        <input type="hidden" id="bk-service" name="service" value="">
+        <input type="hidden" id="bk-day" name="day" value="">
+        <input type="hidden" id="bk-time" name="time" value="">
+
+        <div class="book-main">
+          <ol class="book-steps" aria-label="خطوات الحجز">
+            <li><button type="button" class="book-step" data-step="1" aria-current="step"><span>1</span> الخدمة</button></li>
+            <li><button type="button" class="book-step" data-step="2"><span>2</span> الميعاد</button></li>
+            <li><button type="button" class="book-step" data-step="3"><span>3</span> بياناتك</button></li>
+          </ol>
+
+          <div class="book-pane" data-pane="1">
+            <p class="book-pane-kicker">الخطوة 1 من 3</p>
+            <h3 class="book-pane-title">اختار الخدمة</h3>
+            <div class="svc-grid" id="svc-grid" role="radiogroup" aria-label="الخدمات"></div>
+            <p class="field-err" id="err-service" hidden>اختار الخدمة الأول</p>
+            <button type="button" class="btn btn-primary btn-block" id="bk-next-1">اختار اليوم والوقت</button>
+          </div>
+
+          <div class="book-pane" data-pane="2" hidden>
+            <p class="book-pane-kicker">الخطوة 2 من 3</p>
+            <h3 class="book-pane-title">اختار اليوم والوقت</h3>
+            <p class="date-rail-label" id="date-range-label"></p>
+            <div class="date-rail" id="date-rail" role="radiogroup" aria-label="الأيام المتاحة"></div>
+            <p class="slot-meta" id="slot-meta"></p>
+            <div class="book-slots" id="slot-grid" role="radiogroup" aria-label="الأوقات المتاحة"></div>
+            <p class="field-err" id="err-time" hidden>اختار وقت من المتاح</p>
+            <div class="book-nav">
+              <button type="button" class="btn btn-ghost" id="bk-back-2">رجوع للخدمات</button>
+              <button type="button" class="btn btn-primary" id="bk-next-2">اكتب بياناتك</button>
+            </div>
+          </div>
+
+          <div class="book-pane" data-pane="3" hidden>
+            <p class="book-pane-kicker">الخطوة 3 من 3</p>
+            <h3 class="book-pane-title">بياناتك للتأكيد</h3>
+            <div class="field">
+              <label for="bk-name">الاسم</label>
+              <input type="text" id="bk-name" name="name" autocomplete="name" required placeholder="اسمك بالكامل">
+              <p class="field-err" id="err-name" hidden>اكتب اسمك بالكامل</p>
+            </div>
+            <div class="field">
+              <label for="bk-phone">رقم الموبايل</label>
+              <input type="tel" id="bk-phone" name="phone" inputmode="tel" autocomplete="tel" required placeholder="01xxxxxxxxx" dir="ltr">
+              <p class="field-err" id="err-phone" hidden>اكتب رقم موبايل مصري صحيح: 11 رقم ويبدأ بـ 01</p>
+            </div>
+            <p class="book-hint">بعد التأكيد هتفتح رسالة واتساب جاهزة للعيادة، وتقدر تضيف الميعاد لجوجل كالندر أو تقويم الموبايل.</p>
+            <div class="book-nav">
+              <button type="button" class="btn btn-ghost" id="bk-back-3">رجوع للمواعيد</button>
+              <button type="submit" class="btn btn-primary btn-shine">أكّد الحجز</button>
+            </div>
+          </div>
         </div>
-        <div class="field">
-          <label for="bk-phone">رقم الموبايل</label>
-          <input type="tel" id="bk-phone" name="phone" inputmode="tel" autocomplete="tel" required placeholder="01xxxxxxxxx" dir="ltr" style="text-align:end">
-          <p class="field-err" id="err-phone" hidden>اكتب رقم موبايل مصري صحيح — 11 رقم ويبدأ بـ 01</p>
-        </div>
-        <div class="field">
-          <label for="bk-service">الخدمة</label>
-          <select id="bk-service" name="service" required></select>
-        </div>
-        <div class="field">
-          <label for="bk-day">اليوم</label>
-          <select id="bk-day" name="day" required></select>
-        </div>
-        <div class="field">
-          <label>الوقت المتاح</label>
-          <div class="slot-grid" id="slot-grid" role="radiogroup" aria-label="الأوقات المتاحة"></div>
-          <p class="field-err" id="err-time" hidden>اختار وقت من المتاح</p>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block btn-shine">أكّد الحجز</button>
+
+        <aside class="book-ticket" id="book-ticket" aria-live="polite">
+          <p class="ticket-kicker">تذكرة الموعد</p>
+          <h3 class="ticket-clinic" id="ticket-clinic"></h3>
+          <dl class="ticket-rows">
+            <div><dt>الخدمة</dt><dd id="ticket-service">لسه ما اخترتش</dd></div>
+            <div><dt>اليوم</dt><dd id="ticket-day">اختار يوم</dd></div>
+            <div><dt>الوقت</dt><dd id="ticket-time">اختار وقت</dd></div>
+            <div><dt>المدة</dt><dd>ساعة</dd></div>
+          </dl>
+          <p class="ticket-foot" id="ticket-foot">المعاد يتقفل فور التأكيد ويتبعت على واتساب العيادة.</p>
+        </aside>
       </form>
 
       <!-- شاشة نجاح الحجز -->
@@ -153,10 +194,11 @@
           <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>
         </div>
         <h3>تم استلام حجزك بنجاح</h3>
-        <p class="section-sub" style="margin-inline:auto">رقم الحجز <b class="booking-ref" id="bs-ref"></b> — احتفظ بيه.</p>
+        <p class="section-sub" style="margin-inline:auto">رقم الحجز <b class="booking-ref" id="bs-ref"></b> احتفظ بيه.</p>
         <dl class="bs-summary" id="bs-summary"></dl>
         <div class="bs-actions">
           <a class="btn btn-primary btn-block" id="bs-wa" href="#" target="_blank" rel="noopener">ابعت التأكيد على واتساب العيادة</a>
+          <a class="btn btn-ghost btn-block" id="bs-gcal" href="#" target="_blank" rel="noopener">أضف الميعاد لجوجل كالندر</a>
           <button type="button" class="btn btn-ghost btn-block" id="bs-ics">أضف الميعاد لتقويم موبايلك</button>
           <button type="button" class="reset-link" id="bs-again">احجز موعد تاني</button>
         </div>
@@ -196,8 +238,8 @@
 
   </div>
 
-  <script src="data/clinic-data.js?v=4"></script>
-  <script src="assets/js/app.js?v=4"></script>
-  <script src="assets/js/site.js?v=4"></script>
+  <script src="data/clinic-data.js?v=7"></script>
+  <script src="assets/js/app.js?v=7"></script>
+  <script src="assets/js/site.js?v=7"></script>
 </body>
 </html>
