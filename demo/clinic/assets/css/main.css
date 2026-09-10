@@ -1560,11 +1560,98 @@ body { padding-block-start: 0; padding-block-end: 24px; }
   border-radius: var(--r-pill);
 }
 
-/* ---------- صفحة العروض ---------- */
-.offers-hero { padding-block: 56px 40px; }
-.offers-hero .lead { color: #B6C2CE; }
-.faq-grid { display: grid; gap: 14px; }
-@media (min-width: 720px) { .faq-grid { grid-template-columns: repeat(3, 1fr); } }
+/* ---------- صفحة الأسعار ---------- */
+.offers-page .topbar-inner { min-height: 56px; }
+.offers-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-direction: row;
+  position: static;
+  min-width: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.offers-nav a:not(.btn) {
+  min-height: 36px;
+  padding: 6px 10px;
+  font-size: 14px;
+}
+.offers-nav .btn {
+  color: #fff;
+  min-height: 36px;
+  padding: 6px 14px;
+  font-size: 13px;
+}
+.offers-hero { padding-block: 36px 28px; }
+.offers-hero-copy {
+  text-align: center;
+  max-width: 640px;
+  margin-inline: auto;
+}
+.offers-hero .kicker { justify-content: center; }
+.offers-hero .lead {
+  color: #B6C2CE;
+  margin-inline: auto;
+  font-size: 15px;
+}
+.offers-hero .hero-cta { justify-content: center; }
+.offers-hero h1 { font-size: clamp(26px, 7vw, 40px); }
+
+.price-trust {
+  list-style: none;
+  margin: 18px 0 8px;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr;
+}
+.price-trust li {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.price-trust b { font-size: 14px; }
+.price-trust span { font-size: 13px; color: var(--ink-soft); }
+
+.offers-page #pricing { scroll-margin-top: 72px; }
+.offers-page .tier-card { padding: 20px 16px; }
+.offers-page .tier-price { font-size: 28px; }
+.offers-page .tier-feats { font-size: 13.5px; }
+.offers-page .tier-card.featured { transform: none; }
+.offers-page .tier-card.featured:hover { transform: translateY(-4px); }
+
+.offers-faq .faq-list { display: grid; gap: 10px; }
+.offers-faq .card { padding: 16px; }
+.offers-faq h3 { font-size: 15px; margin-block-end: 6px; }
+.offers-faq p { font-size: 14px; color: var(--ink-soft); margin: 0; }
+
+.offers-close {
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px 18px;
+  margin-block: 12px 8px;
+}
+.offers-close h2 { font-size: 22px; margin-block-end: 8px; }
+.offers-close p { margin-inline: auto; margin-block-end: 16px; color: var(--ink-soft); }
+.offers-foot-links { margin-block-start: 8px; }
+
+@media (min-width: 640px) {
+  .price-trust { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .offers-hero { padding-block: 48px 36px; }
+  .offers-faq .faq-list { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+}
+@media (min-width: 880px) {
+  .offers-page .tier-card.featured { transform: none; }
+}
 .demo-credit {
   margin-block-start: 20px; font-size: 13px; color: var(--ink-soft);
   border-block-start: 1px solid var(--line); padding-block-start: 14px;
