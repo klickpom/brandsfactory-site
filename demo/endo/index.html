@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عيادة استشاري السكر والغدد — احجز موعدك أونلاين</title>
+  <meta name="description" content="عيادة استشاري السكر والسمنة والغدد والقدم السكري والتغذية العلاجية. ٣ فروع في القاهرة: التجمع، رمسيس، مصر الجديدة. احجز تليفون أو واتساب أو من الموقع.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://brandsfactory.site/demo/endo/">
+  <meta name="author" content="Brands Factory">
+  <link rel="preload" href="fonts/plex-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/plex-arabic-600.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="fonts/fonts.css?v=1">
+  <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css?v=1">
+  <link rel="stylesheet" href="assets/css/main.css?v=1">
+</head>
+<body>
+
+  <header class="topbar" id="top">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#top">عيادة <span>استشاري السكر والغدد</span></a>
+      <nav class="site-nav" id="site-nav" aria-label="التنقل الرئيسي">
+        <a href="#services">الخدمات</a>
+        <a href="#doctor">عن الدكتور</a>
+        <a href="#booking">الحجز</a>
+        <a href="#location">الفروع</a>
+        <a href="panel.html" class="nav-panel">لوحة التحكم</a>
+      </nav>
+      <a class="btn btn-primary btn-sm topbar-book" href="#booking">احجز</a>
+      <details class="nav-menu">
+        <summary class="nav-toggle" aria-label="فتح القائمة" aria-controls="site-nav">
+          <span></span><span></span><span></span>
+        </summary>
+      </details>
+    </div>
+  </header>
+
+  <section class="hero-dark">
+    <div class="glow glow-1" aria-hidden="true"></div>
+    <div class="glow glow-2" aria-hidden="true"></div>
+    <div class="hero-grid-lines" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="kicker reveal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 7L9 5l-3 7H2"/></svg>
+          سكر · سمنة · غدد · قدم سكري — ٣ فروع في القاهرة
+        </p>
+        <h1 class="reveal">عيادة استشاري السكر والغدد<br><span class="exclusive-line">التجمع · رمسيس · مصر الجديدة</span></h1>
+        <p class="lead reveal">احجز موعدك من التليفون أو واتساب أو الموقع. تختار الفرع والخدمة والميعاد، وهيوصلك تأكيد على واتساب.</p>
+        <p class="hours reveal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          <span id="hero-hours"></span>
+        </p>
+        <div class="hero-cta reveal">
+          <a class="btn btn-primary btn-shine" href="#booking">احجز موعدك</a>
+          <a class="btn btn-glass" href="#services">الخدمات والأسعار</a>
+        </div>
+        <div class="doc-badge reveal">
+          <span class="doc-ring sm">
+            <span class="doc-initials">س</span>
+          </span>
+          <div>
+            <b>الاستشاري</b>
+            <span>سكر وسمنة وغدد وقدم سكري وتغذية علاجية</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-mock float-anim">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="pm-head">
+              <b>أقرب المواعيد المتاحة</b>
+              <span id="pm-today"></span>
+            </div>
+            <div id="live-slots"></div>
+            <div class="pm-foot">المعاد اللي تحجزه بيتقفل فوراً في الفرع ده</div>
+          </div>
+        </div>
+        <p class="phone-caption">اضغط على أي معاد وهيتملى فورم الحجز لوحده</p>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="proof-strip reveal" id="stats-strip"></div>
+    </div>
+  </section>
+
+  <div class="wrap">
+
+    <section aria-labelledby="how-h">
+      <h2 class="section-title reveal" id="how-h">تحجز إزاي؟</h2>
+      <p class="section-sub reveal">تليفون أو واتساب أو من الموقع: فرع، خدمة، يوم، وتأكيد.</p>
+      <ol class="steps">
+        <li class="reveal">
+          <span class="step-num">1</span>
+          <div><b>اختار الفرع والخدمة</b><p>التجمع أو رمسيس أو مصر الجديدة. الأسعار ظاهرة قبل ما تحجز.</p></div>
+        </li>
+        <li class="reveal">
+          <span class="step-num">2</span>
+          <div><b>اختار اليوم والوقت</b><p>المواعيد المتاحة لحظية حسب الفرع. المحجوز في فرع ما يتقفلش في الفرعين التانيين.</p></div>
+        </li>
+        <li class="reveal">
+          <span class="step-num">3</span>
+          <div><b>أكّد واستلم على واتساب</b><p>رقم حجز، رسالة جاهزة للعيادة، والميعاد ينضاف لتقويم الموبايل.</p></div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="services" aria-labelledby="services-h">
+      <h2 class="section-title reveal" id="services-h">الخدمات والأسعار</h2>
+      <p class="section-sub reveal">أسعار واضحة من غير مفاجآت — الخطة النهائية بتتحدد بعد الكشف.</p>
+      <ul class="services-list reveal" id="services-list"></ul>
+    </section>
+
+    <section id="doctor" aria-labelledby="doctor-h">
+      <h2 class="section-title reveal" id="doctor-h">عن الدكتور</h2>
+      <p class="section-sub reveal">نفس الاستشاري على ٣ فروع.</p>
+      <div class="about reveal">
+        <figure class="about-photo photo-mark">
+          <img alt="" width="720" height="960" hidden>
+          <span class="doc-initials lg">س</span>
+        </figure>
+        <div class="about-copy">
+          <h3 id="doctor-name"></h3>
+          <p class="section-sub" id="doctor-title"></p>
+          <p id="doctor-bio"></p>
+          <ul class="creds" id="doctor-creds"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="booking" aria-labelledby="booking-h">
+      <h2 class="section-title reveal" id="booking-h">احجز موعدك</h2>
+      <p class="section-sub reveal">اختار الفرع والخدمة واليوم والوقت. التذكرة بتتكتب لوحدها، وبعد التأكيد تبعت واتساب.</p>
+
+      <form class="book-board reveal" id="booking-form" novalidate>
+        <input type="hidden" id="bk-branch" name="branch" value="">
+        <input type="hidden" id="bk-service" name="service" value="">
+        <input type="hidden" id="bk-day" name="day" value="">
+        <input type="hidden" id="bk-time" name="time" value="">
+
+        <div class="book-main">
+          <ol class="book-steps" aria-label="خطوات الحجز">
+            <li><button type="button" class="book-step" data-step="1" aria-current="step"><span>1</span> الفرع والخدمة</button></li>
+            <li><button type="button" class="book-step" data-step="2"><span>2</span> الميعاد</button></li>
+            <li><button type="button" class="book-step" data-step="3"><span>3</span> بياناتك</button></li>
+          </ol>
+
+          <div class="book-pane" data-pane="1">
+            <p class="book-pane-kicker">الخطوة 1 من 3</p>
+            <h3 class="book-pane-title">اختار الفرع</h3>
+            <div class="branch-grid" id="branch-grid" role="radiogroup" aria-label="فروع العيادة"></div>
+            <p class="field-err" id="err-branch" hidden>اختار الفرع الأول</p>
+            <h3 class="book-pane-title">اختار الخدمة</h3>
+            <div class="svc-grid" id="svc-grid" role="radiogroup" aria-label="الخدمات"></div>
+            <p class="field-err" id="err-service" hidden>اختار الخدمة الأول</p>
+            <button type="button" class="btn btn-primary btn-block" id="bk-next-1">اختار اليوم والوقت</button>
+          </div>
+
+          <div class="book-pane" data-pane="2" hidden>
+            <p class="book-pane-kicker">الخطوة 2 من 3</p>
+            <h3 class="book-pane-title">اختار اليوم والوقت</h3>
+            <p class="date-rail-label" id="date-range-label"></p>
+            <div class="date-rail" id="date-rail" role="radiogroup" aria-label="الأيام المتاحة"></div>
+            <p class="slot-meta" id="slot-meta"></p>
+            <div class="book-slots" id="slot-grid" role="radiogroup" aria-label="الأوقات المتاحة"></div>
+            <p class="field-err" id="err-time" hidden>اختار وقت من المتاح</p>
+            <div class="book-nav">
+              <button type="button" class="btn btn-ghost" id="bk-back-2">رجوع</button>
+              <button type="button" class="btn btn-primary" id="bk-next-2">التالي</button>
+            </div>
+          </div>
+
+          <div class="book-pane" data-pane="3" hidden>
+            <p class="book-pane-kicker">الخطوة 3 من 3</p>
+            <h3 class="book-pane-title">بياناتك للتأكيد</h3>
+            <div class="field">
+              <label for="bk-name">الاسم</label>
+              <input type="text" id="bk-name" name="name" autocomplete="name" required placeholder="اسمك بالكامل">
+              <p class="field-err" id="err-name" hidden>اكتب اسمك بالكامل</p>
+            </div>
+            <div class="field">
+              <label for="bk-phone">رقم الموبايل</label>
+              <input type="tel" id="bk-phone" name="phone" inputmode="tel" autocomplete="tel" required placeholder="01xxxxxxxxx" dir="ltr">
+              <p class="field-err" id="err-phone" hidden>اكتب رقم موبايل مصري صحيح: 11 رقم ويبدأ بـ 01</p>
+            </div>
+            <p class="book-hint">بعد التأكيد هتفتح رسالة واتساب جاهزة للعيادة، وتقدر تضيف الميعاد لجوجل كالندر أو تقويم الموبايل.</p>
+            <div class="book-nav">
+              <button type="button" class="btn btn-ghost" id="bk-back-3">رجوع</button>
+              <button type="submit" class="btn btn-primary btn-shine">أكّد الحجز</button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="book-ticket" id="book-ticket" aria-live="polite">
+          <p class="ticket-kicker">تذكرة الموعد</p>
+          <h3 class="ticket-clinic" id="ticket-clinic"></h3>
+          <dl class="ticket-rows">
+            <div><dt>الفرع</dt><dd id="ticket-branch">اختار فرع</dd></div>
+            <div><dt>الخدمة</dt><dd id="ticket-service">لسه ما اخترتش</dd></div>
+            <div><dt>اليوم</dt><dd id="ticket-day">اختار يوم</dd></div>
+            <div><dt>الوقت</dt><dd id="ticket-time">اختار وقت</dd></div>
+            <div><dt>المدة</dt><dd>ساعة</dd></div>
+          </dl>
+          <p class="ticket-foot" id="ticket-foot">المعاد يتقفل فور التأكيد في الفرع اللي اخترته.</p>
+        </aside>
+      </form>
+
+      <div class="card success-card" id="booking-success" hidden>
+        <div class="big-check" aria-hidden="true">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>
+        </div>
+        <h3>تم استلام حجزك بنجاح</h3>
+        <p class="section-sub" style="margin-inline:auto">رقم الحجز <b class="booking-ref" id="bs-ref"></b> احتفظ بيه.</p>
+        <dl class="bs-summary" id="bs-summary"></dl>
+        <div class="bs-actions">
+          <a class="btn btn-primary btn-block" id="bs-wa" href="#" target="_blank" rel="noopener">ابعت التأكيد على واتساب العيادة</a>
+          <a class="btn btn-ghost btn-block" href="panel.html">شوف الحجز في لوحة التحكم</a>
+          <a class="btn btn-ghost btn-block" id="bs-gcal" href="#" target="_blank" rel="noopener">أضف الميعاد لجوجل كالندر</a>
+          <button type="button" class="btn btn-ghost btn-block" id="bs-ics">أضف الميعاد لتقويم موبايلك</button>
+          <button type="button" class="reset-link" id="bs-again">احجز موعد تاني</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="location" aria-labelledby="location-h">
+      <h2 class="section-title reveal" id="location-h">الفروع</h2>
+      <p class="section-sub reveal" id="clinic-address"></p>
+      <div class="branch-places reveal" id="branch-places"></div>
+      <div class="map-stage reveal">
+        <div id="clinic-map" class="map-canvas" dir="ltr" role="application" aria-label="خريطة فروع العيادة"></div>
+        <div class="map-vignette" aria-hidden="true"></div>
+        <article class="map-place">
+          <div class="map-place-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 40" width="28" height="36">
+              <path fill="#0F766E" d="M16 0C7.7 0 1 6.5 1 14.6 1 24 16 40 16 40s15-16 15-25.4C31 6.5 24.3 0 16 0z"/>
+              <circle cx="16" cy="14" r="5.5" fill="#ECFDF5"/>
+            </svg>
+          </div>
+          <div class="map-place-body">
+            <p class="map-place-kicker" id="map-kicker">٣ فروع · القاهرة</p>
+            <h3 id="map-title">التجمع الخامس</h3>
+            <p class="map-place-addr" id="map-address"></p>
+            <p class="map-place-hours" id="map-hours"></p>
+            <div class="map-place-actions">
+              <a class="btn btn-primary btn-sm" id="map-directions" href="#" target="_blank" rel="noopener">افتح الاتجاهات</a>
+              <a class="btn btn-ghost btn-sm" id="map-wa" href="#" target="_blank" rel="noopener">واتساب</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="cols">
+        <div>
+          <h3 style="font-size:16px;margin-block-end:6px">المواعيد</h3>
+          <p id="footer-hours"></p>
+        </div>
+        <div>
+          <h3 style="font-size:16px;margin-block-end:6px">تواصل معانا</h3>
+          <p>تليفون: <a id="footer-phone" href="#" dir="ltr"></a></p>
+          <p style="margin-block-start:6px"><a id="footer-wa" href="#" target="_blank" rel="noopener">واتساب العيادة</a></p>
+        </div>
+        <div>
+          <h3 style="font-size:16px;margin-block-end:6px">للعيادة</h3>
+          <p><a href="panel.html">لوحة التحكم</a></p>
+          <p style="margin-block-start:6px"><a href="../../clinic-booking-system/">نظام الحجز من Brands Factory</a></p>
+        </div>
+        <div>
+          <h3 style="font-size:16px;margin-block-end:6px">الفروع</h3>
+          <p id="footer-address"></p>
+        </div>
+      </div>
+      <p class="demo-credit">
+        معاينة خاصة — منفصلة عن ديمو الأسنان
+        · <button type="button" class="reset-link" id="reset-data">إعادة تعيين البيانات</button>
+      </p>
+    </footer>
+
+  </div>
+
+  <script src="assets/vendor/leaflet/leaflet.js?v=1"></script>
+  <script src="data/clinic-data.js?v=1"></script>
+  <script src="assets/js/app.js?v=1"></script>
+  <script src="assets/js/site.js?v=1"></script>
+</body>
+</html>
