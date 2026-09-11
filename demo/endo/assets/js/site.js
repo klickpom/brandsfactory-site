@@ -92,6 +92,7 @@
       docPhoto.hidden = false;
       docPhoto.src = D.doctor.photo;
       docPhoto.alt = D.doctor.photoAlt || D.doctor.name;
+      docPhoto.closest('.about-photo')?.classList.remove('photo-mark');
       if (docMark) docMark.hidden = true;
     } else if (docPhoto) {
       docPhoto.hidden = true;
