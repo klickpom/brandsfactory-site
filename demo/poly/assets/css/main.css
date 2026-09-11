@@ -2388,12 +2388,12 @@ body { padding-block-start: 0; padding-block-end: 24px; }
 
 .branch-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 6px;
   margin-block-end: 14px;
 }
-@media (min-width: 640px) {
-  .branch-grid { grid-template-columns: repeat(3, 1fr); }
+@media (min-width: 900px) {
+  .branch-grid { grid-template-columns: repeat(4, 1fr); }
 }
 .branch-chip {
   text-align: start;
@@ -2415,12 +2415,12 @@ body { padding-block-start: 0; padding-block-end: 24px; }
 
 .branch-places {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 8px;
   margin-block-end: 14px;
 }
-@media (min-width: 760px) {
-  .branch-places { grid-template-columns: repeat(3, 1fr); }
+@media (min-width: 900px) {
+  .branch-places { grid-template-columns: repeat(4, 1fr); }
 }
 .branch-place {
   text-align: start;

@@ -53,14 +53,13 @@
       activeFilter = s.newOnes.length ? 'new' : 'today';
       filterPicked = true;
     }
-    const patients = buildPatients();
 
     root().innerHTML = `
       <div class="summary-strip" aria-label="ملخص العيادة">
         <button type="button" class="summary-item ${s.newOnes.length ? 'hot' : ''}" data-jump="new"><b id="sum-new">${s.newOnes.length}</b><span>حجز جديد محتاج تأكيد</span></button>
         <button type="button" class="summary-item" data-jump="today"><b>${s.today.length}</b><span>مواعيد النهاردة</span></button>
         <button type="button" class="summary-item" data-jump="tomorrow"><b>${s.tomorrow.length}</b><span>مواعيد بكرة</span></button>
-        <button type="button" class="summary-item" data-jump="patients"><b>${patients.length}</b><span>مريض مسجّل</span></button>
+        <button type="button" class="summary-item" data-jump="all"><b>${D.branches.length}</b><span>عيادات في نظام واحد</span></button>
       </div>
 
       <div class="tabs" role="tablist" aria-label="أقسام لوحة التحكم">
@@ -128,8 +127,8 @@
           return `<button class="filter-pill" data-filter="${k}" aria-pressed="${activeFilter === k}">${label} <small>${count}</small></button>`;
         }).join('')}
       </div>
-      <div class="filter-pills" role="group" aria-label="فلترة حسب التخصص">
-        <button class="filter-pill" data-branch="all" aria-pressed="${activeBranch === 'all'}">كل التخصصات</button>
+      <div class="filter-pills" role="group" aria-label="فلترة حسب العيادة">
+        <button class="filter-pill" data-branch="all" aria-pressed="${activeBranch === 'all'}">كل العيادات</button>
         ${D.branches.map(br => {
           const n = s.all.filter(b => b.branchId === br.id).length;
           return `<button class="filter-pill" data-branch="${br.id}" aria-pressed="${activeBranch === br.id}">${br.short} <small>${n}</small></button>`;
@@ -137,7 +136,7 @@
       </div>
       <div class="search-box">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-        <input type="search" id="appt-search" placeholder="دوّر بالاسم أو الموبايل أو رقم الحجز أو التخصص…" aria-label="بحث في الحجوزات">
+        <input type="search" id="appt-search" placeholder="دوّر بالاسم أو الموبايل أو رقم الحجز أو العيادة…" aria-label="بحث في الحجوزات">
       </div>
       <ul class="appt-list" id="appt-list"></ul>`;
 

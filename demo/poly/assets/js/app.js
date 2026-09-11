@@ -5,7 +5,7 @@
 
 const BF = (() => {
   const NS = 'bfp_';
-  const SEED_VER = 1;
+  const SEED_VER = 2;
 
   /* ---------- التخزين ---------- */
   const store = {

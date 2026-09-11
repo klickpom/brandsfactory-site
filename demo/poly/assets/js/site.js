@@ -118,7 +118,7 @@
 
   function renderTicket() {
     const br = currentBranch();
-    document.getElementById('ticket-branch').textContent = br ? br.name : 'اختار التخصص';
+    document.getElementById('ticket-branch').textContent = br ? br.name : 'اختار العيادة';
     document.getElementById('ticket-service').textContent = book.service || 'لسه ما اخترتش';
     document.getElementById('ticket-day').textContent = book.dayIso
       ? BF.labelFor(BF.fromIso(book.dayIso))
@@ -432,7 +432,7 @@
     document.getElementById('bs-ref').textContent = b.ref;
     document.getElementById('bs-summary').innerHTML = `
       <div><dt>الاسم</dt><dd>${b.name}</dd></div>
-      <div><dt>التخصص</dt><dd>${b.branchName || ''}</dd></div>
+      <div><dt>العيادة</dt><dd>${b.branchName || ''}</dd></div>
       <div><dt>الخدمة</dt><dd>${b.service}</dd></div>
       <div><dt>الميعاد</dt><dd>${b.dayLabel} الساعة ${b.time}</dd></div>
       <div><dt>الموبايل</dt><dd dir="ltr">${b.phone}</dd></div>`;

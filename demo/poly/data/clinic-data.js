@@ -8,7 +8,7 @@ const CLINIC_DATA = {
   clinic: {
     name: 'مركز أمير التخصصي',
     shortName: 'مركز أمير التخصصي',
-    address: 'القاهرة الجديدة — بولي كلينك: باطنة · أطفال · نساء · عظام · جلدية · أسنان',
+    address: 'القاهرة الجديدة — ٨ عيادات: باطنة · أطفال · نساء · عظام · جلدية · أسنان · أنف وأذن · عيون',
     hours: 'السبت – الخميس، 4:00 م – 10:00 م',
     friday: 'الجمعة إجازة',
     phoneDisplay: '0109 262 9424',
@@ -26,6 +26,8 @@ const CLINIC_DATA = {
     { id: 'ortho', name: 'العظام', short: 'عظام', address: 'عيادة العظام — الدور الثاني', lat: 30.0204, lng: 31.4412, mapsUrl: 'https://www.google.com/maps/dir/?api=1&destination=30.0204,31.4412&hl=ar', mapsEmbedUrl: 'https://maps.google.com/maps?q=30.0204,31.4412+(مركز+أمير)&hl=ar&z=16&output=embed' },
     { id: 'derma', name: 'الجلدية', short: 'جلدية', address: 'عيادة الجلدية — الدور الأرضي', lat: 30.0204, lng: 31.4412, mapsUrl: 'https://www.google.com/maps/dir/?api=1&destination=30.0204,31.4412&hl=ar', mapsEmbedUrl: 'https://maps.google.com/maps?q=30.0204,31.4412+(مركز+أمير)&hl=ar&z=16&output=embed' },
     { id: 'dent', name: 'الأسنان', short: 'أسنان', address: 'عيادة الأسنان — الدور الأرضي', lat: 30.0204, lng: 31.4412, mapsUrl: 'https://www.google.com/maps/dir/?api=1&destination=30.0204,31.4412&hl=ar', mapsEmbedUrl: 'https://maps.google.com/maps?q=30.0204,31.4412+(مركز+أمير)&hl=ar&z=16&output=embed' },
+    { id: 'ent', name: 'الأنف والأذن والحنجرة', short: 'أنف وأذن', address: 'عيادة الأنف والأذن — الدور الثاني', lat: 30.0204, lng: 31.4412, mapsUrl: 'https://www.google.com/maps/dir/?api=1&destination=30.0204,31.4412&hl=ar', mapsEmbedUrl: 'https://maps.google.com/maps?q=30.0204,31.4412+(مركز+أمير)&hl=ar&z=16&output=embed' },
+    { id: 'eye', name: 'العيون', short: 'عيون', address: 'عيادة العيون — الدور الأرضي', lat: 30.0204, lng: 31.4412, mapsUrl: 'https://www.google.com/maps/dir/?api=1&destination=30.0204,31.4412&hl=ar', mapsEmbedUrl: 'https://maps.google.com/maps?q=30.0204,31.4412+(مركز+أمير)&hl=ar&z=16&output=embed' },
   ],
 
   doctor: {
@@ -34,18 +36,19 @@ const CLINIC_DATA = {
     initials: 'م',
     photo: '',
     photoAlt: 'محمد أمير — مركز أمير التخصصي',
-    bio: 'بولي كلينك بنظام واحد لكل التخصصات: حجز المريض من الموقع أو واتساب أو التليفون، وملف واحد في لوحة التحكم بدل نظام منفصل لكل عيادة.',
+    bio: '٨ عيادات في مركز واحد، بنظام شامل: حجز المريض من الموقع أو واتساب أو التليفون، وملف واحد في لوحة التحكم بدل نظام منفصل لكل عيادة.',
     credentials: [
       'باطنة وأطفال',
       'نساء وتوليد',
       'عظام وجلدية',
       'أسنان',
-      'لوحة واحدة لكل المركز',
+      'أنف وأذن وعيون',
+      'لوحة واحدة للـ ٨ عيادات',
     ],
   },
 
   stats: [
-    { to: 6, suffix: '', label: 'تخصصات في مركز واحد' },
+    { to: 8, suffix: '', label: 'عيادات في مركز واحد' },
     { to: 1, suffix: '', label: 'نظام شامل لكل العيادات' },
     { to: 3, suffix: '', label: 'طرق حجز: تليفون · واتساب · موقع' },
   ],
@@ -57,6 +60,8 @@ const CLINIC_DATA = {
     { name: 'كشف نساء',       price: 'من 450 جنيه' },
     { name: 'كشف عظام',       price: 'من 400 جنيه' },
     { name: 'كشف أسنان',      price: 'من 400 جنيه' },
+    { name: 'كشف أنف وأذن',   price: 'من 400 جنيه' },
+    { name: 'كشف عيون',       price: 'من 400 جنيه' },
   ],
 
   slots: [
@@ -171,8 +176,8 @@ const CLINIC_DATA = {
     const todayBoard = [
       { h: 16, status: nowH >= 17 ? 'done' : 'confirmed', branchId: 'im' },
       { h: 17, status: nowH >= 18 ? 'done' : 'new', branchId: 'ped', createdAt: iso(today) + 'T10:15:00' },
-      { h: 19, status: nowH >= 20 ? 'done' : 'confirmed', branchId: 'obgyn', reminded: nowH < 20 },
-      { h: 20, status: nowH >= 21 ? 'done' : 'confirmed', branchId: 'dent' },
+      { h: 19, status: nowH >= 20 ? 'done' : 'confirmed', branchId: 'eye', reminded: nowH < 20 },
+      { h: 20, status: nowH >= 21 ? 'done' : 'confirmed', branchId: 'ent' },
     ];
     todayBoard.forEach(row => bookings.push(mk(today, row.h, row.status, row)));
 
@@ -185,13 +190,13 @@ const CLINIC_DATA = {
 
     const t2 = workingAhead[1];
     bookings.push(mk(t2, 16, 'confirmed', { branchId: 'dent' }));
-    bookings.push(mk(t2, 18, 'confirmed', { branchId: 'ortho' }));
-    bookings.push(mk(t2, 20, 'confirmed', { branchId: 'im' }));
+    bookings.push(mk(t2, 18, 'confirmed', { branchId: 'eye' }));
+    bookings.push(mk(t2, 20, 'confirmed', { branchId: 'ent' }));
 
     const t3 = workingAhead[2];
     bookings.push(mk(t3, 17, 'confirmed', { branchId: 'derma' }));
     bookings.push(mk(t3, 19, 'new', { branchId: 'dent', createdAt: iso(today) + 'T13:05:00' }));
-    bookings.push(mk(t3, 21, 'confirmed', { branchId: 'ped' }));
+    bookings.push(mk(t3, 21, 'confirmed', { branchId: 'eye' }));
 
     [4, 5, 7, 9].forEach(i => {
       if (workingAhead[i]) bookings.push(mk(workingAhead[i], pick([16, 18, 20]), 'confirmed', { branchId: pick(branches).id }));
