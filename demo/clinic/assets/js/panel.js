@@ -292,7 +292,13 @@
     const list = document.getElementById('appt-list');
     const rows = filteredBookings();
     if (!rows.length) {
-      list.innerHTML = `<li class="empty-note">${apptQuery.trim() ? 'مفيش نتيجة للبحث ده' : 'مفيش حجوزات في الفلتر ده'}</li>`;
+      const offToday = activeFilter === 'today' && !BF.isWorkingDay(new Date());
+      const empty = apptQuery.trim()
+        ? 'مفيش نتيجة للبحث ده'
+        : offToday
+          ? 'النهاردة إجازة — الحجوزات الجديدة وبكرة موجودين من الفلاتر فوق'
+          : 'مفيش حجوزات في الفلتر ده';
+      list.innerHTML = `<li class="empty-note">${empty}</li>`;
       return;
     }
     const news = rows.filter(b => b.status === 'new');

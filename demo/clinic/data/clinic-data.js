@@ -160,14 +160,20 @@ const CLINIC_DATA = {
       if (isWorkingDay(d)) workingAhead.push(d);
     }
 
-    // النهاردة (لو يوم شغال): موعدين خلصوا + اتنين جايين
+    // النهاردة دايماً في اللوحة — حتى لو الجمعة إجازة في الحجز العام
+    // عشان الدكتور يفتح «جديدة» و«النهاردة» يلاقي يومه قدامه
     const today = new Date();
-    if (isWorkingDay(today)) {
-      bookings.push(mk(today, 16, 'done'));
-      bookings.push(mk(today, 17, 'done'));
-      bookings.push(mk(today, 20, 'confirmed', { reminded: true }));
-      bookings.push(mk(today, 21, 'confirmed', { reminded: true }));
-    }
+    const nowH = today.getHours();
+    const todayBoard = [
+      { h: 16, status: nowH >= 17 ? 'done' : 'confirmed' },
+      { h: 17, status: nowH >= 18 ? 'done' : 'new', createdAt: iso(today) + 'T10:15:00' },
+      { h: 20, status: nowH >= 21 ? 'done' : 'confirmed', reminded: nowH < 21 },
+      { h: 21, status: nowH >= 22 ? 'done' : 'confirmed' },
+    ];
+    todayBoard.forEach(s => bookings.push(mk(today, s.h, s.status, {
+      reminded: !!s.reminded,
+      createdAt: s.createdAt,
+    })));
 
     // بكرة (أول يوم شغال جاي): ٧ مواعيد — ٢ جداد من الموقع
     const t1 = workingAhead[0];

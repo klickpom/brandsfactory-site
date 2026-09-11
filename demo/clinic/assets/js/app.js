@@ -5,6 +5,7 @@
 
 const BF = (() => {
   const NS = 'bfc_';
+  const SEED_VER = 22;
 
   /* ---------- التخزين ---------- */
   const store = {
@@ -62,9 +63,11 @@ const BF = (() => {
   /* ---------- الحجوزات ---------- */
   function seedIfNeeded() {
     let b = store.get('bookings', null);
-    if (!b) {
+    const ver = store.get('seed_ver', 0);
+    if (!b || ver !== SEED_VER) {
       b = CLINIC_DATA.generateSeed({ addDays, iso, labelFor, isWorkingDay, slotLabel });
       store.set('bookings', b);
+      store.set('seed_ver', SEED_VER);
     }
     return b;
   }
