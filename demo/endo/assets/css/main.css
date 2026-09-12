@@ -392,28 +392,21 @@ button {
 .hero-dark h1 { color: #fff; }
 .exclusive-line {
   display: inline-block;
-  background-image: linear-gradient(90deg, #2DD4BF, #A7F3D0);
-  background-size: 100% 100%;
+  background-image: linear-gradient(
+    90deg,
+    #5EEAD4 0%,
+    #FBBF24 28%,
+    #2DD4BF 52%,
+    #FDE68A 76%,
+    #5EEAD4 100%
+  );
+  background-size: 280% 100%;
+  background-position: 0% 50%;
   -webkit-background-clip: text;
   background-clip: text;
   color: #2DD4BF;
   -webkit-text-fill-color: transparent;
-  animation: none;
-}
-@media (max-width: 859px) {
-  .exclusive-line {
-    background-image: linear-gradient(
-      90deg,
-      #5EEAD4 0%,
-      #FBBF24 28%,
-      #2DD4BF 52%,
-      #FDE68A 76%,
-      #5EEAD4 100%
-    );
-    background-size: 280% 100%;
-    background-position: 0% 50%;
-    animation: exclusiveFlow 3s linear infinite;
-  }
+  animation: exclusiveFlow 3s linear infinite;
 }
 @keyframes exclusiveFlow {
   0% { background-position: 0% 50%; }
@@ -1830,18 +1823,10 @@ body { padding-block-start: 0; padding-block-end: 24px; }
 .offers-hero .kicker { justify-content: center; }
 .offers-kicker {
   color: #FDE68A;
-  background: rgba(45, 212, 191, .12);
-  border-color: rgba(45, 212, 191, .35);
-  animation: none;
-}
-@media (max-width: 859px) {
-  .offers-kicker {
-    color: #FDE68A;
-    background: linear-gradient(90deg, rgba(251,191,36,.2), rgba(45,212,191,.18), rgba(251,191,36,.2));
-    background-size: 220% 100%;
-    border-color: rgba(251, 191, 36, .5);
-    animation: exclusiveBadge 5s ease-in-out infinite;
-  }
+  background: linear-gradient(90deg, rgba(251,191,36,.2), rgba(45,212,191,.18), rgba(251,191,36,.2));
+  background-size: 220% 100%;
+  border-color: rgba(251, 191, 36, .5);
+  animation: exclusiveBadge 5s ease-in-out infinite;
 }
 .offers-hero .glow-gold {
   width: 300px;
