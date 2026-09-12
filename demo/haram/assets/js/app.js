@@ -1,0 +1,272 @@
+/* ============================================================
+   النواة المشتركة — قاعدة بيانات الديمو (localStorage)
+   الحجوزات بتتخزن فعلاً، وأي تغيير بيحدّث الصفحات التانية لحظياً
+   ============================================================ */
+
+const BF = (() => {
+  const NS = 'bfh_';
+  const SEED_VER = 1;
+
+  /* ---------- التخزين ---------- */
+  const store = {
+    get(key, fallback) {
+      try {
+        const raw = localStorage.getItem(NS + key);
+        return raw === null ? fallback : JSON.parse(raw);
+      } catch { return fallback; }
+    },
+    set(key, value) {
+      try { localStorage.setItem(NS + key, JSON.stringify(value)); } catch {}
+    },
+    clearAll() {
+      Object.keys(localStorage)
+        .filter(k => k.startsWith(NS))
+        .forEach(k => localStorage.removeItem(k));
+    },
+  };
+
+  /* ---------- تواريخ عربية ---------- */
+  const DAYS = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+  const MONTHS = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
+                  'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+
+  function iso(d) {
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  }
+  function fromIso(s) {
+    const [y, m, d] = s.split('-').map(Number);
+    return new Date(y, m - 1, d);
+  }
+  function addDays(d, n) {
+    const x = new Date(d); x.setDate(x.getDate() + n); return x;
+  }
+  function labelFor(d) {
+    return `${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]}`;
+  }
+  function isWorkingDay(d, branchId) {
+    const day = d.getDay();
+    if (CLINIC_DATA.offDays.includes(day)) return false;
+    const br = branchId ? branchById(branchId) : null;
+    if (br && Array.isArray(br.days) && br.days.length) return br.days.includes(day);
+    return true;
+  }
+  function slotLabel(h) {
+    const s = CLINIC_DATA.slots.find(x => x.h === h);
+    return s ? s.label : '';
+  }
+
+  function nowEgyptian() {
+    const d = new Date();
+    let h = d.getHours();
+    const m = String(d.getMinutes()).padStart(2, '0');
+    const suffix = h >= 12 ? 'م' : 'ص';
+    h = h % 12 || 12;
+    return `${h}:${m} ${suffix}`;
+  }
+
+  /* ---------- الحجوزات ---------- */
+  function seedIfNeeded() {
+    let b = store.get('bookings', null);
+    const ver = store.get('seed_ver', 0);
+    if (!b || ver !== SEED_VER) {
+      b = CLINIC_DATA.generateSeed({ addDays, iso, labelFor, isWorkingDay, slotLabel });
+      store.set('bookings', b);
+      store.set('seed_ver', SEED_VER);
+    }
+    return b;
+  }
+
+  function getBookings() { return seedIfNeeded(); }
+
+  function saveBookings(arr) {
+    store.set('bookings', arr);
+    emit();
+  }
+
+  function addBooking(b) {
+    const arr = getBookings();
+    arr.push(b);
+    saveBookings(arr);
+    return b;
+  }
+
+  function patchBooking(id, patch) {
+    const arr = getBookings();
+    const i = arr.findIndex(x => x.id === id);
+    if (i === -1) return null;
+    Object.assign(arr[i], patch);
+    saveBookings(arr);
+    return arr[i];
+  }
+
+  function getBooking(id) {
+    return getBookings().find(x => x.id === id) || null;
+  }
+
+  function nextRef() {
+    const n = store.get('refCounter', 2000) + 1;
+    store.set('refCounter', n);
+    return 'B-' + n;
+  }
+
+  /* ---------- المواعيد المتاحة ---------- */
+  function nextWorkingDays(count, branchId) {
+    const out = [];
+    for (let i = 0; out.length < count && i < count * 4 + 14; i++) {
+      const d = addDays(new Date(), i);
+      if (isWorkingDay(d, branchId)) out.push(d);
+    }
+    return out;
+  }
+
+  function branchById(id) {
+    const list = CLINIC_DATA.branches || [];
+    return list.find(x => x.id === id) || list[0] || null;
+  }
+
+  function isSlotTaken(dateIso, timeLabel, branchId) {
+    return getBookings().some(b =>
+      b.date === dateIso && b.time === timeLabel &&
+      (!branchId || b.branchId === branchId) &&
+      b.status !== 'cancelled' && b.status !== 'noshow');
+  }
+
+  function isSlotPassed(date, hour) {
+    const now = new Date();
+    if (iso(date) !== iso(now)) return false;
+    return hour <= now.getHours();
+  }
+
+  function slotsForDate(date, branchId) {
+    if (branchId && !isWorkingDay(date, branchId)) return [];
+    const dIso = iso(date);
+    return CLINIC_DATA.slots.map(s => ({
+      ...s,
+      taken: isSlotTaken(dIso, s.label, branchId),
+      passed: isSlotPassed(date, s.h),
+    }));
+  }
+
+  function nextFreeSlots(limit) {
+    const out = [];
+    const branches = CLINIC_DATA.branches || [null];
+    for (const branch of branches) {
+      const branchId = branch ? branch.id : undefined;
+      for (const d of nextWorkingDays(CLINIC_DATA.bookingWindowDays, branchId)) {
+        for (const s of slotsForDate(d, branchId)) {
+          if (s.taken || s.passed) continue;
+          out.push({
+            dateIso: iso(d),
+            label: labelFor(d),
+            time: s.label,
+            h: s.h,
+            branchId,
+            branchName: branch ? branch.short : '',
+          });
+        }
+      }
+    }
+    out.sort((a, b) => a.dateIso.localeCompare(b.dateIso) || a.h - b.h);
+    return out.slice(0, limit);
+  }
+
+  function freeCountFor(date, branchId) {
+    return slotsForDate(date, branchId).filter(s => !s.taken && !s.passed).length;
+  }
+
+  function digitsPhone(value) {
+    return String(value || '').replace(/\D/g, '');
+  }
+
+  function telLink(phone) {
+    let d = digitsPhone(phone);
+    if (d.startsWith('0020')) d = d.slice(2);
+    else if (d.startsWith('0')) d = '20' + d.slice(1);
+    if (!d.startsWith('20')) d = '20' + d;
+    return 'tel:+' + d;
+  }
+
+  function gcalUrl(b) {
+    const start = `${b.date.replace(/-/g, '')}T${String(b.hour).padStart(2, '0')}0000`;
+    const endH = Math.min((b.hour || 16) + 1, 23);
+    const end = `${b.date.replace(/-/g, '')}T${String(endH).padStart(2, '0')}0000`;
+    const q = new URLSearchParams({
+      action: 'TEMPLATE',
+      text: `موعد في ${CLINIC_DATA.clinic.shortName} — ${b.service}`,
+      dates: `${start}/${end}`,
+      details: `رقم الحجز ${b.ref}\n${b.service}\n${b.branchName || ''}\n${CLINIC_DATA.clinic.shortName}`,
+      location: (branchById(b.branchId) || {}).address || CLINIC_DATA.clinic.address,
+      ctz: 'Africa/Cairo',
+    });
+    return `https://calendar.google.com/calendar/render?${q.toString()}`;
+  }
+
+  /* ---------- واتساب ---------- */
+  function waLink(phone, message) {
+    let digits = String(phone).replace(/\D/g, '');
+    if (digits.startsWith('0020')) digits = digits.slice(2);
+    else if (digits.startsWith('0')) digits = '20' + digits.slice(1);
+    return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
+  }
+
+  /* ---------- القوالب ---------- */
+  function getTemplates() {
+    return Object.assign({}, CLINIC_DATA.templates, store.get('templates', {}));
+  }
+  function saveTemplate(key, value) {
+    const t = store.get('templates', {});
+    t[key] = value;
+    store.set('templates', t);
+  }
+  function fillTemplate(tpl, vars) {
+    return tpl.replace(/\{([^{}]+)\}/g, (_, k) => ({
+      'الاسم': vars.name, 'اليوم': vars.day, 'التاريخ': vars.date,
+      'الوقت': vars.time, 'الخدمة': vars.service, 'الموبايل': vars.phone,
+      'الرقم': vars.ref, 'الفرع': vars.branch, 'التخصص': vars.branch,
+    }[k.trim()] ?? `{${k}}`));
+  }
+
+  /* ---------- الأحداث — تحديث لحظي بين التبويبات ---------- */
+  const listeners = new Set();
+  function emit() { listeners.forEach(fn => { try { fn(); } catch {} }); }
+  function onChange(fn) {
+    listeners.add(fn);
+  }
+  window.addEventListener('storage', e => {
+    if (e.key && e.key.startsWith(NS)) emit();
+  });
+
+  /* ---------- حالات الحجز ---------- */
+  const STATUS = {
+    new:       { label: 'جديد',      cls: 'st-new' },
+    confirmed: { label: 'مؤكد',      cls: 'st-confirmed' },
+    done:      { label: 'تم الحضور', cls: 'st-done' },
+    cancelled: { label: 'ملغي',      cls: 'st-cancelled' },
+    noshow:    { label: 'لم يحضر',   cls: 'st-noshow' },
+  };
+
+  /* ---------- إعادة تعيين ---------- */
+  function resetAll() {
+    store.clearAll();
+    location.reload();
+  }
+
+  /* ---------- تشغيل ---------- */
+  function boot() { seedIfNeeded(); }
+
+  return {
+    store,
+    iso, fromIso, addDays, labelFor, isWorkingDay, slotLabel, nowEgyptian,
+    DAYS, MONTHS,
+    getBookings, addBooking, patchBooking, getBooking, nextRef,
+    nextWorkingDays, slotsForDate, nextFreeSlots, isSlotTaken,
+    freeCountFor, gcalUrl, digitsPhone, telLink, branchById,
+    waLink,
+    getTemplates, saveTemplate, fillTemplate,
+    onChange, emit,
+    STATUS,
+    resetAll, boot,
+  };
+})();
+
+document.addEventListener('DOMContentLoaded', BF.boot);
